@@ -1,0 +1,47 @@
+﻿
+#header, #topNav, #instructionsEditBar, #fullScreenProgressFill, .themeBackground, .progress, .ai-chat .ai-submit {
+    background-color: #008750;
+}
+
+#fullScreenMessageLoadingIcon, .loadingAnimation-medium, .loadingAnimation-small, .loadingAnimation-large{
+    border-top-color: #008750;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+    outline-color: #008750;
+}
+
+.editInputWrapper {
+    border-right-color: #008750;
+}
+
+#timerWrapper.expiring {
+    background-color: #000;
+}
+
+.tabHeading.selected {
+    border-bottom: 4px solid #008750;
+}
+
+.dialogButtons > input[type=button].primary, .ui-dialog-buttonset > button.primary {
+    background-color: #008750;
+    border: solid 1px #008750;
+}
+
+.dialogButtons > input[type=button].primary:hover, .ui-dialog-buttonset > button.primary:hover{
+    background-color: #006d31;
+    border: solid 1px #002e14;
+}
+
+.dialogButtons > input[type=button].primary:active, .ui-dialog-buttonset > button.primary:active {
+    background-color: #008750;
+}
+
+.ui-dialog-buttonpane .ui-button.primary {
+    background-color: #008750;
+    border: solid 1px #008750;
+}
+
+input[type="checkbox"] {
+    accent-color: #008750;
+}

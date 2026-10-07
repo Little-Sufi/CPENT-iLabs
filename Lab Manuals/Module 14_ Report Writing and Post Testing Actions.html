@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://labondemand.com/LabProfile/Instructions/155862?instructionsSetId=248764 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Module 14: Report Writing and Post Testing Actions</title>
+
+
+    <script src="./Module 14_ Report Writing and Post Testing Actions_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Module 14_ Report Writing and Post Testing Actions_files/Localize" type="text/javascript"></script>
+    <script src="./Module 14_ Report Writing and Post Testing Actions_files/showdown.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./Module 14_ Report Writing and Post Testing Actions_files/prettify.css">
+    <script src="./Module 14_ Report Writing and Post Testing Actions_files/yaml.min.js.download"></script>
+    <script src="./Module 14_ Report Writing and Post Testing Actions_files/LocalizeTo" type="text/javascript"></script>
+    <link href="./Module 14_ Report Writing and Post Testing Actions_files/CloudClient.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body, html {
+            font-family: Segoe UI,Tahoma,Verdana,Arial,sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background-color: #efefef;
+            color: #000;
+            height: 100%;
+        }
+
+        body {
+            overflow: auto;
+        }
+
+        #outputWrapper {
+            background-color: #efefef;
+            min-height: 100%;
+        }
+
+        .instructionsPreview {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .instructionsPreview .page {
+            position: relative;
+            display: block !important;
+            padding: 15px 20px;
+            background-color: #fff;
+            page-break-after: always;
+            min-height: 650px;
+        }
+
+        .instructionsPreview .page:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        @font-face {
+            font-family: "lod";
+            src: url("/fonts/lod.woff?v=18") format("woff"), url("/fonts/lod.ttf?v=18") format("truetype"), url("/fonts/lod.svg?v=18") format("svg");
+        }
+
+        .editLink:before {
+            content: "\E70F";
+            font-family: "lod";
+            margin-right: 4px;
+            display: inline-block;
+        }
+
+        @media print {
+            body, html {
+                height: auto;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            #outputWrapper {
+                background-color: transparent;
+            }
+
+            .instructionsPreview {
+                padding: 0;
+            }
+
+                .instructionsPreview .page:not(:first-child) {
+                    margin-top: 0px;
+                }
+        }
+
+        @page {
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-top: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+    </style>
+    <link id="themeStylesheet" href="./Module 14_ Report Writing and Post Testing Actions_files/Light.css" rel="stylesheet">
+
+</head>
+<body>
+        <div style="padding:10px 20px;">
+            <a class="editLink" href="https://labondemand.com/LabProfile/EditInstructions/155862?InstructionsSetId=248764">Edit</a>
+        </div>
+
+    <div id="outputWrapper">
+        <div id="instructions" class="instructionsPreview instructions"><div class="page" id="page0"><h1 class="lab-title primary-color">Report Writing and Post Testing Actions</h1>
+<h2 id="scenario">Scenario</h2>
+<p>At the end of a penetration test, the tester needs to provide the results of the pentest by preparing a report and submitting it to the clients. This report is the only tangible thing that clients get out of the entire process and therefore making it simple for everyone to understand and yet exhaustive is an art that every penetration tester needs to have. The report is also the basis for clients to get a second opinion if they disagree with the tester’s findings. This can only be done if the process can be duplicated by someone else. Thus, the report needs to be as detailed as possible. Assumptions about target audience’s technical knowledge and their interest should be avoided while drafting this report as they are the root causes of unnecessary confusions between clients and testers. A penetration testing report is written for three types of audiences: top management who are only concerned with the overall security posture of the organization, IT managers who are responsible for individual areas of the IT infrastructure, and IT staff who will ultimately implement the recommendations of the report. As a penetration tester you need to be able to write a report which satisfies all three audiences and leaves no confusion in anybody’s mind about your findings.</p>
+<h2 id="objective">Objective</h2>
+<p>The objective this lab is to prepare documentation for your penetration testing report.</p>
+<blockquote class="alert">
+  <p><strong>Note:</strong> All lab manuals are accessible in the <strong>Lab Manuals</strong> folder located on the <strong>Desktop</strong> of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.</p>
+</blockquote>
+</div><div class="page" id="page1">
+<h1 id="exercise-1-generating-penetration-test-reports-and-documenting-all-of-them-to-dradis">Exercise 1: Generating Penetration Test Reports and Documenting all of them to Dradis</h1>
+<p>Dradis is used for sharing the information during security assesments, it is a web application framework which helps in writing reports after performing penetration testing. </p>
+<p>The objective of this lab is to help students learn how to:  </p>
+<ul>
+<li><p>Import Penetration Test Reports from Penetration Test Folder to Dradis</p></li>
+<li><p>Export a Final Penetration Test Report containing all the internal pentest reports</p></li>
+</ul>
+<h3 id="lab-tasks">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex0"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex0"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155862?instructionsSetId=248764#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to Parrot Security machine. Type <strong>toor</strong> in the Password field and press <strong>Enter</strong>.</p>
+<blockquote class="note">
+  <p>If you are already logged in skip to step <strong>2</strong>.</p>
+</blockquote></li>
+<li class="task-list-item" id="taskIndex1"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex1"><span></span></label> Launch a terminal and type <strong>sudo dradis</strong> and press <strong>Enter</strong>. Type <strong>toor</strong> and press <strong>Enter</strong> when prompt for the Password. Wait for couple seconds, to generate a URL. </p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/cenbq0vs.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex2"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex2"><span></span></label> Open up a browser, and type <strong>http://127.0.0.1:3000</strong> in the address bar of the browser and press <strong>Enter</strong>. Dradis login page appears as shown in the screenshot.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/niox3c50.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex3"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex3"><span></span></label> Type the below credentials and click <strong>Log in</strong>.</p>
+<p><strong>Username:</strong> <strong>Admin</strong></p>
+<p><strong>Password:</strong> <strong>password</strong></p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/2mvtanw0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex4"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex4"><span></span></label> After logging in to the application, <strong>Dashboard</strong> page appears.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/envkuwew.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex5"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex5"><span></span></label> Click <strong>Go To Issues</strong> under <strong>Project summary</strong> section.</p></li>
+<li class="task-list-item" id="taskIndex6"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex6"><span></span></label> Now, under <strong>Issues Summary</strong> pane, click on the <strong>+</strong> icon next to <strong>Issues</strong> and click on <strong>Blank</strong>.</p>
+<blockquote class="note">
+  <p>If the dropdown menu does not appear completely, change the display resolution or zoom out the browser web page.</p>
+</blockquote>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/5vxjowd4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex7"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex7"><span></span></label> Under <strong>Add new issue</strong> tab, select <strong>Fields</strong> and type <strong>Luxurytreats Penetration Test Report</strong> in <strong>Enter field name</strong> text field.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/fzk0u1ss.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex8"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex8"><span></span></label> Now click <strong>Add field</strong> and type <strong>Document Details</strong> in <strong>Enter field name</strong> text field.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/2lp53rqo.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex9"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex9"><span></span></label> In <strong>Enter field value</strong> field under <strong>Document Details</strong>  type:</p>
+<p><strong>Document Title: Luxurytreats Penetration Testing Report</strong><br>
+<strong>Company: X-SECURITY</strong><br>
+<strong>Recipient: Luxurytreats</strong><br>
+<strong>Date: August 18, 2020</strong><br>
+<strong>Classification: Confidential</strong><br>
+<strong>Document Type: Report</strong><br>
+<strong>Version: 1.0</strong><br>
+<strong>Author: John</strong><br>
+<strong>Pen testers: Micheal, Marshall, Sean, and Adam</strong><br>
+<strong>Reviewed By: Allen and Bacon</strong><br>
+<strong>Approved By: Clark</strong></p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/23no3gk5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex10"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex10"><span></span></label> Now, click <strong>Add field</strong> and type <strong>Executive Summary</strong> in <strong>Enter field name</strong> text field.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/bijh0ttl.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex11"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex11"><span></span></label> Under <strong>Executive Summary</strong> field, add the content as shown in the screenshot.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/jdd22cps.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex12"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex12"><span></span></label> Click on <strong>Upload</strong> on top of the application.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/zb3egelk.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex13"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex13"><span></span></label> Now, in <strong>1. Tool are you uploading output from</strong> drop-down list select <strong>Dradis::Plugins::Nmap</strong>.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/w2e500ck.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex14"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex14"><span></span></label> Click on <strong>Browse</strong> under <strong>Upload outpul file</strong> section. <strong>File Upload</strong> window appears, navigate to <strong>/home/pentester</strong>, select <strong>scan.xml</strong> and click <strong>Open</strong>.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/lt0f52s0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex15"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex15"><span></span></label> Scroll down and you can see the result of the scan.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/gpsgzvci.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex16"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex16"><span></span></label> Click <strong>All issues</strong> from left window pane.</p></li>
+<li class="task-list-item" id="taskIndex17"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex17"><span></span></label> Now, under <strong>Issues Summary</strong> section, click on the <strong>+</strong> icon next to <strong>Issues</strong> and click on <strong>Blank</strong>.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/1s3v5abw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex18"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex18"><span></span></label> Click on <strong>Tag</strong> section, select <strong>Info</strong> and then, click on <strong>Create Issue (Draft)</strong>.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/hlhohyaa.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex19"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex19"><span></span></label> The <strong>Issue</strong> will be created.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/onufanra.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex20"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex20"><span></span></label> Now, under <strong>Issues Summary</strong> pane, click on the <strong>+</strong> icon next to <strong>Issues</strong> and click on <strong>Blank</strong>.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/2xb2p40q.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex21"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex21"><span></span></label> Under <strong>Add New Issue</strong> tab, select <strong>Fields</strong> and type <strong>Comprehensive Technical Report</strong> in <strong>Enter field name</strong> text field.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/bujfci4r.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex22"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex22"><span></span></label> In <strong>Enter field value</strong> field under <strong>Comprehensive Technical Report</strong> type the content as shown in the Screenshot.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/enkbm2c4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex23"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex23"><span></span></label> Now under <strong>tag</strong> section select <strong>Critical</strong> and then click on <strong>Create Issse (Draft)</strong>.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/nsa4pb2w.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex24"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex24"><span></span></label> The <strong>Issue</strong> will be created.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/fncltpd5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex25"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex25"><span></span></label> Now, click on <strong>Dashboard</strong> or <strong>Dradis Project</strong>. You will be presented with the <strong>Project summary</strong> as shown in the screenshot.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/jqpiqquw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex26"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex26"><span></span></label> Now, click <strong>Export</strong> on the top of the web <strong>application</strong>.</p></li>
+<li class="task-list-item" id="taskIndex27"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex27"><span></span></label> Export Manager webpage appears with the HTML output format selected by default. Under <strong>Choose a template</strong>, select <strong>default_dradis_template_v3.0.html.erb</strong> and then, select <strong>Export All Records</strong>. </p>
+<blockquote class="note">
+  <p>If you the current selection in the dropdown menu is <strong>Export Published Records</strong>, expand the dropdown menu and select <strong>All</strong>. The dropdown menu then points you to <strong>Export All Records</strong>.</p>
+</blockquote>
+<blockquote class="note">
+  <p>If you encounter any error, run <strong>chmod -R 777 /usr/lib/dradis/app/views</strong> as a <strong>root</strong> user and try to export the records again.</p>
+</blockquote>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/zljqiukl.jpg" alt="Screenshot"></p>
+<p>This will display the report you have created.</p>
+<p>
+<img src="./Module 14_ Report Writing and Post Testing Actions_files/epudygqd.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex28"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex28"><span></span></label> This way, you can create a penetration test report and use it to assess the security posture of an organization. Close all the opened windows.</p></li>
+</ol>
+<p>In this lab, you have learned how to:  </p>
+<ul>
+<li><p>Import Penetration Test Reports from Penetration Test Folder to Dradis.</p></li>
+<li><p>Export a Final Penetration Test Report containing all the internal pentest reports.</p></li>
+</ul></div></div>
+    </div>
+    <input type="hidden" id="rawContent" value="@lab.Title
+
+##Scenario
+
+At the end of a penetration test, the tester needs to provide the results of the pentest by preparing a report and submitting it to the clients. This report is the only tangible thing that clients get out of the entire process and therefore making it simple for everyone to understand and yet exhaustive is an art that every penetration tester needs to have. The report is also the basis for clients to get a second opinion if they disagree with the tester&amp;rsquo;s findings. This can only be done if the process can be duplicated by someone else. Thus, the report needs to be as detailed as possible. Assumptions about target audience&amp;rsquo;s technical knowledge and their interest should be avoided while drafting this report as they are the root causes of unnecessary confusions between clients and testers. A penetration testing report is written for three types of audiences: top management who are only concerned with the overall security posture of the organization, IT managers who are responsible for individual areas of the IT infrastructure, and IT staff who will ultimately implement the recommendations of the report. As a penetration tester you need to be able to write a report which satisfies all three audiences and leaves no confusion in anybody&amp;rsquo;s mind about your findings.
+
+##Objective
+
+The objective this lab is to prepare documentation for your penetration testing report.
+
+&gt;[!alert] **Note:** All lab manuals are accessible in the **Lab Manuals** folder located on the **Desktop** of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.
+===
+
+#Exercise 1: Generating Penetration Test Reports and Documenting all of them to Dradis
+
+Dradis is used for sharing the information during security assesments, it is a web application framework which helps in writing reports after performing penetration testing. 
+
+The objective of this lab is to help students learn how to:  
+
+- Import Penetration Test Reports from Penetration Test Folder to Dradis
+
+- Export a Final Penetration Test Report containing all the internal pentest reports
+
+###Lab Tasks
+
+1. [ ] Click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to Parrot Security machine. Type **toor** in the Password field and press **Enter**.
+
+	&gt;[!note] If you are already logged in skip to step **2**.
+
+2. [] Launch a terminal and type **sudo dradis** and press **Enter**. Type **toor** and press **Enter** when prompt for the Password. Wait for couple seconds, to generate a URL. 
+
+	!IMAGE[Screenshot](screens/cenbq0vs.jpg)
+
+3. [] Open up a browser, and type **http://127.0.0.1:3000** in the address bar of the browser and press **Enter**. Dradis login page appears as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/niox3c50.jpg)
+
+4. [] Type the below credentials and click **Log in**.
+
+	**Username:** **Admin**
+
+	**Password:** **password**
+
+	!IMAGE[Screenshot](screens/2mvtanw0.jpg)
+
+5. [] After logging in to the application, **Dashboard** page appears.
+
+	!IMAGE[Screenshot](screens/envkuwew.jpg)
+
+6. [] Click **Go To Issues** under **Project summary** section.
+
+7. [] Now, under **Issues Summary** pane, click on the **+** icon next to **Issues** and click on **Blank**.
+
+	&gt;[!note] If the dropdown menu does not appear completely, change the display resolution or zoom out the browser web page.
+
+	!IMAGE[Screenshot](screens/5vxjowd4.jpg)
+
+8. [] Under **Add new issue** tab, select **Fields** and type **Luxurytreats Penetration Test Report** in **Enter field name** text field.
+
+	!IMAGE[Screenshot](screens/fzk0u1ss.jpg)
+
+9. [] Now click **Add field** and type **Document Details** in **Enter field name** text field.
+
+	!IMAGE[Screenshot](screens/2lp53rqo.jpg)
+
+10. [] In **Enter field value** field under **Document Details**  type:
+
+	**Document Title: Luxurytreats Penetration Testing Report**  
+	**Company: X-SECURITY**  
+	**Recipient: Luxurytreats**  
+	**Date: August 18, 2020**  
+	**Classification: Confidential**  
+	**Document Type: Report**  
+	**Version: 1.0**  
+	**Author: John**  
+	**Pen testers: Micheal, Marshall, Sean, and Adam**  
+	**Reviewed By: Allen and Bacon**  
+	**Approved By: Clark**
+
+	!IMAGE[Screenshot](screens/23no3gk5.jpg)
+
+11. [] Now, click **Add field** and type **Executive Summary** in **Enter field name** text field.
+
+	!IMAGE[Screenshot](screens/bijh0ttl.jpg)
+
+12. [] Under **Executive Summary** field, add the content as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/jdd22cps.jpg)
+
+13. [] Click on **Upload** on top of the application.
+
+	!IMAGE[Screenshot](screens/zb3egelk.jpg)
+
+14. [] Now, in **1. Tool are you uploading output from** drop-down list select **Dradis::Plugins::Nmap**.
+
+	!IMAGE[Screenshot](screens/w2e500ck.jpg)
+
+15. [] Click on **Browse** under **Upload outpul file** section. **File Upload** window appears, navigate to **/home/pentester**, select **scan.xml** and click **Open**.
+
+	!IMAGE[Screenshot](screens/lt0f52s0.jpg)
+
+16. [] Scroll down and you can see the result of the scan.
+
+	!IMAGE[Screenshot](screens/gpsgzvci.jpg)
+
+17. [] Click **All issues** from left window pane.
+
+18. [] Now, under **Issues Summary** section, click on the **+** icon next to **Issues** and click on **Blank**.
+
+	!IMAGE[Screenshot](screens/1s3v5abw.jpg)
+
+19. [] Click on **Tag** section, select **Info** and then, click on **Create Issue (Draft)**.
+
+	!IMAGE[Screenshot](screens/hlhohyaa.jpg)
+
+20. [] The **Issue** will be created.
+
+	!IMAGE[Screenshot](screens/onufanra.jpg)
+
+21. [] Now, under **Issues Summary** pane, click on the **+** icon next to **Issues** and click on **Blank**.
+
+	!IMAGE[Screenshot](screens/2xb2p40q.jpg)
+
+22. [] Under **Add New Issue** tab, select **Fields** and type **Comprehensive Technical Report** in **Enter field name** text field.
+
+	!IMAGE[Screenshot](screens/bujfci4r.jpg)
+
+23. [] In **Enter field value** field under **Comprehensive Technical Report** type the content as shown in the Screenshot.
+
+	!IMAGE[Screenshot](screens/enkbm2c4.jpg)
+
+24. [] Now under **tag** section select **Critical** and then click on **Create Issse (Draft)**.
+
+	!IMAGE[Screenshot](screens/nsa4pb2w.jpg)
+
+25. [] The **Issue** will be created.
+
+	!IMAGE[Screenshot](screens/fncltpd5.jpg)
+
+26. [] Now, click on **Dashboard** or **Dradis Project**. You will be presented with the **Project summary** as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/jqpiqquw.jpg)
+
+27. [] Now, click **Export** on the top of the web **application**.
+
+28. [] Export Manager webpage appears with the HTML output format selected by default. Under **Choose a template**, select **default_dradis_template_v3.0.html.erb** and then, select **Export All Records**. 
+
+	&gt;[!note] If you the current selection in the dropdown menu is **Export Published Records**, expand the dropdown menu and select **All**. The dropdown menu then points you to **Export All Records**.
+
+	&gt;[!note] If you encounter any error, run **chmod -R 777 /usr/lib/dradis/app/views** as a **root** user and try to export the records again.
+
+	!IMAGE[Screenshot](screens/zljqiukl.jpg)
+
+	This will display the report you have created.
+	
+	!IMAGE[Screenshot](screens/epudygqd.jpg)
+
+29. [] This way, you can create a penetration test report and use it to assess the security posture of an organization. Close all the opened windows.
+
+In this lab, you have learned how to:  
+
+- Import Penetration Test Reports from Penetration Test Folder to Dradis.
+
+- Export a Final Penetration Test Report containing all the internal pentest reports.">
+    <input type="hidden" id="activities" value="[]">
+    <input type="hidden" id="activityGroups" value="[]">
+    <input type="hidden" id="replacementTokens" value="[{&quot;Token&quot;:&quot;@lab.LabProfile.Id&quot;,&quot;Replacement&quot;:&quot;155862&quot;},{&quot;Token&quot;:&quot;@lab.CtrlAltDelete&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;ctrlAltDeleteLink icon-link special-action-link&#39;&gt;Ctrl+Alt+Delete&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;242674&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;242674&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;242674&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Username&quot;,&quot;Replacement&quot;:&quot;pentester&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268660&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.Title&quot;,&quot;Replacement&quot;:&quot;&lt;h1 class=\&quot;lab-title primary-color\&quot;&gt;Report Writing and Post Testing Actions&lt;/h1&gt;&quot;},{&quot;Token&quot;:&quot;@lab.LanguageName&quot;,&quot;Replacement&quot;:&quot;English&quot;},{&quot;Token&quot;:&quot;@lab.LanguageCode&quot;,&quot;Replacement&quot;:&quot;en&quot;},{&quot;Token&quot;:&quot;@lab.LanguageRegionCode&quot;,&quot;Replacement&quot;:&quot;en-US&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.Id&quot;,&quot;Replacement&quot;:&quot;{LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.GlobalId&quot;,&quot;Replacement&quot;:&quot;{lod_LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.StartDate&quot;,&quot;Replacement&quot;:&quot;20250124&quot;},{&quot;Token&quot;:&quot;@lab.User.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.FirstName&quot;,&quot;Replacement&quot;:&quot;{USER_FIRSTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.LastName&quot;,&quot;Replacement&quot;:&quot;{USER_LASTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.Email&quot;,&quot;Replacement&quot;:&quot;{EMAIL}&quot;},{&quot;Token&quot;:&quot;@lab.User.ExternalId&quot;,&quot;Replacement&quot;:&quot;{USER_EXTERNALID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Name&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_NAME}&quot;},{&quot;Token&quot;:&quot;@lab.Tag&quot;,&quot;Replacement&quot;:&quot;{TAG}&quot;}]">
+    <input type="hidden" id="replacements">
+    <input type="hidden" id="variables">
+
+    <textarea id="copyInput" value="" style="position: absolute; left:-10000px; top:-10000px; "></textarea>
+
+    <div id="Model" data-id="155862" data-contentroot="https://labondemand.blob.core.windows.net/content/lab155862/" data-scrolltop="" data-themescript="">
+
+
+
+</div></body></html>

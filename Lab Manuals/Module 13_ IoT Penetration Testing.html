@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://labondemand.com/LabProfile/Instructions/155870?instructionsSetId=248772 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Module 13: IoT Penetration Testing</title>
+
+
+    <script src="./Module 13_ IoT Penetration Testing_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Module 13_ IoT Penetration Testing_files/Localize" type="text/javascript"></script>
+    <script src="./Module 13_ IoT Penetration Testing_files/showdown.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./Module 13_ IoT Penetration Testing_files/prettify.css">
+    <script src="./Module 13_ IoT Penetration Testing_files/yaml.min.js.download"></script>
+    <script src="./Module 13_ IoT Penetration Testing_files/LocalizeTo" type="text/javascript"></script>
+    <link href="./Module 13_ IoT Penetration Testing_files/CloudClient.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body, html {
+            font-family: Segoe UI,Tahoma,Verdana,Arial,sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background-color: #efefef;
+            color: #000;
+            height: 100%;
+        }
+
+        body {
+            overflow: auto;
+        }
+
+        #outputWrapper {
+            background-color: #efefef;
+            min-height: 100%;
+        }
+
+        .instructionsPreview {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .instructionsPreview .page {
+            position: relative;
+            display: block !important;
+            padding: 15px 20px;
+            background-color: #fff;
+            page-break-after: always;
+            min-height: 650px;
+        }
+
+        .instructionsPreview .page:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        @font-face {
+            font-family: "lod";
+            src: url("/fonts/lod.woff?v=18") format("woff"), url("/fonts/lod.ttf?v=18") format("truetype"), url("/fonts/lod.svg?v=18") format("svg");
+        }
+
+        .editLink:before {
+            content: "\E70F";
+            font-family: "lod";
+            margin-right: 4px;
+            display: inline-block;
+        }
+
+        @media print {
+            body, html {
+                height: auto;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            #outputWrapper {
+                background-color: transparent;
+            }
+
+            .instructionsPreview {
+                padding: 0;
+            }
+
+                .instructionsPreview .page:not(:first-child) {
+                    margin-top: 0px;
+                }
+        }
+
+        @page {
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-top: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+    </style>
+    <link id="themeStylesheet" href="./Module 13_ IoT Penetration Testing_files/Light.css" rel="stylesheet">
+
+</head>
+<body>
+        <div style="padding:10px 20px;">
+            <a class="editLink" href="https://labondemand.com/LabProfile/EditInstructions/155870?InstructionsSetId=248772">Edit</a>
+        </div>
+
+    <div id="outputWrapper">
+        <div id="instructions" class="instructionsPreview instructions"><div class="page" id="page0"><h1 class="lab-title primary-color">IoT Penetration Testing</h1>
+<h2 id="scenario">Scenario</h2>
+<p>IoT penetration testing is a specialized form of a security assessment designed to identify and address vulnerabilities in IoT devices and their associated ecosystems. IoT devices, ranging from smart home appliances to industrial sensors, often lack robust security features, making them prime targets for cyberattacks. Penetration testing simulates real-world attack scenarios to uncover weaknesses in the hardware, software, firmware, and network connectivity of IoT devices. The primary goal is to ensure these systems are resilient against threats such as data breaches, unauthorized access, and service disruptions.</p>
+<p>This module is designed to provide the necessary practice and knowledge for locating and identifying vulnerabilities in IoT firmware. The ability to first acquire, and then extract and emulate an image's firmware is a critical component for performing IoT hacking.</p>
+<h2 id="objective">Objective</h2>
+<p>We will be performing the following labs in this module:</p>
+<ul>
+<li><p>Performing IOT Fireware Acquisition, Extraction, Analysis, and Emulation</p></li>
+<li><p>Developing a Lua Wireshark Dissector for DICOM Protocol</p></li>
+<li><p>Using Nmap DICOM Scripts</p></li>
+<li><p>Probing IOT Devices by Analyzing UPnP and mDNS Messages</p></li>
+</ul>
+<blockquote class="alert">
+  <p><strong>Note:</strong> All lab manuals are accessible in the <strong>Lab Manuals</strong> folder located on the <strong>Desktop</strong> of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.</p>
+</blockquote>
+</div><div class="page" id="page1">
+<h1 id="exercise-1-performing-iot-fireware-acquisition-extraction-analysis-and-emulation">Exercise 1: Performing IOT Fireware Acquisition, Extraction, Analysis, and Emulation</h1>
+<p>IoT firmware analysis helps uncover hidden vulnerabilities such as hardcoded credentials, insecure update mechanisms, buffer overflows, or weak encryption protocols. These issues, if exploited, can lead to device compromise or network infiltration. Penetration testers can identify such flaws early by analyzing the firmware and mitigating risks before attackers exploit them.</p>
+<h3 id="lab-tasks">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex0"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex0"><span></span></label> By default, the Parrot machine appears. In the Password field type <strong>toor</strong> and press <strong>Enter</strong> to log in.</p></li>
+<li class="task-list-item" id="taskIndex1"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex1"><span></span></label> We have a sample firmware package binary for a <strong>Netgear IOT</strong> device that is often used for practicing IOT hacking. The device model number is <strong>WNAP 320</strong>, which is a wireless access point for a network. An example of the device is shown in the following image.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/xqcsonvm.jpg" alt="xqcsonvm.jpg"></p></li>
+<li class="task-list-item" id="taskIndex2"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex2"><span></span></label> We have downloaded the firmware for you. It is located in the <strong>home</strong> folder and named <strong>firmware.bin</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/nd3wgivx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex3"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex3"><span></span></label> The first step when we have a file is to run the file command on it. Launch a Terminal, type <strong>sudo file firmware.bin</strong>, and press <strong>Enter</strong>. Type <strong>toor</strong> when prompted for the password and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/vkjjcbj0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex4"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex4"><span></span></label> There is nothing useful for us here, so we continue trying. Type <strong>sudo hexdump -c firmware.bin | more</strong> and press <strong>Enter</strong>.</p></li>
+<li class="task-list-item" id="taskIndex5"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex5"><span></span></label> Now we have <strong>qshs</strong> that is identified in the hex trace. It is a known signature of the <strong>Squashfs</strong> file system, so this is a start.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/cyl21zb2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex6"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex6"><span></span></label> The next step in the process is to try and extract the file system from this firmware image. Our preferred tool is <strong>binwalk</strong>, so we will try this. In the terminal window, type <strong>man binwalk</strong> and press <strong>Enter</strong>. Take a few minutes to read about the tool. Once you are done, type <strong>q</strong> to exit the man page.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/xk5niats.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/waj0xdhz.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex7"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex7"><span></span></label> In the terminal type <strong>binwalk -e firmware.bin</strong> and press <strong>Enter</strong>. However, the main thing is the message that the image has been extracted. We also see that the filesystem is confirmed as Squashfs. Once the command is completed, you will have a directory that represents the extracted filesystem in the <strong>Home</strong> folder.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/chnmk50k.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/fawqq3jt.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex8"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex8"><span></span></label> In the terminal type <strong>cd _firmware.bin.extracted/squashfs-root</strong> and press <strong>Enter</strong>. Once you are in the directory, type <strong>ls</strong> and press <strong>Enter</strong>. You will see that the extracted file system is in a squashfs-root directory. We now have a complete and extracted file system, which as you can see, is a Linux variant.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/enkcu2mp.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex9"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex9"><span></span></label> From here, you can explore it to see the contents. A good place to start is the home directory since it usually contains information about the installed applications. Type <strong>cd home</strong> and press <strong>Enter</strong>. Type <strong>ls</strong> and press <strong>Enter</strong> to review the results. Since we have a <strong>www</strong> folder, this can be of interest. Type <strong>cd www</strong> and press <strong>Enter</strong>, and then type <strong>ls</strong> and press <strong>Enter</strong> to view the file contents.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/si34kbep.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex10"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex10"><span></span></label> We have a lot of code here to examine. In most cases, this code is not written securely. The file we want to look at is the <strong>boardDataWW.php</strong>. Open this in the editor of your choice.</p></li>
+<li class="task-list-item" id="taskIndex11"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex11"><span></span></label> As you review the code, it is apparent that there is nothing in the way of input validation and boundary checking. This is a clear indication that this application has injection vulnerabilities. Minimize or close the text editor window. There are many files here for you to explore, but we will leave that to you. Next, we will work on the challenges of mounting and booting the firmware with an emulator.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/4uieewr0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex12"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex12"><span></span></label> The one configuration we want to make is to point the <strong>firmadyne</strong> directory to the correct address. Type <strong>cd firmadyne</strong> and press <strong>Enter</strong> and open the config file <strong>firmadyne.config</strong> in the text editor of your choice and set <strong>FIRMWARE_DIR</strong> to point to the location of the tool, and <strong>uncomment</strong> the line. Save and close the text editor.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/ieaxvjuo.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/ivospu53.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex13"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex13"><span></span></label> We will work with the compressed firmware version straight from the download. This is the same file as <strong>firmware.bin</strong>. Ensure that you are in the firmadyne directory.</p></li>
+<li class="task-list-item" id="taskIndex14"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex14"><span></span></label> Use the extractor to recover only the filesystem. Ensure that the following are set:  no kernel (-nk), no parallel operation (-np), populating the image table in the SQL server at 127.0.0.1 (-sql) with the Netgear brand (-b), and storing the tarball in images. Run <strong>sudo service postgresql start</strong> and <strong>sudo python3 sources/extractor/extractor.py -b Netgear -sql 127.0.0.1 -np -nk "WNAP320 Firmware Version 2.0.3.zip" images</strong> commands.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/hcb5nsne.jpg" alt="hcb5nsne.jpg"></p></li>
+<li class="task-list-item" id="taskIndex15"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex15"><span></span></label> If it works correctly, you will have a tarball in the image directory. Next, enter <strong>sudo bash scripts/getArch.sh images/1.tar.gz</strong>. Enter the password of firmadyne which is <strong>toor</strong> when prompted.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/ndoz4yed.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex16"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex16"><span></span></label> This command is used to identify the architecture of firmware <strong>1</strong> and store the result in the image table of the database.</p></li>
+<li class="task-list-item" id="taskIndex17"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex17"><span></span></label> Now we want to load the contents of the filesystem for firmware <strong>1</strong> into the database and populate the object and object_to_image tables. Enter <strong>sudo python3 scripts/tar2db.py -i 1 -f images/1.tar.gz</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/g2ut2alr.jpg" alt="Screenshot">    </p></li>
+<li class="task-list-item" id="taskIndex18"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex18"><span></span></label> Next, we need to create the QEMU disk image for firmware <strong>1</strong>. Enter <strong>sudo bash scripts/makeImage.sh 1</strong>. Enter the password of firmadyne which is <strong>toor</strong> when prompted.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/4pjytqlo.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/vpsrz3wa.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex19"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex19"><span></span></label> Now you are ready to set up networking. It should then be available on the network like any other node. Enter <strong>sudo bash scripts/inferNetwork.sh 1</strong>. Enter the password of firmadyne i.e., <strong>toor</strong> when prompted.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/nsy2xbzd.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/wvxw4rmn.jpg" alt="Screenshot">    </p></li>
+<li class="task-list-item" id="taskIndex20"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex20"><span></span></label> Now we are ready to emulate firmware <strong>1</strong> with the inferred network configuration. This will modify the configuration of the host system by creating a Test Access Point (TAP) device and adding a route. Enter <strong>sudo bash scratch/1/run.sh</strong>. </p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/lovx5frl.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex21"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex21"><span></span></label> This will take some time and execute a chain of instructions as shown in the screenshot. Minimize the terminal window.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/dohwj3ua.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex22"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex22"><span></span></label> The system should be available over the network. Open a browser, and enter <strong>http://192.168.0.100</strong>. Netgear WNAP320 access point login page should appear as shown in the screenshot. This is the web interface from the running firmware that is being emulated.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/oxbejnot.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex23"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex23"><span></span></label> We can next look at any of the PHP code that we saw when we explored the file system. In the browser, enter http://192.168.0.100/boardDataWW.php. This will bring up another form as shown in the following screenshot.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/xea5pmgc.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex24"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex24"><span></span></label> Since we had the advantage of reviewing the code, we know that we do not have any input validation, which means that there is a possibility of command injection. We will leave that for you to explore. Hint: You can intercept the query using Burpsuite or any other proxy, and then attempt to enter commands such as cat /etc/passwd.</p></li>
+<li class="task-list-item" id="taskIndex25"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex25"><span></span></label> Within the Firmadyne tool, we can leverage additional scripts. Open a new terminal and change the directory to <strong>firmadyne</strong>. Now, enter <strong>sudo bash analyses/snmpwalk.sh 192.168.0.100</strong>. As the command states, it will enumerate data using SNMP. If you are asked to enter the password, type <strong>toor</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/rzo1yo21.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex26"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex26"><span></span></label> We can next enter <strong>sudo python3 analyses/webAccess.py 1 192.168.0.100 log.txt</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/wbrw00vw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex27"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex27"><span></span></label> There is also a Metasploit interface that can look for vulnerabilities and corresponding exploits. Enter <strong>sudo mkdir exploits</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/alzpzbst.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex28"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex28"><span></span></label> Change the permissions on the file with <strong>sudo chmod +x analyses/runExploits.py</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/40q55aco.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex29"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex29"><span></span></label> Open runExploits.py in any editor and modify lines 178 and 180 as shown in the screenshot.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/730stxfs.jpg" alt="730stxfs.jpg"></p></li>
+<li class="task-list-item" id="taskIndex30"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex30"><span></span></label> Enter <strong>sudo python3 analyses/runExploits.py -t 192.168.0.100 -o exploits/exploit -e x</strong>. An example of the output of the command is shown in the following screenshot:</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/qy01b53f.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex31"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex31"><span></span></label> Once the script finishes, open the file (<strong>script.rc</strong>) in any text editor. The file can be found in <strong>/home/pentester/firmadyne</strong> directory.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/uwnr3jxe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex32"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex32"><span></span></label> As you can see in the above screenshot, the tool is only trying a list of exploits. Therefore, it is not a powerful or effective script. Therefore, it should be used as a reference. Similar to other findings, your ability to research will determine success. The exercise objectives have been achieved.</p></li>
+</ol>
+</div><div class="page" id="page2">
+<h1 id="exercise-2-developing-a-lua-wireshark-dissector-for-dicom-protocol">Exercise 2: Developing a Lua Wireshark Dissector for DICOM Protocol</h1>
+<p>The DICOM protocol is one of the most common protocols in medical devices and clinical devices. Despite this, there are very few tools that support DICOM.</p>
+<p>In this lab, we will create a Lua Wireshark Dissector for DICOM Protocol.</p>
+<h3 id="lab-tasks-1">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex33"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex33"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155870?instructionsSetId=248772#" class="selectMachineLink icon-link special-action-link" data-data="278657">Ubuntu</a> to switch to Ubuntu machine, and log in with Ubuntu/toor credentials. </p></li>
+<li class="task-list-item" id="taskIndex34"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex34"><span></span></label> Open a terminal window with sudo privileges, run <strong>wireshark</strong> command to launch the application, and go to <strong>Help</strong> --&gt; <strong>About Wireshark</strong> to verify that the <strong>Lua</strong> is installed and enabled.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/kwsehojf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex35"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex35"><span></span></label> Now, navigate to <strong>Analyze --&gt; Enabled Protocols</strong> to check whether Wireshark has a dissector for the protocol and if it’s enabled.  </p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/wj1e1am1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex36"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex36"><span></span></label> Ensure that the DICOM protocol is enabled, as shown in the screenshot.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/kr0hjjch.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex37"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex37"><span></span></label> Now, navigate to <strong>File --&gt; Open</strong> and open <strong>DICOM_C-ECHO-echoscu.pcap</strong> file located in <strong>Downloads</strong> directory.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/idq2mpl2.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/uq0304lh.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex38"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex38"><span></span></label> In <strong>Apply a display filter</strong> section, type <strong>tcp.flags.push == 1</strong> and press <strong>Enter</strong> to apply a filter as shown in the screenshot.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/kankngnr.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex39"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex39"><span></span></label> Right-click on the packet and select <strong>Follow --&gt; TCP Stream</strong> to follow the stream.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/x4w4cyva.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/bmhwzwx1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex40"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex40"><span></span></label> Now that we have had a look at the data at the packet level, we can create our traffic and see what it looks like when we run the protocol. Close the wireshark window.</p></li>
+<li class="task-list-item" id="taskIndex41"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex41"><span></span></label> In a terminal window, run <strong>sudo apt install orthanc</strong> to install orthanc software.</p></li>
+<li class="task-list-item" id="taskIndex42"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex42"><span></span></label> Once installed, run <strong>netstat -atn</strong> to verify that ports 4242 and 8042 are open.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/nzsegifm.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex43"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex43"><span></span></label> Once you have verified the port is open, open a browser to port 8042 on localhost. Start a capture in Wireshark and observe the connection.</p>
+<blockquote class="note">
+  <p>If prompted for credentials, use <strong>orthanc</strong> as username and password.</p>
+</blockquote>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/oy5tulhf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex44"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex44"><span></span></label> Now, have a look at the communication sequence in Wireshark, open Wireshark, and start packet capture ensure that you have selected <strong>Any</strong> as the interface.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/qubqghup.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex45"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex45"><span></span></label> As we can see, the protocol communication is clear text, so that is something to note.</p></li>
+<li class="task-list-item" id="taskIndex46"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex46"><span></span></label> Now that we have a working server, we need to work on the dissector code. An example of this code is here:</p>
+<ul>
+<li>dicom_protocol = Proto("dicom-a",  "DICOM A-Type message")</li>
+<li>pdu_type = ProtoField.uint8("dicom-a.pdu_type", "pduType", base.DEC, {[1]="ASSOC Request", [2]="ASSOC Accept", [3]=”ASSOC Reject”, [4]=”Data”, [5]=”RELEASE Request”, [6]=”RELEASE Response”, [7]=”ABORT”})</li>
+<li>message_length = ProtoField.uint16("dicom-a.message_length", "messageLength", base.DEC)</li>
+<li>dicom_protocol.fields = {message_length, pdu_type} 1</li>
+<li>function dicom_protocol.dissector(buffer, pinfo, tree)</li>
+<li>pinfo.cols.protocol = dicom_protocol.name</li>
+<li>local subtree = tree:add(dicom_protocol, buffer(), "DICOM PDU")</li>
+<li>subtree:add_le(pdu_type, buffer(0,1))</li>
+<li>subtree:add(message_length, buffer(2,4))</li>
+<li>end</li>
+<li>local tcp_port = DissectorTable.get("tcp.port")</li>
+<li>tcp_port:add(4242, dicom_protocol)</li></ul></li>
+<li class="task-list-item" id="taskIndex47"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex47"><span></span></label> Let us break it down and explain the code in detail:</p>
+<ul>
+<li>dicom_protocol = Proto("dicom-a",  "DICOM A-Type message")</li>
+<li>define our new protocol dissector using the Proto(name, description) function</li>
+<li>pdu_type = ProtoField.uint8("dicom-a.pdu_type","pduType",base.DEC, {[1]="ASSOC Request",</li>
+<li>[2]="ASSOC Accept",</li>
+<li>[3]="ASSOC Reject",</li>
+<li>[4]="Data",</li>
+<li>[5]="RELEASE Request",</li>
+<li>[6]="RELEASE Response",</li>
+<li>[7]="ABORT"}) -- unsigned 8-bit integer</li>
+<li>message_length = ProtoField.uint16("dicom-a.message_length", "messageLength", base.DEC) -- unsigned 16-bit integer</li>
+<li>dicom_protocol.fields = {pdu_type, message_length}</li></ul></li>
+<li class="task-list-item" id="taskIndex48"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex48"><span></span></label> Define the header fields in Wireshark to match the DICOM PDU structure discussed previously with the help of the ProtoField class:</p>
+<ul>
+<li><p>we use these ProtoFields to add items to the dissection tree. For our dissector, we’ll call ProtoField twice: once to create the one-byte unsigned integer to store the PDU type and a second time for two bytes to store the message length</p></li>
+<li><p>we assigned a table of values for PDU types. Wireshark will automatically display this information. Then we set our protocol dissector fields to a Lua table containing our ProtoFields</p></li></ul></li>
+<li class="task-list-item" id="taskIndex49"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex49"><span></span></label>The next thing we have to do is define the main protocol dissector function</p>
+<ul>
+<li>function dicom_protocol.dissector(buffer, pinfo, tree)</li>
+<li>pinfo.cols.protocol = dicom_protocol.name</li>
+<li>local subtree = tree:add(dicom_protocol, buffer(), "DICOM PDU")</li>
+<li>subtree:add_le(pdu_type, buffer(0,1)) -- big endian</li>
+<li>subtree:add(message_length, buffer(2,4)) -- skip 1 byte</li>
+<li>End</li>
+<li>We set the protocol field to the protocol name we defined in dicom_protocol.name</li>
+<li>For each item we want to add, we use either add_le() for Big-Endian data or add() for Little Endian, along with a ProtoField and the buffer range to dissect.</li></ul></li>
+<li class="task-list-item" id="taskIndex50"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex50"><span></span></label> Finally, we are ready to complete the dissector. DissectorTable holds a table of sub-dissectors for the protocol, shown through the Decode dialog in Wireshark</p>
+<ul>
+<li>local tcp_port = DissectorTable.get("tcp.port")</li>
+<li>tcp_port:add(4242, dicom_protocol)</li>
+<li>To complete the dissector, we simply add our dissector to the DissectorTable for TCP ports at port 4242</li></ul></li>
+<li class="task-list-item" id="taskIndex51"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex51"><span></span></label> One more time, we will look at the capture without the lua dissector which is the case in old versions of Wireshark.</p></li>
+<li class="task-list-item" id="taskIndex52"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex52"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155870?instructionsSetId=248772#" class="selectMachineLink icon-link special-action-link" data-data="287851">Windows Server 2022</a> to switch to Windows Server 2022 machine, press <a href="https://labondemand.com/LabProfile/Instructions/155870?instructionsSetId=248772#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a> to activate the machine, login with <strong>Administrator/Pa$$w0rd</strong> credentials open Wireshark.</p></li>
+<li class="task-list-item" id="taskIndex53"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex53"><span></span></label> In Wireshark, open <strong>DICOM_C-ECHO-echoscu.pcap</strong> file located in <strong>Downloads</strong> folder.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/1pkhf54a.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex54"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex54"><span></span></label> Now click <a href="https://labondemand.com/LabProfile/Instructions/155870?instructionsSetId=248772#" class="selectMachineLink icon-link special-action-link" data-data="278657">Ubuntu</a> to switch to Ubuntu and open the <strong>DICOM_C-ECHO-echoscu.pcap</strong> file located in the <strong>Downloads</strong> directory.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/qgk31qaw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex55"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex55"><span></span></label> You can see that there is a quite difference. You are encouraged to explore this more. </p></li>
+</ol>
+</div><div class="page" id="page3">
+<h1 id="exercise-3-using-nmap-dicom-scripts">Exercise 3: Using Nmap DICOM Scripts</h1>
+<p>Nmap DICOM scripts are specialized NSE (Nmap Scripting Engine) scripts designed to assess the security of systems running the DICOM (Digital Imaging and Communications in Medicine) protocol, commonly used in healthcare for medical imaging data. These scripts help identify vulnerabilities such as open DICOM services, unsecured file transfers, and authentication misconfigurations that could expose sensitive patient information. They can detect the presence of DICOM servers, enumerate available services, and check for potential exploitation vectors like improper access controls or unencrypted communication. By leveraging these scripts, security professionals can evaluate the compliance of healthcare systems with data protection standards and enhance the overall security posture of medical imaging networks.</p>
+<p>In this lab, we will run Nmap scripts or DICOM protocol.</p>
+<h3 id="lab-tasks-2">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex56"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex56"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155870?instructionsSetId=248772#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine. Open a terminal window and navigate to <strong>/usr/share/nmap/scripts</strong> directory.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/0h1awwb1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex57"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex57"><span></span></label> Now run <strong>ls <em>*dicom</em>*</strong> to view dicom scripts.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/dqcsbbql.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex58"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex58"><span></span></label> Now, run <strong>pluma dicom-ping.nse</strong> command to open dicom-ping.nse script.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/chzvo3ew.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex59"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex59"><span></span></label> The contents of the script do look familiar, take a few minutes and read through the script.</p></li>
+<li class="task-list-item" id="taskIndex60"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex60"><span></span></label> Let us now run the script against your Orthanc server. Enter <strong>nmap -sV -p 4242 --script dicom-ping [IP address of the Server]</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/x0irbpkb.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex61"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex61"><span></span></label> As we see from the results. We have the detection of the DICOM, and we also have the report that is not secure! Once again, this is what testing is all about, we have to be able to do research and determine what the best method is to try and test it.</p></li>
+<li class="task-list-item" id="taskIndex62"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex62"><span></span></label> We have accomplished what we wanted to in this lab and will conclude here</p></li>
+</ol>
+</div><div class="page" id="page4">
+<h1 id="exercise-4-probing-iot-devices-by-analyzing-upnp-and-mdns-messages">Exercise 4: Probing IOT Devices by Analyzing UPnP and mDNS Messages</h1>
+<p>In this lab, we will look at the concept of Zero Configuration Networking, which is a set of technologies that automate the process of assigning network addresses, distributing and resolving hostnames, and discovering network services without the need for configuration or servers.</p>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex63"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex63"><span></span></label> We will now review the process to exploit the mDNS probing phase. In this phase, which occurs whenever an mDNS responder starts up or changes its connectivity, the responder asks the local network if there are any resource records with the same name as the one it’s planning to announce. To do this, it sends a query of type "ANY".</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/cdyfqmeu.jpg" alt="cdyfqmeu.jpg"></p></li>
+<li class="task-list-item" id="taskIndex64"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex64"><span></span></label> Notice that the replies are sent back to the multicast address on UDP port 5353. Because anyone can receive the multicast messages, an attacker can easily send the mDNS query from a spoofed IP address and still hear the replies on the local network.</p></li>
+<li class="task-list-item" id="taskIndex65"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex65"><span></span></label> We can use a tool known as Pholus. In the Parrot Security machine, open a terminal window and enter <strong>cd Pholus/</strong> command.</p></li>
+<li class="task-list-item" id="taskIndex66"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex66"><span></span></label> Open a terminal with sudo privileges, launch Wireshark, and capture network traffic from <strong>eth0</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/1b2f4f54.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex67"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex67"><span></span></label> We are going to install a tool to emulate a printer, switch to the previous terminal, and enter <strong>sudo python pholus3.py  eth0 -rq -stimeout 10</strong>.</p>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/hsp2yozn.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex68"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex68"><span></span></label> Learning more about what services are exposed on the network is one of the first steps in any security test. Using this approach, you can find the services with potential vulnerabilities and then exploit them.</p></li>
+<li class="task-list-item" id="taskIndex69"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex69"><span></span></label> Now, in the terminal window, run <strong>sudo python pholus3.py  eth0 -afre -stimeout 1000</strong>.</p>
+<blockquote class="note">
+  <p>It will take some time for the results to appear. If you are not receiving results, run the <strong>sudo ifconfig eth1 down</strong> command and perform step 7 again.</p>
+</blockquote>
+<p>
+<img src="./Module 13_ IoT Penetration Testing_files/2hbbml0r.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex70"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex70"><span></span></label> In this example, you can see the Ubuntu machine boot up named <strong>_ipp._tcp.local</strong>.</p></li>
+<li class="task-list-item" id="taskIndex71"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex71"><span></span></label> Because Pholus continuously sent fake replies indicating that the attacker owned that name, the Ubuntu host kept iterating over new potential names, like ubuntu-2.local, ubuntu-3.local, and so on without ever being able to register. We can also see there is a bog in the code, so we can only review the attack and not continue it, so as with other things, you can research it some more.</p></li>
+</ol></div></div>
+    </div>
+    <input type="hidden" id="rawContent" value="@lab.Title
+
+##Scenario
+
+IoT penetration testing is a specialized form of a security assessment designed to identify and address vulnerabilities in IoT devices and their associated ecosystems. IoT devices, ranging from smart home appliances to industrial sensors, often lack robust security features, making them prime targets for cyberattacks. Penetration testing simulates real-world attack scenarios to uncover weaknesses in the hardware, software, firmware, and network connectivity of IoT devices. The primary goal is to ensure these systems are resilient against threats such as data breaches, unauthorized access, and service disruptions.
+
+This module is designed to provide the necessary practice and knowledge for locating and identifying vulnerabilities in IoT firmware. The ability to first acquire, and then extract and emulate an image&#39;s firmware is a critical component for performing IoT hacking.
+
+
+##Objective
+
+We will be performing the following labs in this module:
+
+- Performing IOT Fireware Acquisition, Extraction, Analysis, and Emulation
+
+- Developing a Lua Wireshark Dissector for DICOM Protocol
+
+- Using Nmap DICOM Scripts
+
+- Probing IOT Devices by Analyzing UPnP and mDNS Messages
+
+&gt;[!alert] **Note:** All lab manuals are accessible in the **Lab Manuals** folder located on the **Desktop** of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.
+
+===
+
+# Exercise 1: Performing IOT Fireware Acquisition, Extraction, Analysis, and Emulation
+  
+IoT firmware analysis helps uncover hidden vulnerabilities such as hardcoded credentials, insecure update mechanisms, buffer overflows, or weak encryption protocols. These issues, if exploited, can lead to device compromise or network infiltration. Penetration testers can identify such flaws early by analyzing the firmware and mitigating risks before attackers exploit them.
+
+### Lab Tasks
+
+1. [] By default, the Parrot machine appears. In the Password field type **toor** and press **Enter** to log in.
+
+2. [] We have a sample firmware package binary for a **Netgear IOT** device that is often used for practicing IOT hacking. The device model number is **WNAP 320**, which is a wireless access point for a network. An example of the device is shown in the following image.
+
+    !IMAGE[xqcsonvm.jpg](instructions248772/xqcsonvm.jpg)
+
+3. [] We have downloaded the firmware for you. It is located in the **home** folder and named **firmware.bin**.
+
+    !IMAGE[Screenshot](screens/nd3wgivx.jpg)
+
+4. [] The first step when we have a file is to run the file command on it. Launch a Terminal, type **sudo file firmware.bin**, and press **Enter**. Type **toor** when prompted for the password and press **Enter**.
+
+    !IMAGE[Screenshot](screens/vkjjcbj0.jpg)
+
+5. [] There is nothing useful for us here, so we continue trying. Type **sudo hexdump -c firmware.bin | more** and press **Enter**.
+
+6. [] Now we have **qshs** that is identified in the hex trace. It is a known signature of the **Squashfs** file system, so this is a start.
+
+    !IMAGE[Screenshot](screens/cyl21zb2.jpg)
+
+7. [] The next step in the process is to try and extract the file system from this firmware image. Our preferred tool is **binwalk**, so we will try this. In the terminal window, type **man binwalk** and press **Enter**. Take a few minutes to read about the tool. Once you are done, type **q** to exit the man page.
+
+    !IMAGE[Screenshot](screens/xk5niats.jpg)
+
+    !IMAGE[Screenshot](screens/waj0xdhz.jpg)
+
+8. [] In the terminal type **binwalk -e firmware.bin** and press **Enter**. However, the main thing is the message that the image has been extracted. We also see that the filesystem is confirmed as Squashfs. Once the command is completed, you will have a directory that represents the extracted filesystem in the **Home** folder.
+
+    !IMAGE[Screenshot](screens/chnmk50k.jpg)
+
+    !IMAGE[Screenshot](screens/fawqq3jt.jpg)
+
+9. [] In the terminal type **cd _firmware.bin.extracted/squashfs-root** and press **Enter**. Once you are in the directory, type **ls** and press **Enter**. You will see that the extracted file system is in a squashfs-root directory. We now have a complete and extracted file system, which as you can see, is a Linux variant.
+
+    !IMAGE[Screenshot](screens/enkcu2mp.jpg)
+
+10. [] From here, you can explore it to see the contents. A good place to start is the home directory since it usually contains information about the installed applications. Type **cd home** and press **Enter**. Type **ls** and press **Enter** to review the results. Since we have a **www** folder, this can be of interest. Type **cd www** and press **Enter**, and then type **ls** and press **Enter** to view the file contents.
+
+    !IMAGE[Screenshot](screens/si34kbep.jpg)
+
+11. [] We have a lot of code here to examine. In most cases, this code is not written securely. The file we want to look at is the **boardDataWW.php**. Open this in the editor of your choice.
+
+12. [] As you review the code, it is apparent that there is nothing in the way of input validation and boundary checking. This is a clear indication that this application has injection vulnerabilities. Minimize or close the text editor window. There are many files here for you to explore, but we will leave that to you. Next, we will work on the challenges of mounting and booting the firmware with an emulator.
+
+    !IMAGE[Screenshot](screens/4uieewr0.jpg)
+
+13. [] The one configuration we want to make is to point the **firmadyne** directory to the correct address. Type **cd firmadyne** and press **Enter** and open the config file **firmadyne.config** in the text editor of your choice and set **FIRMWARE_DIR** to point to the location of the tool, and **uncomment** the line. Save and close the text editor.
+
+    !IMAGE[Screenshot](screens/ieaxvjuo.jpg)
+
+    !IMAGE[Screenshot](screens/ivospu53.jpg)
+
+14. [] We will work with the compressed firmware version straight from the download. This is the same file as **firmware.bin**. Ensure that you are in the firmadyne directory.
+
+15. [] Use the extractor to recover only the filesystem. Ensure that the following are set:  no kernel (-nk), no parallel operation (-np), populating the image table in the SQL server at 127.0.0.1 (-sql) with the Netgear brand (-b), and storing the tarball in images. Run **sudo service postgresql start** and **sudo python3 sources/extractor/extractor.py -b Netgear -sql 127.0.0.1 -np -nk &quot;WNAP320 Firmware Version 2.0.3.zip&quot; images** commands.
+
+    !IMAGE[hcb5nsne.jpg](instructions248772/hcb5nsne.jpg)
+
+16. [] If it works correctly, you will have a tarball in the image directory. Next, enter **sudo bash scripts/getArch.sh images/1.tar.gz**. Enter the password of firmadyne which is **toor** when prompted.
+
+    !IMAGE[Screenshot](screens/ndoz4yed.jpg)
+
+17. [] This command is used to identify the architecture of firmware **1** and store the result in the image table of the database.
+
+18. [] Now we want to load the contents of the filesystem for firmware **1** into the database and populate the object and object_to_image tables. Enter **sudo python3 scripts/tar2db.py -i 1 -f images/1.tar.gz**.
+
+    !IMAGE[Screenshot](screens/g2ut2alr.jpg)    
+
+19. [] Next, we need to create the QEMU disk image for firmware **1**. Enter **sudo bash scripts/makeImage.sh 1**. Enter the password of firmadyne which is **toor** when prompted.
+
+    !IMAGE[Screenshot](screens/4pjytqlo.jpg)
+    
+    !IMAGE[Screenshot](screens/vpsrz3wa.jpg)
+
+20. [] Now you are ready to set up networking. It should then be available on the network like any other node. Enter **sudo bash scripts/inferNetwork.sh 1**. Enter the password of firmadyne i.e., **toor** when prompted.
+
+    !IMAGE[Screenshot](screens/nsy2xbzd.jpg)
+    
+    !IMAGE[Screenshot](screens/wvxw4rmn.jpg)    
+
+21. [] Now we are ready to emulate firmware **1** with the inferred network configuration. This will modify the configuration of the host system by creating a Test Access Point (TAP) device and adding a route. Enter **sudo bash scratch/1/run.sh**. 
+
+    !IMAGE[Screenshot](screens/lovx5frl.jpg)
+
+22. [] This will take some time and execute a chain of instructions as shown in the screenshot. Minimize the terminal window.
+
+    !IMAGE[Screenshot](screens/dohwj3ua.jpg)
+
+23. [] The system should be available over the network. Open a browser, and enter **http://192.168.0.100**. Netgear WNAP320 access point login page should appear as shown in the screenshot. This is the web interface from the running firmware that is being emulated.
+
+    !IMAGE[Screenshot](screens/oxbejnot.jpg)
+
+24. [] We can next look at any of the PHP code that we saw when we explored the file system. In the browser, enter http://192.168.0.100/boardDataWW.php. This will bring up another form as shown in the following screenshot.
+
+    !IMAGE[Screenshot](screens/xea5pmgc.jpg)
+
+25. [] Since we had the advantage of reviewing the code, we know that we do not have any input validation, which means that there is a possibility of command injection. We will leave that for you to explore. Hint: You can intercept the query using Burpsuite or any other proxy, and then attempt to enter commands such as cat /etc/passwd.
+
+26. [] Within the Firmadyne tool, we can leverage additional scripts. Open a new terminal and change the directory to **firmadyne**. Now, enter **sudo bash analyses/snmpwalk.sh 192.168.0.100**. As the command states, it will enumerate data using SNMP. If you are asked to enter the password, type **toor** and press **Enter**.
+
+    !IMAGE[Screenshot](screens/rzo1yo21.jpg)
+
+27. [] We can next enter **sudo python3 analyses/webAccess.py 1 192.168.0.100 log.txt**.
+
+    !IMAGE[Screenshot](screens/wbrw00vw.jpg)
+
+28. [] There is also a Metasploit interface that can look for vulnerabilities and corresponding exploits. Enter **sudo mkdir exploits**.
+
+    !IMAGE[Screenshot](screens/alzpzbst.jpg)
+
+29. [] Change the permissions on the file with **sudo chmod +x analyses/runExploits.py**.
+
+    !IMAGE[Screenshot](screens/40q55aco.jpg)
+
+30. [] Open runExploits.py in any editor and modify lines 178 and 180 as shown in the screenshot.
+
+    !IMAGE[730stxfs.jpg](instructions248772/730stxfs.jpg)
+
+30. [] Enter **sudo python3 analyses/runExploits.py -t 192.168.0.100 -o exploits/exploit -e x**. An example of the output of the command is shown in the following screenshot:
+
+    !IMAGE[Screenshot](screens/qy01b53f.jpg)
+
+31. [] Once the script finishes, open the file (**script.rc**) in any text editor. The file can be found in **/home/pentester/firmadyne** directory.
+
+    !IMAGE[Screenshot](screens/uwnr3jxe.jpg)
+
+32. [] As you can see in the above screenshot, the tool is only trying a list of exploits. Therefore, it is not a powerful or effective script. Therefore, it should be used as a reference. Similar to other findings, your ability to research will determine success. The exercise objectives have been achieved.
+
+===
+
+#Exercise 2: Developing a Lua Wireshark Dissector for DICOM Protocol
+  
+The DICOM protocol is one of the most common protocols in medical devices and clinical devices. Despite this, there are very few tools that support DICOM.
+
+In this lab, we will create a Lua Wireshark Dissector for DICOM Protocol.
+
+###Lab Tasks
+
+1. [] Click @lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).SelectLink to switch to Ubuntu machine, and log in with Ubuntu/toor credentials. 
+
+2. [] Open a terminal window with sudo privileges, run **wireshark** command to launch the application, and go to **Help** --&gt; **About Wireshark** to verify that the **Lua** is installed and enabled.
+
+    !IMAGE[Screenshot](screens/kwsehojf.jpg)
+
+3. [] Now, navigate to **Analyze --&gt; Enabled Protocols** to check whether Wireshark has a dissector for the protocol and if it’s enabled.  
+
+    !IMAGE[Screenshot](screens/wj1e1am1.jpg)
+
+4. [] Ensure that the DICOM protocol is enabled, as shown in the screenshot.
+
+    !IMAGE[Screenshot](screens/kr0hjjch.jpg)
+
+5. [] Now, navigate to **File --&gt; Open** and open **DICOM_C-ECHO-echoscu.pcap** file located in **Downloads** directory.
+
+    !IMAGE[Screenshot](screens/idq2mpl2.jpg)
+
+    !IMAGE[Screenshot](screens/uq0304lh.jpg)
+
+6. [] In **Apply a display filter** section, type **tcp.flags.push == 1** and press **Enter** to apply a filter as shown in the screenshot.
+
+    !IMAGE[Screenshot](screens/kankngnr.jpg)
+
+7. [] Right-click on the packet and select **Follow --&gt; TCP Stream** to follow the stream.
+
+    !IMAGE[Screenshot](screens/x4w4cyva.jpg)
+
+    !IMAGE[Screenshot](screens/bmhwzwx1.jpg)
+
+8. [] Now that we have had a look at the data at the packet level, we can create our traffic and see what it looks like when we run the protocol. Close the wireshark window.
+
+9. [] In a terminal window, run **sudo apt install orthanc** to install orthanc software.
+
+10. [] Once installed, run **netstat -atn** to verify that ports 4242 and 8042 are open.
+
+    !IMAGE[Screenshot](screens/nzsegifm.jpg)
+
+11. [] Once you have verified the port is open, open a browser to port 8042 on localhost. Start a capture in Wireshark and observe the connection.
+
+    &gt;[!note] If prompted for credentials, use **orthanc** as username and password.
+
+    !IMAGE[Screenshot](screens/oy5tulhf.jpg)
+
+12. [] Now, have a look at the communication sequence in Wireshark, open Wireshark, and start packet capture ensure that you have selected **Any** as the interface.
+
+    !IMAGE[Screenshot](screens/qubqghup.jpg)
+
+13. [] As we can see, the protocol communication is clear text, so that is something to note.
+
+14. [] Now that we have a working server, we need to work on the dissector code. An example of this code is here:
+
+    - dicom_protocol = Proto(&quot;dicom-a&quot;,  &quot;DICOM A-Type message&quot;)
+    - pdu_type = ProtoField.uint8(&quot;dicom-a.pdu_type&quot;, &quot;pduType&quot;, base.DEC, {[1]=&quot;ASSOC Request&quot;, [2]=&quot;ASSOC Accept&quot;, [3]=”ASSOC Reject”, [4]=”Data”, [5]=”RELEASE Request”, [6]=”RELEASE Response”, [7]=”ABORT”})
+    - message_length = ProtoField.uint16(&quot;dicom-a.message_length&quot;, &quot;messageLength&quot;, base.DEC)
+    - dicom_protocol.fields = {message_length, pdu_type} 1
+    - function dicom_protocol.dissector(buffer, pinfo, tree)
+    - pinfo.cols.protocol = dicom_protocol.name
+    - local subtree = tree:add(dicom_protocol, buffer(), &quot;DICOM PDU&quot;)
+    - subtree:add_le(pdu_type, buffer(0,1))
+    - subtree:add(message_length, buffer(2,4))
+    - end
+    - local tcp_port = DissectorTable.get(&quot;tcp.port&quot;)
+    - tcp_port:add(4242, dicom_protocol)
+
+15. [] Let us break it down and explain the code in detail:
+    - dicom_protocol = Proto(&quot;dicom-a&quot;,  &quot;DICOM A-Type message&quot;)
+    - define our new protocol dissector using the Proto(name, description) function
+    - pdu_type = ProtoField.uint8(&quot;dicom-a.pdu_type&quot;,&quot;pduType&quot;,base.DEC, {[1]=&quot;ASSOC Request&quot;,
+    - [2]=&quot;ASSOC Accept&quot;,
+    - [3]=&quot;ASSOC Reject&quot;,
+    - [4]=&quot;Data&quot;,
+    - [5]=&quot;RELEASE Request&quot;,
+    - [6]=&quot;RELEASE Response&quot;,
+    - [7]=&quot;ABORT&quot;}) -- unsigned 8-bit integer
+    - message_length = ProtoField.uint16(&quot;dicom-a.message_length&quot;, &quot;messageLength&quot;, base.DEC) -- unsigned 16-bit integer
+    - dicom_protocol.fields = {pdu_type, message_length}
+
+16. [] Define the header fields in Wireshark to match the DICOM PDU structure discussed previously with the help of the ProtoField class:
+
+    - we use these ProtoFields to add items to the dissection tree. For our dissector, we’ll call ProtoField twice: once to create the one-byte unsigned integer to store the PDU type and a second time for two bytes to store the message length
+
+    - we assigned a table of values for PDU types. Wireshark will automatically display this information. Then we set our protocol dissector fields to a Lua table containing our ProtoFields
+
+17. []The next thing we have to do is define the main protocol dissector function
+
+    - function dicom_protocol.dissector(buffer, pinfo, tree)
+    - pinfo.cols.protocol = dicom_protocol.name
+    - local subtree = tree:add(dicom_protocol, buffer(), &quot;DICOM PDU&quot;)
+    - subtree:add_le(pdu_type, buffer(0,1)) -- big endian
+    - subtree:add(message_length, buffer(2,4)) -- skip 1 byte
+    - End
+    - We set the protocol field to the protocol name we defined in dicom_protocol.name
+    - For each item we want to add, we use either add_le() for Big-Endian data or add() for Little Endian, along with a ProtoField and the buffer range to dissect.
+
+18. [] Finally, we are ready to complete the dissector. DissectorTable holds a table of sub-dissectors for the protocol, shown through the Decode dialog in Wireshark
+
+    - local tcp_port = DissectorTable.get(&quot;tcp.port&quot;)
+    - tcp_port:add(4242, dicom_protocol)
+    - To complete the dissector, we simply add our dissector to the DissectorTable for TCP ports at port 4242
+
+19. [] One more time, we will look at the capture without the lua dissector which is the case in old versions of Wireshark.
+
+20. [] Click @lab.VirtualMachine(WindowsServer2022_iot).SelectLink to switch to Windows Server 2022 machine, press @lab.CtrlAltDelete to activate the machine, login with **Administrator/Pa$$w0rd** credentials open Wireshark.
+
+21. [] In Wireshark, open **DICOM_C-ECHO-echoscu.pcap** file located in **Downloads** folder.
+
+    !IMAGE[Screenshot](screens/1pkhf54a.jpg)
+
+22. [] Now click @lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).SelectLink to switch to Ubuntu and open the **DICOM_C-ECHO-echoscu.pcap** file located in the **Downloads** directory.
+
+    !IMAGE[Screenshot](screens/qgk31qaw.jpg)
+
+23. [] You can see that there is a quite difference. You are encouraged to explore this more. 
+
+===
+
+#Exercise 3: Using Nmap DICOM Scripts
+
+Nmap DICOM scripts are specialized NSE (Nmap Scripting Engine) scripts designed to assess the security of systems running the DICOM (Digital Imaging and Communications in Medicine) protocol, commonly used in healthcare for medical imaging data. These scripts help identify vulnerabilities such as open DICOM services, unsecured file transfers, and authentication misconfigurations that could expose sensitive patient information. They can detect the presence of DICOM servers, enumerate available services, and check for potential exploitation vectors like improper access controls or unencrypted communication. By leveraging these scripts, security professionals can evaluate the compliance of healthcare systems with data protection standards and enhance the overall security posture of medical imaging networks.
+
+In this lab, we will run Nmap scripts or DICOM protocol.
+
+###Lab Tasks
+
+1. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Open a terminal window and navigate to **/usr/share/nmap/scripts** directory.
+
+    !IMAGE[Screenshot](screens/0h1awwb1.jpg)
+
+2. [] Now run **ls *\*dicom*\*** to view dicom scripts.
+
+    !IMAGE[Screenshot](screens/dqcsbbql.jpg)
+
+3. [] Now, run **pluma dicom-ping.nse** command to open dicom-ping.nse script.
+
+    !IMAGE[Screenshot](screens/chzvo3ew.jpg)
+
+4. [] The contents of the script do look familiar, take a few minutes and read through the script.
+
+5. [] Let us now run the script against your Orthanc server. Enter **nmap -sV -p 4242 --script dicom-ping [IP address of the Server]**.
+
+    !IMAGE[Screenshot](screens/x0irbpkb.jpg)
+
+6. [] As we see from the results. We have the detection of the DICOM, and we also have the report that is not secure! Once again, this is what testing is all about, we have to be able to do research and determine what the best method is to try and test it.
+
+7. [] We have accomplished what we wanted to in this lab and will conclude here
+
+===
+
+#Exercise 4: Probing IOT Devices by Analyzing UPnP and mDNS Messages 
+
+In this lab, we will look at the concept of Zero Configuration Networking, which is a set of technologies that automate the process of assigning network addresses, distributing and resolving hostnames, and discovering network services without the need for configuration or servers.
+
+1. [] We will now review the process to exploit the mDNS probing phase. In this phase, which occurs whenever an mDNS responder starts up or changes its connectivity, the responder asks the local network if there are any resource records with the same name as the one it’s planning to announce. To do this, it sends a query of type &quot;ANY&quot;.
+
+    !IMAGE[cdyfqmeu.jpg](instructions248772/cdyfqmeu.jpg)
+
+2. [] Notice that the replies are sent back to the multicast address on UDP port 5353. Because anyone can receive the multicast messages, an attacker can easily send the mDNS query from a spoofed IP address and still hear the replies on the local network.
+
+3. [] We can use a tool known as Pholus. In the Parrot Security machine, open a terminal window and enter **cd Pholus/** command.
+
+4. [] Open a terminal with sudo privileges, launch Wireshark, and capture network traffic from **eth0**.
+
+    !IMAGE[Screenshot](screens/1b2f4f54.jpg)
+
+5. [] We are going to install a tool to emulate a printer, switch to the previous terminal, and enter **sudo python pholus3.py  eth0 -rq -stimeout 10**.
+
+    !IMAGE[Screenshot](screens/hsp2yozn.jpg)
+
+6. [] Learning more about what services are exposed on the network is one of the first steps in any security test. Using this approach, you can find the services with potential vulnerabilities and then exploit them.
+
+7. [] Now, in the terminal window, run **sudo python pholus3.py  eth0 -afre -stimeout 1000**.
+
+    &gt;[!note] It will take some time for the results to appear. If you are not receiving results, run the **sudo ifconfig eth1 down** command and perform step 7 again.
+
+    !IMAGE[Screenshot](screens/2hbbml0r.jpg)
+
+8. [] In this example, you can see the Ubuntu machine boot up named **_ipp._tcp.local**.
+
+9. [] Because Pholus continuously sent fake replies indicating that the attacker owned that name, the Ubuntu host kept iterating over new potential names, like ubuntu-2.local, ubuntu-3.local, and so on without ever being able to register. We can also see there is a bog in the code, so we can only review the attack and not continue it, so as with other things, you can research it some more.">
+    <input type="hidden" id="activities" value="[]">
+    <input type="hidden" id="activityGroups" value="[]">
+    <input type="hidden" id="replacementTokens" value="[{&quot;Token&quot;:&quot;@lab.LabProfile.Id&quot;,&quot;Replacement&quot;:&quot;155870&quot;},{&quot;Token&quot;:&quot;@lab.CtrlAltDelete&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;ctrlAltDeleteLink icon-link special-action-link&#39;&gt;Ctrl+Alt+Delete&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;278657&#39;&gt;Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).Username&quot;,&quot;Replacement&quot;:&quot;ubuntu&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;278657&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENTM-13).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;278657&#39;&gt;Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022_iot).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;287851&#39;&gt;Windows Server 2022&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022_iot).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022_iot).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022_iot).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;287851&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022_iot).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;287851&#39;&gt;Windows Server 2022&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Username&quot;,&quot;Replacement&quot;:&quot;pentester&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268660&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.OpticalMedia(23658).LoadLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;loadMediaLink opticalMedia icon-link special-action-link&#39; data-data=&#39;23658&#39;&gt;ubuntu-14.04.6-desktop-i386.iso&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.Title&quot;,&quot;Replacement&quot;:&quot;&lt;h1 class=\&quot;lab-title primary-color\&quot;&gt;IoT Penetration Testing&lt;/h1&gt;&quot;},{&quot;Token&quot;:&quot;@lab.LanguageName&quot;,&quot;Replacement&quot;:&quot;English&quot;},{&quot;Token&quot;:&quot;@lab.LanguageCode&quot;,&quot;Replacement&quot;:&quot;en&quot;},{&quot;Token&quot;:&quot;@lab.LanguageRegionCode&quot;,&quot;Replacement&quot;:&quot;en-US&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.Id&quot;,&quot;Replacement&quot;:&quot;{LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.GlobalId&quot;,&quot;Replacement&quot;:&quot;{lod_LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.StartDate&quot;,&quot;Replacement&quot;:&quot;20250124&quot;},{&quot;Token&quot;:&quot;@lab.User.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.FirstName&quot;,&quot;Replacement&quot;:&quot;{USER_FIRSTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.LastName&quot;,&quot;Replacement&quot;:&quot;{USER_LASTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.Email&quot;,&quot;Replacement&quot;:&quot;{EMAIL}&quot;},{&quot;Token&quot;:&quot;@lab.User.ExternalId&quot;,&quot;Replacement&quot;:&quot;{USER_EXTERNALID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Name&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_NAME}&quot;},{&quot;Token&quot;:&quot;@lab.Tag&quot;,&quot;Replacement&quot;:&quot;{TAG}&quot;}]">
+    <input type="hidden" id="replacements">
+    <input type="hidden" id="variables">
+
+    <textarea id="copyInput" value="" style="position: absolute; left:-10000px; top:-10000px; "></textarea>
+
+    <div id="Model" data-id="155870" data-contentroot="https://labondemand.blob.core.windows.net/content/lab155870/" data-scrolltop="" data-themescript="">
+
+
+
+</div></body></html>

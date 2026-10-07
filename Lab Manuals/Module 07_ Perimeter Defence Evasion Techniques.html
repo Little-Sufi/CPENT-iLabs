@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Module 07: Perimeter Defence Evasion Techniques</title>
+
+
+    <script src="./Module 07_ Perimeter Defence Evasion Techniques_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Module 07_ Perimeter Defence Evasion Techniques_files/Localize" type="text/javascript"></script>
+    <script src="./Module 07_ Perimeter Defence Evasion Techniques_files/showdown.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./Module 07_ Perimeter Defence Evasion Techniques_files/prettify.css">
+    <script src="./Module 07_ Perimeter Defence Evasion Techniques_files/yaml.min.js.download"></script>
+    <script src="./Module 07_ Perimeter Defence Evasion Techniques_files/LocalizeTo" type="text/javascript"></script>
+    <link href="./Module 07_ Perimeter Defence Evasion Techniques_files/CloudClient.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body, html {
+            font-family: Segoe UI,Tahoma,Verdana,Arial,sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background-color: #efefef;
+            color: #000;
+            height: 100%;
+        }
+
+        body {
+            overflow: auto;
+        }
+
+        #outputWrapper {
+            background-color: #efefef;
+            min-height: 100%;
+        }
+
+        .instructionsPreview {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .instructionsPreview .page {
+            position: relative;
+            display: block !important;
+            padding: 15px 20px;
+            background-color: #fff;
+            page-break-after: always;
+            min-height: 650px;
+        }
+
+        .instructionsPreview .page:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        @font-face {
+            font-family: "lod";
+            src: url("/fonts/lod.woff?v=18") format("woff"), url("/fonts/lod.ttf?v=18") format("truetype"), url("/fonts/lod.svg?v=18") format("svg");
+        }
+
+        .editLink:before {
+            content: "\E70F";
+            font-family: "lod";
+            margin-right: 4px;
+            display: inline-block;
+        }
+
+        @media print {
+            body, html {
+                height: auto;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            #outputWrapper {
+                background-color: transparent;
+            }
+
+            .instructionsPreview {
+                padding: 0;
+            }
+
+                .instructionsPreview .page:not(:first-child) {
+                    margin-top: 0px;
+                }
+        }
+
+        @page {
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-top: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+    </style>
+    <link id="themeStylesheet" href="./Module 07_ Perimeter Defence Evasion Techniques_files/Blue.css" rel="stylesheet">
+
+</head>
+<body>
+        <div style="padding:10px 20px;">
+            <a class="editLink" href="https://labondemand.com/LabProfile/EditInstructions/155856?InstructionsSetId=248758">Edit</a>
+        </div>
+
+    <div id="outputWrapper">
+        <div id="instructions" class="instructionsPreview instructions"><div class="page" id="page0"><h1 class="lab-title primary-color">Perimeter Defence Evasion Techniques</h1>
+<h2 id="scenario">Scenario</h2>
+<p>In today’s rapidly evolving threat landscape, perimeter defense devices such as firewalls and intrusion detection systems (IDS) serve as the first line of defense against cyber threats. However, attackers continuously develop sophisticated techniques to evade these defenses, rendering traditional configurations ineffective. Conducting penetration testing of these devices is crucial to identify vulnerabilities, misconfigurations, and potential bypass methods before attackers can exploit them. A proactive penetration test helps simulate real-world attack scenarios, such as advanced evasion techniques, misconfigured access control rules, or outdated firmware, enabling organizations to understand their exposure and take corrective actions. This approach strengthens overall security posture by ensuring that perimeter defense devices effectively detect and mitigate modern threats.</p>
+<p>Investing in penetration testing of firewalls and IDS solutions also provides tangible business benefits by reducing the risk of data breaches and minimizing potential downtime from successful attacks. It enables organizations to validate compliance with security regulations and industry standards, such as PCI DSS or ISO 27001, which often mandate periodic testing of network defenses. Moreover, the insights gained from such testing allow IT teams to optimize defense configurations, ensuring resources are allocated efficiently and operational gaps are addressed promptly. By identifying weaknesses in perimeter defenses, organizations can not only protect their sensitive assets but also maintain customer trust and business continuity in the face of ever-evolving cyber threats.</p>
+<h2 id="objective">Objective</h2>
+<p>The objective of this module is to help students learn different techniques to evade perimeter defences. You will learn how to:</p>
+<ul>
+<li><p>Scan with Nmap against Defenses</p></li>
+<li><p>Identify and Bypass a Firewall</p></li>
+<li><p>Use HTTP Tunneling to Bypass Firewalls Using HTTPort</p></li>
+<li><p>Perform evasion Using Social-Engineer Toolkit (SET)</p></li>
+<li><p>Use Proxychains to Avoid Detection</p></li>
+<li><p>Perform WAF Fingerprint</p></li>
+<li><p>Enumeate Firewall Access Control List and Bypass WAF using Nmap</p></li>
+</ul>
+<blockquote class="alert">
+  <p><strong>Note:</strong> All lab manuals are accessible in the <strong>Lab Manuals</strong> folder located on the <strong>Desktop</strong> of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.</p>
+</blockquote>
+</div><div class="page" id="page1">
+<h1 id="exercise-1-scanning-against-defenses-with-nmap">Exercise 1: Scanning against Defenses with Nmap</h1>
+<h3 id="scenario-1">Scenario</h3>
+<p>One of the most popular open source scanning tools on the market is Nmap. As you may have discovered, it is an effective tool. We have also, on numerous occasions, discovered that if there are defenses in place such as firewalls or filters, conducting scans becomes more challenging.</p>
+<p>During a penetration test, it is imperative that you use a tool to identify open ports and the services attached to that port. There are a number of tools available, and we will start with the most popular tool on the market that is free and open source: Nmap. Nmap also has options that give it better success when encountering filters.</p>
+<h3 id="lab-objectives">Lab Objectives</h3>
+<p>The objective of this lab is to help students use Nmap, and then attempt advanced options to scan through a filter. In this lab, you will:</p>
+<ul>
+<li><p>Scan for a target </p></li>
+<li><p>Observe and troubleshoot the scan</p></li>
+<li><p>Attempt advanced options to scan through a filter</p></li>
+</ul>
+<h3 id="lab-tasks">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex0"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex0"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>. Parrot logon screen appears, type <strong>toor</strong> in the Password field and press <strong>Enter</strong>.</p></li>
+<li class="task-list-item" id="taskIndex1"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex1"><span></span></label> You are now ready to test the rules. First, start a <strong>protocol analyzer</strong> when you begin to test the rules. Start Wireshark, launch a terminal and type <strong>sudo wireshark</strong> and press <strong>Enter</strong>. Type <strong>toor</strong> when prompted for the password and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/csjtu5zv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex2"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex2"><span></span></label> Double-click the <strong>eth0</strong> interface to start capturing. Minimize the Wireshark window.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/wxgygffi.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex3"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex3"><span></span></label> Now, launch a new terminal window and type <strong>ping 192.168.0.51</strong> and press <strong>Enter</strong>. Switch to the <strong>Wireshark</strong> window to view the capture.</p>
+<blockquote class="hint">
+  <p>192.168.0.51 is the IP address of the <strong>RPC Server Ubuntu</strong> machine.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/s2s1kf30.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex4"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex4"><span></span></label> Click the <strong>Stop Capturing Packets</strong> button in the menu bar to stop the packet capture. Take a few minutes to review the packets in Wireshark, as shown in the screenshot.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ssska10f.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex5"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex5"><span></span></label> You have not set up any protections as of yet, so you should be able to ping. As soon as you <strong>enable protections</strong>, this will change. Part of advanced techniques is identifying what is in between us and a target, or what is on the target that is preventing us from connecting to it. At the current setting, the <strong>iptables</strong> are allowing all traffic.</p></li>
+<li class="task-list-item" id="taskIndex6"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex6"><span></span></label> Launch a terminal window, type <strong>nmap -sC 192.168.0.51 -n</strong> and press <strong>Enter</strong>, as shown in the screenshot.</p>
+<blockquote class="hint">
+  <p>192.168.0.51 is the IP address of the <strong>RPC Server Ubuntu</strong> machine.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/i0uso5uj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex7"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex7"><span></span></label> Switch to the <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268662">RPC Server Ubuntu</a> machine, by default the <strong>administrator</strong> user profile is selected, type <strong>toor</strong> in the Password field and press <strong>Enter</strong> to log in.</p></li>
+<li class="task-list-item" id="taskIndex8"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex8"><span></span></label> Once you are logged into the machine, launch a terminal and type <strong>sudo iptables -P INPUT DROP</strong>. Type <strong>toor</strong> and press <strong>Enter</strong> when prompted for the password.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/byo3lo4j.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex9"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex9"><span></span></label> Once you have entered the rule, all <strong>inbound packets</strong> will be <strong>blocked</strong>. To see your rule, type <strong>sudo iptables -L</strong> and press <strong>Enter</strong>, type <strong>toor</strong> and press <strong>Enter</strong> when prompted for the password.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/zhjvhdlr.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex10"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex10"><span></span></label> Switch to <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>, and maximize Wireshark and click <strong>Start capturing packets</strong> (Shark Fin Icon) to start the new packet capture. Leave the Wireshark window running.</p>
+<blockquote class="alert">
+  <p>If the Unsaved packets popup appears, click <strong>Continue without Saving</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/jvau4t50.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex11"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex11"><span></span></label> Launch a new terminal, and then type <strong>nmap -sC 192.168.0.51 -n</strong> and press <strong>Enter</strong>. As the screenshot shows, this configuration reduces the attack surface to zero. This occurs when you are working from the perimeter. The tester will often face different types of obstacles. As a result, you must first evaluate them, and then detect any weaknesses or go through the administrator’s configuration.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/d12m2u13.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex12"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex12"><span></span></label> Maximize the Wireshark window and then type <strong>ip.dst == 192.168.0.51</strong> in the Filter field and press <strong>Enter</strong> to apply the filter. Have a look at the captured traffic and then clear the Filter.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/l0pcybqd.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex13"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex13"><span></span></label> Launch a new terminal, and then type <strong>ping 192.168.0.51</strong> and press <strong>Enter</strong>, and then switch to the Wireshark window to view the packet capture. You can see the message in the packet capture states that there is <strong>no response</strong> from the Target machine.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/3wgdqsye.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex14"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex14"><span></span></label> At the current setting, the iptables are appropriately configured to not respond. With most devices, they are not set this way by default. Change the configuration of the iptables to reflect a typical configuration for Cisco or any other router vendor. When you scan an <strong>access control list</strong> (ACL), you will receive an <strong>Internet Control Message Protocol</strong> (ICMP) packet with type <strong>3</strong> and code <strong>13</strong>.</p></li>
+<li class="task-list-item" id="taskIndex15"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex15"><span></span></label> Configure the iptables settings to emulate a filtering device's response. Switch to the <strong>RPC Server Ubuntu</strong> machine and in the terminal window, type the following commands and press <strong>Enter</strong>:</p>
+<ul>
+<li><p><strong>sudo iptables -F</strong></p></li>
+<li><p><strong>sudo iptables -P INPUT ACCEPT</strong></p></li></ul>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/qobgqtap.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex16"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex16"><span></span></label> Set up something similar to this ACL behavior in the iptables. Type <strong>sudo iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/opal0vuf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex17"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex17"><span></span></label> Switch to <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>, and maximize Wireshark and click <strong>Start capturing packets</strong> (Shark Fin Icon) to start the new packet capture. Leave the Wireshark window running.</p>
+<blockquote class="alert">
+  <p>If the Unsaved packets popup appears, click <strong>Continue without Saving</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/rc3fy4ky.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex18"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex18"><span></span></label> Conduct the Nmap scan (<strong>nmap -sC 192.168.0.51 -n</strong>), and then review the information in Wireshark.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/f0gocpvn.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex19"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex19"><span></span></label> Once a filter is in place, you must determine a method into it (see the next lab exercise for the relevant instructions). This concludes the lab exercise. Close all the windows that were opened on both machines.</p></li>
+<li class="task-list-item" id="taskIndex20"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex20"><span></span></label> Before continuing to next exercise in Ubuntu machine run <strong>sudo iptables -P INPUT ACCEPT</strong> command.</p></li>
+</ol>
+</div><div class="page" id="page2">
+<h1 id="exercise-2-identifying-and-bypassing-a-firewall">Exercise 2: Identifying and Bypassing a Firewall</h1>
+<p>Attackers are constantly searching for vulnerable clients to penetrate their network through IP spoofing to damage or steal data. The attackers can access packets through a firewall by spoofing the IP address. If attackers are able to capture network traffic, as explained in the previous lab, they can perform Trojan attacks, registry attacks, password hijacking attacks, etc., which can be disastrous for an organization’s network.</p>
+<p>Therefore, as a network administrator you should be able to identify attacks by extracting information from captured traffic such as source and destination IP addresses, protocol type, header length, source and destination ports, etc. and compare these details with modeled attack signatures to detect if an attack has occurred.  </p>
+<h3 id="lab-tasks-1">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex21"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex21"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268661">Web Server</a> and then click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a>.</p></li>
+<li class="task-list-item" id="taskIndex22"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex22"><span></span></label> In the password field, enter <span class="typeText" title="Type Text">Pa$$w0rd</span> and click the <strong>Login</strong> button or press <strong>Enter</strong>.</p></li>
+<li class="task-list-item" id="taskIndex23"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex23"><span></span></label> Navigate to the <strong>Start</strong> menu and click <strong>Control Panel</strong>. Click <strong>System and Security --&gt; Windows Firewall</strong> in Control Panel. When the <strong>Windows Firewall</strong> control panel appears, click <strong>Turn Windows Firewall on or off</strong> in the left pane.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/cgrxfg00.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex24"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex24"><span></span></label> To customize the settings of the Windows Firewall, choose the <strong>Turn on Windows Firewall</strong> radio button in both network location settings and click <strong>OK</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/fs01c351.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex25"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex25"><span></span></label> Now, Windows Firewall is <strong>ON</strong> on the <strong>Web Server</strong> machine.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/sxmnk2cu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex26"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex26"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>. The Parrot logon screen appears, type <strong>toor</strong> in the Password field and press <strong>Enter</strong>.</p></li>
+<li class="task-list-item" id="taskIndex27"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex27"><span></span></label> Click the <strong>Terminal</strong> icon from the taskbar to launch it.</p></li>
+<li class="task-list-item" id="taskIndex28"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex28"><span></span></label> Now check the connectivity between the Attacker Machine (<strong>Parrot</strong>) and the Victim Machine (<strong>Web Server</strong>). To check, type <strong>ping 172.19.19.7</strong> in the terminal and press <strong>Enter</strong>. If the ping is successful and the remote machine replies with 64 bytes of data, then press <strong>Ctrl+C</strong> to stop pinging the machine.</p>
+<blockquote class="knowledge">
+  <p>The ping command alone cannot bypass firewall restrictions between two machines.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/bkbmy3cs.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex29"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex29"><span></span></label> Now perform a traceroute to the victim's machine. Launch another terminal window and type <strong>traceroute 172.19.19.7</strong> and press <strong>Enter</strong>. After performing traceroute, no results will be displayed because the <strong>Windows Firewall</strong> is turned on, as shown in the screenshot below. Press <strong>Ctrl+C</strong> on the keyboard to stop the traceroute command.</p>
+<blockquote class="knowledge">
+  <p>The traceroute command tracks the path of packets traveling between two machines.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/xxifqv0m.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex30"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex30"><span></span></label> Now, type the following command <strong>sudo nmap --script=firewalk --traceroute 172.19.19.7</strong> and press <strong>Enter</strong>. Type <strong>toor</strong> and press <strong>Enter</strong> when prompted for the password. This command will check for open ports on the target machine, as shown in the screenshot. It displays open ports on the victim's machine, filtered ports under Host script results, and Traceroute details.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/k5hexxha.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex31"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex31"><span></span></label> Now, type <strong>sudo hping3 -S 172.19.19.7 -c 100 -p ++1</strong> and press <strong>Enter</strong>. Type <strong>toor</strong> and press <strong>Enter</strong> if prompted for the password. Hping begins to ping each port in incremental order till port <strong>100</strong> and displays the response packets for the ports that respond to the requests. In the hping statistics, you can see that out of <strong>100</strong> packets, only <strong>2</strong> packets are transmitted to the victim’s machine and the rest <strong>98</strong> packets’ transfers fail. The <strong>2</strong> packets which passed through the firewall from port <strong>21</strong> and <strong>80</strong> and other packets are filtered by the firewall. You can use these two open ports to perform your penetration testing.</p>
+<blockquote class="alert">
+  <p>The scan takes about 5 minutes to finish.</p>
+</blockquote>
+<blockquote class="knowledge">
+  <p>The -S switch is for setting the SYN TCP flag.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/4xltbtn1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex32"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex32"><span></span></label> Close all the windows.</p></li>
+</ol>
+<p>In this lab, you have learned how to identify and bypass a firewall.</p>
+</div><div class="page" id="page3">
+<h1 id="exercise-3-http-tunneling-to-bypass-firewalls-using-httport">Exercise 3: HTTP Tunneling to Bypass Firewalls Using HTTPort</h1>
+<p>Attackers are constantly searching for vulnerable clients to penetrate their network through IP spoofing to damage or steal data. The attacker can access packets through a firewall by spoofing the IP address. If attackers are able to capture network traffic, as explained in the previous lab, they can perform Trojan attacks, registry attacks, password hijacking attacks, etc., which can be disastrous for an organization’s network.</p>
+<p>Therefore, as a network administrator, you should be able to identify attacks by extracting information from captured traffic such as source and destination IP addresses, protocol type, header length, source and destination ports, etc. and compare these details with modeled attack signatures to determine if an attack has occurred.</p>
+<p>Also, familiarity with the HTTP tunneling technique is important as it helps in identifying additional security risks that may not be detected by conducting simple network and vulnerability scanning and determines to what extent a network IDS can identify malicious traffic within a communication channel.</p>
+<h3 id="lab-tasks-2">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex33"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex33"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="269780">FTP Server</a>. Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a> to activate the machine.</p></li>
+<li class="task-list-item" id="taskIndex34"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex34"><span></span></label> In the logon box password field click <span class="typeText" title="Type Text">test@123</span>.</p></li>
+<li class="task-list-item" id="taskIndex35"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex35"><span></span></label> Launch Control Panel from the Start menu. The Control Panel window appears. Click <strong>System and Security --&gt; Windows Tools</strong>. In the Windows Tools window, double-click <strong>Services</strong>.</p>
+<blockquote class="alert">
+  <p>If any pop-up appears, click <strong>No</strong> to close.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/sajbtqxr.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/cjhly312.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/lnj51lit.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex36"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex36"><span></span></label> The <strong>Services</strong> window appears. Scroll down and right-click on <strong>World Wide Web Publishing Service</strong> and click the <strong>Stop</strong> option.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/mavso05t.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex37"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex37"><span></span></label> In the same way, right-click on <strong>IIS Admin Service</strong> and click the <strong>Stop</strong> option. Minimize the Services window.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/gpk2skpe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex38"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex38"><span></span></label> Double-click the <strong>HTTHost</strong> folder on the Desktop and double-click <strong>htthost.exe</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/mtorkoa5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex39"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex39"><span></span></label> If The <strong>Open File – Security Warning</strong> pop-up appears on the screen, click <strong>Run</strong>.</p></li>
+<li class="task-list-item" id="taskIndex40"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex40"><span></span></label> The <strong>HTTHost 1.8.5</strong> window appears, as shown in the screenshot.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/jst15duf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex41"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex41"><span></span></label> Select the <strong>Options</strong> tab. In the Options tab, set all its settings to default except the <strong>Personal Password</strong> field, which should be filled in with any password. In this lab, the personal password is set to <strong>magic</strong>. Check the <strong>Revalidate DNS names</strong> and <strong>Log Connections</strong> options, and click <strong>Apply</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/p2bloosf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex42"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex42"><span></span></label> Check if the last line is <strong>Listener: listening at 0.0.0.0:80</strong> in <strong>Application Log</strong>. This ensures that <strong>HTTHost</strong> is running properly and has started listening to port <strong>80</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/kodrlszd.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex43"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex43"><span></span></label> Close the <strong>Services</strong> console. Leave HTTHost running, and do not turn off the <strong>FTP Server</strong> machine.</p></li>
+<li class="task-list-item" id="taskIndex44"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex44"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268659">Windows Server 2022</a> click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a>.</p></li>
+<li class="task-list-item" id="taskIndex45"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex45"><span></span></label> In the log on box click <span class="typeText" title="Type Text">Pa$$w0rd</span> and press <strong>Enter</strong>.</p>
+<blockquote class="knowledge">
+  <p>You can use the <strong>Type Password</strong> option from the <strong>Commands</strong> menu to enter the password.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex46"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex46"><span></span></label> Launch <strong>Control Panel</strong>. To launch Control Panel click <strong>Start</strong> and click the <strong>Control Panel</strong> app from the apps menu.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/mon45ex5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex47"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex47"><span></span></label> The <strong>Control Panel</strong> window appears. Navigate to <strong>System and Security --&gt; Windows Defender Firewall</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/1ks0usrg.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex48"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex48"><span></span></label> The <strong>Windows Defender Firewall</strong> control panel appears; click the <strong>Turn Windows Firewall on or off</strong> link in the left pane.</p></li>
+<li class="task-list-item" id="taskIndex49"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex49"><span></span></label> The <strong>Customize settings</strong> window appears. Select the <strong>Turn on Windows Firewall</strong> (under <strong>Private network settings</strong> and <strong>Public network settings</strong>). Click <strong>OK</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/tfdskijy.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex50"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex50"><span></span></label> The firewall is successfully turned on. Now, click <strong>Advanced settings</strong> in the left pane.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ell2xyz2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex51"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex51"><span></span></label> The <strong>Windows Defender Firewall with Advanced Security</strong> window appears. Select <strong>Outbound Rules</strong> in the left pane. A list of outbound rules is displayed. Click <strong>New Rule…</strong> in the right pane (under <strong>Outbound Rules</strong>).</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/4ca5qbjo.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex52"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex52"><span></span></label> In the <strong>New Outbound Rule Wizard</strong>, select <strong>Port</strong> as the <strong>Rule Type</strong>, and click <strong>Next</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/si21odvh.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex53"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex53"><span></span></label> Select <strong>All remote ports</strong>, under <strong>Protocol and Ports</strong>, and click <strong>Next</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/35fhytj0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex54"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex54"><span></span></label> Under <strong>Action</strong>, <strong>Block the connection</strong> is selected by default. Click <strong>Next</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/fvx0zo5i.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex55"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex55"><span></span></label> In the <strong>Profile</strong> section, ensure that all the options (Domain, Private and Public) are checked, and click <strong>Next</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/t5vds0c5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex56"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex56"><span></span></label> Under <strong>Name</strong>, type <strong>Port 21 Blocked</strong> in the <strong>Name</strong> field, and click <strong>Finish</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/wm5toscx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex57"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex57"><span></span></label> The new rule <strong>Port 21 Blocked</strong> is created, right-click the newly created rule (<strong>Port 21 Blocked</strong>), and click <strong>Properties</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/omynhkfo.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex58"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex58"><span></span></label> The <strong>Properties</strong> window for the <strong>Port 21 Blocked</strong> rule appears. Select the <strong>Protocols and Ports</strong> tab. In the <strong>Remote Port</strong> field, select the <strong>Specific Ports</strong> option from the drop-down list, then enter <strong>21</strong> as the <strong>Port Number</strong>. Leave the other default settings, click <strong>Apply</strong>, and click <strong>OK</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/darxmgof.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex59"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex59"><span></span></label> <strong>Disable</strong> the rule, and check if you are able to connect to the FTP server. Right-click the newly added rule, and click <strong>Disable Rule</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/svpdysar.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex60"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex60"><span></span></label> Launch the <strong>command prompt</strong>, and issue <strong>ftp 172.19.19.17</strong>. You will be asked to enter the username. This means you are able to establish an FTP connection. Press <strong>Ctrl+C</strong> to terminate the session. Minimize or close the command prompt.</p>
+<blockquote class="knowledge">
+  <p>172.19.19.17 is the IP address of the Sales Department machine.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/1yvueqo3.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex61"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex61"><span></span></label> Maximize the <strong>Windows Defender Firewall with Advanced Security</strong> window. Now, enable the rule, and check whether you can establish a connection. Right-click the newly added rule, and click <strong>Enable Rule</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/d554bv1r.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex62"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex62"><span></span></label> Launch the <strong>Command Prompt</strong> and check whether you are able to connect to the FTP server by issuing the command <strong>ftp 172.19.19.17</strong>. The added outbound rule should block the connection as shown in the screenshot.</p>
+<blockquote class="alert">
+  <p>If you are not asked to enter credentials, it means that the connection is blocked.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/voccvjmv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex63"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex63"><span></span></label> Close all the windows. Now, perform tunneling using <strong>HTTPort</strong> to establish a connection with the <strong>FTP server</strong> located on the <strong>FTP Server</strong> machine.</p></li>
+<li class="task-list-item" id="taskIndex64"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex64"><span></span></label> Navigate to <strong>C:\CPENT-Tools\CPENT Module 07 Perimeter Defence Evasion Techniques\HTTP Tunneling</strong> and double-click <strong>httport3snfm.exe</strong>. Follow the wizard-driven installation steps to install <strong>HTTPort</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/3qrfskxf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex65"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex65"><span></span></label> Click on Start and navigate to the <strong>HTTPort 3.SNFM</strong> folder and click on <strong>HTTPort 3.SNFM</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/lqxy41rx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex66"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex66"><span></span></label> An Introduction wizard appears, click <strong>Next</strong> (5 times) till the end of the wizard and then click <strong>Close</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/2t3b55si.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ezdxcltn.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex67"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex67"><span></span></label> The HTTPort main window (<strong>HTTPort 3.SNFM</strong>) appears.</p></li>
+<li class="task-list-item" id="taskIndex68"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex68"><span></span></label> Select the <strong>Proxy</strong> tab and enter the IP address of <strong>FTP Server</strong> machine i.e., <strong>172.19.19.9</strong> (since <strong>HTTHost</strong> is running in that machine), and enter <strong>80</strong> as Port number. In the <strong>Misc. options</strong> section, under the <strong>Bypass mode:</strong> field, select <strong>Remote host</strong> option from the drop-down list. In the <strong>Use personal remote host at (blank = use public)</strong> section, re-enter the IP address <strong>FTP Server</strong> i.e., <strong>172.19.19.9</strong> and 80 as the port number. Enter <strong>magic</strong> in the <strong>Password:</strong> field.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/i4plcrox.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex69"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex69"><span></span></label> Select the <strong>Port mapping</strong> tab and click <strong>Add</strong> to create New Mapping.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/s5srjlzs.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex70"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex70"><span></span></label> Right-click the <strong>New Mapping</strong> node, and click <strong>Edit</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ab1bflo0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex71"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex71"><span></span></label> Rename this to <strong>ftp old home</strong> (you can enter a name of your choice). Right-click the node below <strong>Local port</strong>, then click <strong>Edit</strong> and enter 21 as the port value. Right-click the node below <strong>Remote host</strong>, click <strong>Edit</strong> and rename it as <strong>172.19.19.17</strong>. Right-click the node below <strong>Remote port</strong>, then click <strong>Edit</strong> and enter 21 as the port value.</p>
+<blockquote class="alert">
+  <p><strong>172.19.19.17</strong> specified in the <strong>Remote host</strong> node is the IP address of the FTP server hosted on the <strong>Sales Department</strong> machine.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/kgra23cb.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex72"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex72"><span></span></label> Switch back to the <strong>Proxy</strong> tab and click <strong>Start</strong> to begin the <strong>HTTP tunneling</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/wd2enmn1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex73"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex73"><span></span></label> <strong>HTTPort</strong> intercepts the FTP request to localhost and tunnels it through HTTHost running on the remote machine (172.19.19.9). The client does not directly access 172.19.19.9. This means you cannot directly connect to 172.19.19.17 due to the firewall rule, instead, you will be connecting to the tunnel on localhost by issuing the command <strong>ftp 127.0.0.1</strong>, which will forward the traffic to the FTP server 172.19.19.17 via 172.19.19.9.</p></li>
+<li class="task-list-item" id="taskIndex74"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex74"><span></span></label> Launch the <strong>Command Prompt</strong> and type <strong>ftp 172.19.19.17</strong>, and press <strong>Enter</strong>. The ftp connection will be blocked by the outbound firewall rule.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/rpef4o5m.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex75"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex75"><span></span></label> Now launch a new <strong>Command Prompt</strong>, type <strong>ftp 127.0.0.1</strong> and press <strong>Enter</strong>. You should be able to connect to the FTP server (172.19.19.17).</p></li>
+<li class="task-list-item" id="taskIndex76"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex76"><span></span></label> The tunnel is now active, you will now be prompted for credentials. Enter the credentials of any user account of the <strong>Sales Department</strong>. In this lab, we are using the credentials of the <strong>Admin</strong> account. Type the username (<strong>Admin</strong>) and password (<strong>test@123</strong>), and press <strong>Enter</strong>.</p>
+<blockquote class="alert">
+  <p>The password you enter won't be visible.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/te1srtrq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex77"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex77"><span></span></label> You have successfully logged in, even after adding a firewall outbound rule inferring that a tunnel has been established by <strong>HTTPort</strong> and <strong>HTTHost</strong>, bypassing the firewall. Now you have access to the FTP directory located in the <strong>Sales Department</strong> machine, you will have to create a directory before being able to add files. Type <strong>mkdir Test</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/xg25ua2j.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex78"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex78"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268771">Sales Department</a>. Login to the machine with Username <strong>Admin</strong> and password as <strong>test@123</strong>.</p></li>
+<li class="task-list-item" id="taskIndex79"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex79"><span></span></label> Navigate to <strong>C:\FTP</strong>. A directory named <strong>Test</strong> will be created in the <strong>FTP</strong> folder as shown in the screenshot.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/fwcfcniu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex80"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex80"><span></span></label> Thus, you have successfully bypassed the Windows firewall using HTTP Tunneling. On completion of the exercise, delete the created outbound rule, stop HttHost and HTTPort and disable the firewall using the Control Panel (which was enabled in the beginning of the lab) in the host machine i.e., Windows Server 2022. Also, start the World Wide Web Publishing Service in <strong>FTP Server</strong> machine and disable the firewall using the Control Panel. Close all the applications, files, and folders that were opened while performing this exercise.</p></li>
+</ol>
+<p>In this lab you have learned how to analyze and document the results related to the lab exercise. Give your opinion on your target’s security posture and exposure.</p>
+</div><div class="page" id="page4">
+<h1 id="exercise-4-evading-perimeter-defences-using-social-engineer-toolkit-set">Exercise 4: Evading Perimeter Defences Using Social-Engineer Toolkit (SET)</h1>
+<p>An important part of penetration testing is the ability to evade detection when it is part of the scope of work. We will attempt an evasion of Windows Defender using PowerShell techniques.</p>
+<p>The objective of this lab is to teach students to use the Social Engineering Toolkit to evade detection by Windows Defender. The technique can also be used against any anti-virus and many other host-based protection tools.</p>
+<h3 id="lab-objective">Lab Objective</h3>
+<p>In this lab, you will </p>
+<ul>
+<li><p>Create the PowerShell script</p></li>
+<li><p>Send the PowerShell code file to the target machine</p></li>
+<li><p>Attempt to exploit the machine</p></li>
+</ul>
+<h3 id="lab-tasks-3">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex81"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex81"><span></span></label> Our target machine is <strong>Windows Server 2019</strong>. With time, it becomes more difficult to bypass protections. The techniques that are currently successful may not work later, but testers must test these techniques for access and documentation.</p></li>
+<li class="task-list-item" id="taskIndex82"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex82"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>. Parrot logon screen appears, type <strong>toor</strong> in the Password field and press <strong>Enter</strong>.</p>
+<blockquote class="knowledge">
+  <p>If you are already logged in, skip to <strong>step 3</strong>.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex83"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex83"><span></span></label> Launch a terminal and type <strong>sudo setoolkit</strong> and press <strong>Enter</strong>. Type <strong>toor</strong> in the password field and press <strong>Enter</strong> to log in.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/oluxpdih.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex84"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex84"><span></span></label> Type <strong>y</strong> and press <strong>Enter</strong> to accept the terms and services of the setoolkit.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/v3zdkxbz.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex85"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex85"><span></span></label> Type <strong>1</strong> and press <strong>Enter</strong> to select the <strong>Social-Engineering Attacks</strong> option.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/fiicnzs5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex86"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex86"><span></span></label> As the menu shows, there are many vectors to choose from; choose one, but feel free to research and explore. Next, type <strong>9</strong> and press <strong>Enter</strong> to select the <strong>PowerShell Attack Vectors</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/h41qyi4y.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex87"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex87"><span></span></label> As you review the options, read the module instructions. <strong>Create a PowerShell shellcode</strong>, copy it to the <strong>Windows Server 2019</strong> machine, and check if you can acquire a shell to your <strong>Parrot</strong> machine.</p>
+<blockquote class="alert">
+  <p>Note that you are focusing on the power of client-side attacks, which, for the most part, is the main vector for attacking the latest versions of Windows.</p>
+</blockquote></li>
+<li class="task-list-item" id="taskIndex88"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex88"><span></span></label> Type <strong>1</strong> to select the first option and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/exuqukpu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex89"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex89"><span></span></label> Type the IP address of the <strong>Parrot</strong> machine and press <strong>Enter</strong>. Here, the IP address of the Parrot machine is <strong>192.168.0.18</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/j21baaub.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex90"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex90"><span></span></label> You can accept the default port or choose one of your own; note that this would be important if you had to egress. Use a custom port and enter <strong>443</strong>. To accept the default port, just press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/xocdawez.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex91"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex91"><span></span></label> When prompted, start the listener by typing <strong>yes</strong> and pressing <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/gad1j5yu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex92"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex92"><span></span></label> The Metasploit will start; place the <strong>PowerShell</strong> code in the folder.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ca4roxzj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex93"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex93"><span></span></label> Moving the file across to the machine you are going to attempt to gain access to is usually done using a phishing vector. However, you can use a number of different methods. The file we want to copy is <strong>x86_powershell_injection.txt</strong> and is located at <strong>/root/.set/reports/powershell</strong>.</p></li>
+<li class="task-list-item" id="taskIndex94"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex94"><span></span></label> Once you have transferred the file, paste its contents into a <strong>Command prompt</strong> window. Note that we are emulating the client side here—even post-exploitation. An example of what the code looks like is shown in the screenshot in next strep.</p></li>
+<li class="task-list-item" id="taskIndex95"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex95"><span></span></label> Log in to your <strong>email account</strong> and copy the code, paste it into a new email, and save it as a <strong>draft</strong>. Close the Text editor window once you have explored the code.</p>
+<blockquote class="alert">
+  <p>Press <strong>Ctrl+H</strong> to view the hidden files and folders, as <strong>.set</strong> is a hidden folder.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ns355wkw.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/bnlxcjg2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex96"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex96"><span></span></label> You can perform the attack against <strong>Windows Server 2019</strong>. Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268773">Windows Server 2019</a> to select, and click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a>.</p></li>
+<li class="task-list-item" id="taskIndex97"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex97"><span></span></label> Click <span class="typeText" title="Type Text">Pa$$w0rd</span> to log in as <strong>Administrator</strong>. Once you are logged into the machine, type <strong>powershell</strong> in the <strong>Search</strong> field, right-click on the <strong>Windows PowerShell</strong> icon, and click <strong>Run as administrator</strong>, as shown in the screenshot.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/rprhnyme.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex98"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex98"><span></span></label> Now, open your email account, copy the PowerShell script, and paste it into the <strong>Windows PowerShell</strong> window and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/lcveiyeg.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex99"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex99"><span></span></label> As soon as you press Enter, the Windows PowerShell window closes. Now, switch to <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine and observe that a meterpreter session has opened, as shown in the screenshot.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/1czcafxz.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex100"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex100"><span></span></label> You may want to set up the payload without HTTPS. This way, the exchange of certificates and handshake does not have to take place. This concludes the lab exercise.</p></li>
+</ol>
+</div><div class="page" id="page5">
+<h1 id="exercise-5-using-proxychains-to-avoid-detection-and-bypass-perimeter-defences">Exercise 5: Using Proxychains to Avoid Detection and Bypass Perimeter Defences</h1>
+<h3 id="scenario-2">Scenario</h3>
+<p>As a penetration tester, you need to assess the security of a high-profile organization that employs multiple layers of network defenses, including firewalls, IDS/IPS, and IP-based geolocation restrictions. Your reconnaissance may indicate that the organization's perimeter defenses block direct connections from unknown or suspicious IP addresses, effectively preventing external scans or unauthorized access attempts. To overcome this challenge, you can use Proxychains to route your traffic through multiple proxy servers, disguising your original IP and avoiding detection. By chaining proxies located in different geographic regions, you successfully bypass IP-based restrictions while maintaining anonymity.</p>
+<h3 id="lab-objective-1">Lab Objective</h3>
+<p>In this lab, we will use proxychains to conduct a scan</p>
+<h3 id="lab-tasks-4">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex101"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex101"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>. Parrot logon screen appears, type <strong>toor</strong> in the Password field and press <strong>Enter</strong>.</p>
+<blockquote class="knowledge">
+  <p>If you are already logged in, skip to <strong>step 2</strong>.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex102"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex102"><span></span></label> Launch a terminal window, type <strong>pluma /etc/proxychains.conf</strong>, and press <strong>Enter</strong>. Carefully review the information and note the configuration at the bottom. Although this serves our purpose for the lab, you may add more information to the file. Close the text editor window.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ybzgswdq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex103"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex103"><span></span></label> In the terminal window, type <strong>msfconsole</strong> and press <strong>Enter</strong> to launch Metasploit Framework.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ikiuegpo.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex104"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex104"><span></span></label> In the msfconsole, type <strong>search socks</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/nx1zbjhq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex105"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex105"><span></span></label> Select the server; type <strong>use auxiliary/server/socks_proxy</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/fcdx4jro.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex106"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex106"><span></span></label> Once the module is loaded, type <strong>info</strong> and press <strong>Enter</strong> to read about the module.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/hm3pfeom.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex107"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex107"><span></span></label> To set up the port, type <strong>set SRVPORT 9050</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/kpco2wpq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex108"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex108"><span></span></label> Type <strong>run</strong> and press <strong>Enter</strong> to run the server.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/ztulirbr.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex109"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex109"><span></span></label> To verify whether the server is running or not, open a new terminal window and type <strong>sudo netstat -atn</strong> and press <strong>Enter</strong>. Type <strong>toor</strong> and press <strong>Enter</strong>, when prompted for the password. You should see the port open and listening.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/vdvyuzqw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex110"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex110"><span></span></label> Run <strong>proxychains</strong>, type <strong>sudo proxychains nmap -sS 192.168.0.51</strong> and press <strong>Enter</strong>.</p>
+<blockquote class="hint">
+  <p>192.168.0.51 is the IP address of the <strong>RPC Server Ubuntu</strong> machine.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/acnor3tk.jpg" alt="Screenshot"></p></li>
+</ol>
+</div><div class="page" id="page6">
+<h1 id="exercise-6-performing-waf-fingerprinting">Exercise 6: Performing WAF Fingerprinting</h1>
+<p>WAF (Web Application Firewall) fingerprinting identifies specific WAFs by analyzing their responses to various requests, revealing their presence and type. Detection involves recognizing WAF signatures and behaviors. Bypassing techniques exploit weaknesses or use obfuscation to evade WAF filters, relying on a deep understanding of the WAF's rules and configurations.</p>
+<h3 id="lab-objective-2">Lab Objective</h3>
+<p>In this lab you will </p>
+<ul>
+<li><p>Use nmap script to perform WAF and IDS/IPS detection</p></li>
+<li><p>Use WhatWaf tool to determine the WAF behing a web application</p></li>
+</ul>
+<h3 id="lab-tasks-5">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex111"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex111"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine. Open a terminal and execute <strong>sudo su</strong> to run the programs as a root user (When prompted, enter the password <strong>toor</strong>).</p></li>
+<li class="task-list-item" id="taskIndex112"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex112"><span></span></label> Here, we will scan the target to identify the Web Application Firewall. To do so, enter <strong>nmap --script http-waf-detect certifiedhacker.com</strong>.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/l0ukemgh.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex113"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex113"><span></span></label> From the result, we can see that the scan displays the WAF and IDS/IPS, as shown in the above screenshot.</p></li>
+<li class="task-list-item" id="taskIndex114"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex114"><span></span></label> Now we will use the Whatwaf tool to glean some information regarding WAF on the target.</p></li>
+<li class="task-list-item" id="taskIndex115"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex115"><span></span></label> In the terminal, enter <strong>whatwaf -u http://certifiedhacker.com</strong> to perform scanning for WAF.</p>
+<blockquote class="note">
+  <p>If you get any errors after detecting the WAF, ignore them.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/oi3ciir0.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/zgtusedb.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex116"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex116"><span></span></label> The result shows that we have detected ModSecurity and Open Source WAF on our target.</p></li>
+</ol>
+</div><div class="page" id="page7">
+<h1 id="exercise-7-enumeating-firewall-access-control-list--and-bypassing-waf-using-nmap">Exercise 7: Enumeating Firewall Access Control List  and Bypassing WAF using Nmap</h1>
+<p>In the previous lab we have detected the WAF on www.certifiedhacke.com, now, we will perfom nmap scans beyond those WAF to gather open ports and other information.</p>
+<h3 id="lab-tasks-6">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex117"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex117"><span></span></label> In the <a href="https://labondemand.com/LabProfile/Instructions/155856?instructionsSetId=248758#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine, open a terminal window with sudo privileges, and run <strong>nmap -sS -O certifiedhacker.com</strong> to perform a SYN Stealth scan.</p>
+<blockquote class="note">
+  <p>In the above command, <strong>-sS</strong> performs a SYN scan, and <strong>-O</strong> performs OS detection.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/gnvml34t.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/2n2o1r21.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex118"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex118"><span></span></label> To scan a specific port, use the <strong>nmap -sS -O certifiedhacker.com -p 80</strong> command.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/zebqgnca.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex119"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex119"><span></span></label> Now, we will try to bypass the firewall using fragmented packets. To do so, run the <strong>nmap -f certifiedhacker.com</strong> command.</p>
+<blockquote class="note">
+  <p>The <strong>-f</strong> option is used to send fragmented packets.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/fsqnjosy.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex120"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex120"><span></span></label> To send fragmented packets by setting a specific MTU, run the <strong>nmap -mtu 24 certifiedhacker.com</strong> command.</p>
+<blockquote class="note">
+  <p><strong>-mtu</strong> stands for Maximum Transmission Unit.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/l2dto3zo.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex121"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex121"><span></span></label> Now, we will try to bypass the firewall by spoofing the source port. To do so, run the <strong>nmap --source-port 53 certifiedhacker.com</strong> command.</p>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/uxsn1q0y.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex122"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex122"><span></span></label> We will try to bypass the firewall by MAC address spoofing by specifying a MAC address from a vendor. To do so, run the <strong>nmap -sT -Pn --spoof-mac Dell certifiedhacker.com</strong> command.</p>
+<blockquote class="note">
+  <p>The <strong>-sT</strong> performs a TCP connect scan, <strong>-Pn</strong> disables host discovery, and <strong>--spoof-mac Dell</strong> spoofs the MAC address of a Dell vendor.</p>
+</blockquote>
+<p>
+<img src="./Module 07_ Perimeter Defence Evasion Techniques_files/qcfxhhmd.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex123"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex123"><span></span></label> This concludes enumerating the access control list and bypassing the Web Application Firewall using Nmap.</p></li>
+<li class="task-list-item" id="taskIndex124"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex124"><span></span></label> Close all open windows.</p></li>
+</ol></div></div>
+    </div>
+    <input type="hidden" id="rawContent" value="@lab.Title
+
+##Scenario
+
+In today’s rapidly evolving threat landscape, perimeter defense devices such as firewalls and intrusion detection systems (IDS) serve as the first line of defense against cyber threats. However, attackers continuously develop sophisticated techniques to evade these defenses, rendering traditional configurations ineffective. Conducting penetration testing of these devices is crucial to identify vulnerabilities, misconfigurations, and potential bypass methods before attackers can exploit them. A proactive penetration test helps simulate real-world attack scenarios, such as advanced evasion techniques, misconfigured access control rules, or outdated firmware, enabling organizations to understand their exposure and take corrective actions. This approach strengthens overall security posture by ensuring that perimeter defense devices effectively detect and mitigate modern threats.
+
+Investing in penetration testing of firewalls and IDS solutions also provides tangible business benefits by reducing the risk of data breaches and minimizing potential downtime from successful attacks. It enables organizations to validate compliance with security regulations and industry standards, such as PCI DSS or ISO 27001, which often mandate periodic testing of network defenses. Moreover, the insights gained from such testing allow IT teams to optimize defense configurations, ensuring resources are allocated efficiently and operational gaps are addressed promptly. By identifying weaknesses in perimeter defenses, organizations can not only protect their sensitive assets but also maintain customer trust and business continuity in the face of ever-evolving cyber threats.
+
+##Objective
+
+The objective of this module is to help students learn different techniques to evade perimeter defences. You will learn how to:
+
+- Scan with Nmap against Defenses
+
+- Identify and Bypass a Firewall
+
+- Use HTTP Tunneling to Bypass Firewalls Using HTTPort
+
+- Perform evasion Using Social-Engineer Toolkit (SET)
+
+- Use Proxychains to Avoid Detection
+
+- Perform WAF Fingerprint
+
+- Enumeate Firewall Access Control List and Bypass WAF using Nmap
+
+&gt;[!alert] **Note:** All lab manuals are accessible in the **Lab Manuals** folder located on the **Desktop** of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.
+===
+
+#Exercise 1: Scanning against Defenses with Nmap 
+
+### Scenario
+
+One of the most popular open source scanning tools on the market is Nmap. As you may have discovered, it is an effective tool. We have also, on numerous occasions, discovered that if there are defenses in place such as firewalls or filters, conducting scans becomes more challenging.
+
+During a penetration test, it is imperative that you use a tool to identify open ports and the services attached to that port. There are a number of tools available, and we will start with the most popular tool on the market that is free and open source: Nmap. Nmap also has options that give it better success when encountering filters.
+
+### Lab Objectives
+
+The objective of this lab is to help students use Nmap, and then attempt advanced options to scan through a filter. In this lab, you will:
+
+- Scan for a target 
+
+- Observe and troubleshoot the scan
+
+- Attempt advanced options to scan through a filter
+
+### Lab Tasks
+
+1. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink. Parrot logon screen appears, type **toor** in the Password field and press **Enter**.
+
+2. [] You are now ready to test the rules. First, start a **protocol analyzer** when you begin to test the rules. Start Wireshark, launch a terminal and type **sudo wireshark** and press **Enter**. Type **toor** when prompted for the password and press **Enter**.
+
+	!IMAGE[Screenshot](screens/csjtu5zv.jpg)
+
+3. [] Double-click the **eth0** interface to start capturing. Minimize the Wireshark window.
+
+	!IMAGE[Screenshot](screens/wxgygffi.jpg)
+
+4. [] Now, launch a new terminal window and type **ping 192.168.0.51** and press **Enter**. Switch to the **Wireshark** window to view the capture.
+
+	&gt;[!Hint] 192.168.0.51 is the IP address of the **RPC Server Ubuntu** machine.
+
+	!IMAGE[Screenshot](screens/s2s1kf30.jpg)
+
+5. [] Click the **Stop Capturing Packets** button in the menu bar to stop the packet capture. Take a few minutes to review the packets in Wireshark, as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/ssska10f.jpg)
+
+6. [] You have not set up any protections as of yet, so you should be able to ping. As soon as you **enable protections**, this will change. Part of advanced techniques is identifying what is in between us and a target, or what is on the target that is preventing us from connecting to it. At the current setting, the **iptables** are allowing all traffic.
+
+7. [] Launch a terminal window, type **nmap -sC 192.168.0.51 -n** and press **Enter**, as shown in the screenshot.
+
+	&gt;[!Hint] 192.168.0.51 is the IP address of the **RPC Server Ubuntu** machine.
+
+	!IMAGE[Screenshot](screens/i0uso5uj.jpg)
+
+8. [] Switch to the @lab.VirtualMachine(RPCServerUbuntu).SelectLink machine, by default the **administrator** user profile is selected, type **toor** in the Password field and press **Enter** to log in.
+
+9. [] Once you are logged into the machine, launch a terminal and type **sudo iptables -P INPUT DROP**. Type **toor** and press **Enter** when prompted for the password.
+
+	!IMAGE[Screenshot](screens/byo3lo4j.jpg)
+
+10. [] Once you have entered the rule, all **inbound packets** will be **blocked**. To see your rule, type **sudo iptables -L** and press **Enter**, type **toor** and press **Enter** when prompted for the password.
+
+	!IMAGE[Screenshot](screens/zhjvhdlr.jpg)
+
+11. [] Switch to @lab.VirtualMachine(ParrotSecurity).SelectLink, and maximize Wireshark and click **Start capturing packets** (Shark Fin Icon) to start the new packet capture. Leave the Wireshark window running.
+
+	&gt;[!Alert] If the Unsaved packets popup appears, click **Continue without Saving**.
+
+	!IMAGE[Screenshot](screens/jvau4t50.jpg)
+
+12. [] Launch a new terminal, and then type **nmap -sC 192.168.0.51 -n** and press **Enter**. As the screenshot shows, this configuration reduces the attack surface to zero. This occurs when you are working from the perimeter. The tester will often face different types of obstacles. As a result, you must first evaluate them, and then detect any weaknesses or go through the administrator’s configuration.
+
+	!IMAGE[Screenshot](screens/d12m2u13.jpg)
+
+13. [] Maximize the Wireshark window and then type **ip.dst == 192.168.0.51** in the Filter field and press **Enter** to apply the filter. Have a look at the captured traffic and then clear the Filter.
+
+	!IMAGE[Screenshot](screens/l0pcybqd.jpg)
+
+14. [] Launch a new terminal, and then type **ping 192.168.0.51** and press **Enter**, and then switch to the Wireshark window to view the packet capture. You can see the message in the packet capture states that there is **no response** from the Target machine.
+
+	!IMAGE[Screenshot](screens/3wgdqsye.jpg)
+
+15. [] At the current setting, the iptables are appropriately configured to not respond. With most devices, they are not set this way by default. Change the configuration of the iptables to reflect a typical configuration for Cisco or any other router vendor. When you scan an **access control list** (ACL), you will receive an **Internet Control Message Protocol** (ICMP) packet with type **3** and code **13**.
+
+16. [] Configure the iptables settings to emulate a filtering device&#39;s response. Switch to the **RPC Server Ubuntu** machine and in the terminal window, type the following commands and press **Enter**:
+
+	- **sudo iptables -F**
+
+	- **sudo iptables -P INPUT ACCEPT**
+
+	!IMAGE[Screenshot](screens/qobgqtap.jpg)
+
+17. [] Set up something similar to this ACL behavior in the iptables. Type **sudo iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited** and press **Enter**.
+
+	!IMAGE[Screenshot](screens/opal0vuf.jpg)
+
+18. [] Switch to @lab.VirtualMachine(ParrotSecurity).SelectLink, and maximize Wireshark and click **Start capturing packets** (Shark Fin Icon) to start the new packet capture. Leave the Wireshark window running.
+
+	&gt;[!Alert] If the Unsaved packets popup appears, click **Continue without Saving**.
+
+	!IMAGE[Screenshot](screens/rc3fy4ky.jpg)
+
+19. [] Conduct the Nmap scan (**nmap -sC 192.168.0.51 -n**), and then review the information in Wireshark.
+
+	!IMAGE[Screenshot](screens/f0gocpvn.jpg)
+
+20. [] Once a filter is in place, you must determine a method into it (see the next lab exercise for the relevant instructions). This concludes the lab exercise. Close all the windows that were opened on both machines.
+
+21. [] Before continuing to next exercise in Ubuntu machine run **sudo iptables -P INPUT ACCEPT** command.
+
+===
+
+#Exercise 2: Identifying and Bypassing a Firewall
+
+Attackers are constantly searching for vulnerable clients to penetrate their network through IP spoofing to damage or steal data. The attackers can access packets through a firewall by spoofing the IP address. If attackers are able to capture network traffic, as explained in the previous lab, they can perform Trojan attacks, registry attacks, password hijacking attacks, etc., which can be disastrous for an organization&amp;rsquo;s network.
+
+Therefore, as a network administrator you should be able to identify attacks by extracting information from captured traffic such as source and destination IP addresses, protocol type, header length, source and destination ports, etc. and compare these details with modeled attack signatures to detect if an attack has occurred.  
+  
+###Lab Tasks
+
+1. [ ] Click @lab.VirtualMachine(WebServer).SelectLink and then click @lab.CtrlAltDelete.
+
+2. [ ] In the password field, enter +++Pa$$w0rd+++ and click the **Login** button or press **Enter**.
+
+3. [ ] Navigate to the **Start** menu and click **Control Panel**. Click **System and Security --&gt; Windows Firewall** in Control Panel. When the **Windows Firewall** control panel appears, click **Turn Windows Firewall on or off** in the left pane.
+
+	!IMAGE[Screenshot](screens/cgrxfg00.jpg)
+
+4. [ ] To customize the settings of the Windows Firewall, choose the **Turn on Windows Firewall** radio button in both network location settings and click **OK**.
+
+	!IMAGE[Screenshot](screens/fs01c351.jpg)
+
+5. [ ] Now, Windows Firewall is **ON** on the **Web Server** machine.
+
+	!IMAGE[Screenshot](screens/sxmnk2cu.jpg)
+
+6. [ ] Click @lab.VirtualMachine(ParrotSecurity).SelectLink. The Parrot logon screen appears, type **toor** in the Password field and press **Enter**.
+
+7. [ ] Click the **Terminal** icon from the taskbar to launch it.
+
+8. [ ] Now check the connectivity between the Attacker Machine (**Parrot**) and the Victim Machine (**Web Server**). To check, type **ping 172.19.19.7** in the terminal and press **Enter**. If the ping is successful and the remote machine replies with 64 bytes of data, then press **Ctrl+C** to stop pinging the machine.
+
+	&gt; [!KNOWLEDGE] The ping command alone cannot bypass firewall restrictions between two machines.
+
+	!IMAGE[Screenshot](screens/bkbmy3cs.jpg)
+
+9. [ ] Now perform a traceroute to the victim&#39;s machine. Launch another terminal window and type **traceroute 172.19.19.7** and press **Enter**. After performing traceroute, no results will be displayed because the **Windows Firewall** is turned on, as shown in the screenshot below. Press **Ctrl+C** on the keyboard to stop the traceroute command.
+
+	&gt; [!KNOWLEDGE] The traceroute command tracks the path of packets traveling between two machines.
+
+	!IMAGE[Screenshot](screens/xxifqv0m.jpg)
+
+10. [ ] Now, type the following command **sudo nmap --script=firewalk --traceroute 172.19.19.7** and press **Enter**. Type **toor** and press **Enter** when prompted for the password. This command will check for open ports on the target machine, as shown in the screenshot. It displays open ports on the victim&#39;s machine, filtered ports under Host script results, and Traceroute details.
+
+	!IMAGE[Screenshot](screens/k5hexxha.jpg)
+
+11. [ ] Now, type **sudo hping3 -S 172.19.19.7 -c 100 -p ++1** and press **Enter**. Type **toor** and press **Enter** if prompted for the password. Hping begins to ping each port in incremental order till port **100** and displays the response packets for the ports that respond to the requests. In the hping statistics, you can see that out of **100** packets, only **2** packets are transmitted to the victim’s machine and the rest **98** packets’ transfers fail. The **2** packets which passed through the firewall from port **21** and **80** and other packets are filtered by the firewall. You can use these two open ports to perform your penetration testing.
+
+	&gt; [!ALERT] The scan takes about 5 minutes to finish.
+
+	&gt; [!KNOWLEDGE] The -S switch is for setting the SYN TCP flag.
+
+	!IMAGE[Screenshot](screens/4xltbtn1.jpg)
+
+12. [ ] Close all the windows.
+
+In this lab, you have learned how to identify and bypass a firewall.
+
+===
+
+#Exercise 3: HTTP Tunneling to Bypass Firewalls Using HTTPort
+
+Attackers are constantly searching for vulnerable clients to penetrate their network through IP spoofing to damage or steal data. The attacker can access packets through a firewall by spoofing the IP address. If attackers are able to capture network traffic, as explained in the previous lab, they can perform Trojan attacks, registry attacks, password hijacking attacks, etc., which can be disastrous for an organization&amp;rsquo;s network.
+
+Therefore, as a network administrator, you should be able to identify attacks by extracting information from captured traffic such as source and destination IP addresses, protocol type, header length, source and destination ports, etc. and compare these details with modeled attack signatures to determine if an attack has occurred.
+
+Also, familiarity with the HTTP tunneling technique is important as it helps in identifying additional security risks that may not be detected by conducting simple network and vulnerability scanning and determines to what extent a network IDS can identify malicious traffic within a communication channel.
+  
+### Lab Tasks
+
+1. [ ] Click @lab.VirtualMachine(FTPServer).SelectLink. Click @lab.CtrlAltDelete to activate the machine.
+
+2. [] In the logon box password field click +++test@123+++.
+
+3. [ ] Launch Control Panel from the Start menu. The Control Panel window appears. Click **System and Security --&gt; Windows Tools**. In the Windows Tools window, double-click **Services**.
+
+	&gt;[!Alert] If any pop-up appears, click **No** to close.
+
+	!IMAGE[Screenshot](screens/sajbtqxr.jpg)
+
+	!IMAGE[Screenshot](screens/cjhly312.jpg)
+
+	!IMAGE[Screenshot](screens/lnj51lit.jpg)
+
+4. [ ] The **Services** window appears. Scroll down and right-click on **World Wide Web Publishing Service** and click the **Stop** option.
+
+	!IMAGE[Screenshot](screens/mavso05t.jpg)
+
+5. [ ] In the same way, right-click on **IIS Admin Service** and click the **Stop** option. Minimize the Services window.
+
+	!IMAGE[Screenshot](screens/gpk2skpe.jpg)
+
+6. [ ] Double-click the **HTTHost** folder on the Desktop and double-click **htthost.exe**.
+
+	!IMAGE[Screenshot](screens/mtorkoa5.jpg)
+
+7. [ ] If The **Open File &amp;ndash; Security Warning** pop-up appears on the screen, click **Run**.
+
+8. [ ] The **HTTHost 1.8.5** window appears, as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/jst15duf.jpg)
+
+9. [ ] Select the **Options** tab. In the Options tab, set all its settings to default except the **Personal Password** field, which should be filled in with any password. In this lab, the personal password is set to **magic**. Check the **Revalidate DNS names** and **Log Connections** options, and click **Apply**.
+
+	!IMAGE[Screenshot](screens/p2bloosf.jpg)
+
+10. [ ] Check if the last line is **Listener: listening at 0.0.0.0:80** in **Application Log**. This ensures that **HTTHost** is running properly and has started listening to port **80**.
+
+	!IMAGE[Screenshot](screens/kodrlszd.jpg)
+
+11. [ ] Close the **Services** console. Leave HTTHost running, and do not turn off the **FTP Server** machine.
+
+12. [ ] Click @lab.VirtualMachine(WindowsServer2022).SelectLink click @lab.CtrlAltDelete.
+
+13. [ ] In the log on box click +++Pa$$w0rd+++ and press **Enter**.
+
+	&gt; [!KNOWLEDGE] You can use the **Type Password** option from the **Commands** menu to enter the password.
+
+14. [ ] Launch **Control Panel**. To launch Control Panel click **Start** and click the **Control Panel** app from the apps menu.
+
+	!IMAGE[Screenshot](screens/mon45ex5.jpg)
+
+15. [ ] The **Control Panel** window appears. Navigate to **System and Security --&gt; Windows Defender Firewall**.
+
+	!IMAGE[Screenshot](screens/1ks0usrg.jpg)
+
+16. [ ] The **Windows Defender Firewall** control panel appears; click the **Turn Windows Firewall on or off** link in the left pane.
+
+
+17. [ ] The **Customize settings** window appears. Select the **Turn on Windows Firewall** \(under **Private network settings** and **Public network settings**\). Click **OK**.
+
+	!IMAGE[Screenshot](screens/tfdskijy.jpg)
+
+18. [ ] The firewall is successfully turned on. Now, click **Advanced settings** in the left pane.
+
+	!IMAGE[Screenshot](screens/ell2xyz2.jpg)
+
+19. [ ] The **Windows Defender Firewall with Advanced Security** window appears. Select **Outbound Rules** in the left pane. A list of outbound rules is displayed. Click **New Rule…** in the right pane (under **Outbound Rules**).
+
+	!IMAGE[Screenshot](screens/4ca5qbjo.jpg)
+
+20. [ ] In the **New Outbound Rule Wizard**, select **Port** as the **Rule Type**, and click **Next**.
+
+	!IMAGE[Screenshot](screens/si21odvh.jpg)
+
+21. [ ] Select **All remote ports**, under **Protocol and Ports**, and click **Next**.
+
+	!IMAGE[Screenshot](screens/35fhytj0.jpg)
+
+22. [ ] Under **Action**, **Block the connection** is selected by default. Click **Next**.
+
+	!IMAGE[Screenshot](screens/fvx0zo5i.jpg)
+
+23. [ ] In the **Profile** section, ensure that all the options \(Domain, Private and Public\) are checked, and click **Next**.
+
+	!IMAGE[Screenshot](screens/t5vds0c5.jpg)
+
+24. [ ] Under **Name**, type **Port 21 Blocked** in the **Name** field, and click **Finish**.
+
+	!IMAGE[Screenshot](screens/wm5toscx.jpg)
+
+25. [ ] The new rule **Port 21 Blocked** is created, right-click the newly created rule (**Port 21 Blocked**\), and click **Properties**.
+
+	!IMAGE[Screenshot](screens/omynhkfo.jpg)
+
+26. [ ] The **Properties** window for the **Port 21 Blocked** rule appears. Select the **Protocols and Ports** tab. In the **Remote Port** field, select the **Specific Ports** option from the drop-down list, then enter **21** as the **Port Number**. Leave the other default settings, click **Apply**, and click **OK**.
+
+	!IMAGE[Screenshot](screens/darxmgof.jpg)
+
+27. [ ] **Disable** the rule, and check if you are able to connect to the FTP server. Right-click the newly added rule, and click **Disable Rule**.
+
+	!IMAGE[Screenshot](screens/svpdysar.jpg)
+
+28. [ ] Launch the **command prompt**, and issue **ftp 172.19.19.17**. You will be asked to enter the username. This means you are able to establish an FTP connection. Press **Ctrl+C** to terminate the session. Minimize or close the command prompt.
+
+	&gt; [!KNOWLEDGE] 172.19.19.17 is the IP address of the Sales Department machine.
+
+	!IMAGE[Screenshot](screens/1yvueqo3.jpg)
+
+29. [ ] Maximize the **Windows Defender Firewall with Advanced Security** window. Now, enable the rule, and check whether you can establish a connection. Right-click the newly added rule, and click **Enable Rule**.
+
+	!IMAGE[Screenshot](screens/d554bv1r.jpg)
+
+30. [ ] Launch the **Command Prompt** and check whether you are able to connect to the FTP server by issuing the command **ftp 172.19.19.17**. The added outbound rule should block the connection as shown in the screenshot.
+
+	&gt; [!ALERT] If you are not asked to enter credentials, it means that the connection is blocked.
+
+	!IMAGE[Screenshot](screens/voccvjmv.jpg)
+
+31. [ ] Close all the windows. Now, perform tunneling using **HTTPort** to establish a connection with the **FTP server** located on the **FTP Server** machine.
+
+32. [ ] Navigate to **C:\CPENT-Tools\CPENT Module 07 Perimeter Defence Evasion Techniques\\HTTP Tunneling** and double-click **httport3snfm.exe**. Follow the wizard-driven installation steps to install **HTTPort**.
+
+	!IMAGE[Screenshot](screens/3qrfskxf.jpg)
+
+33. [ ] Click on Start and navigate to the **HTTPort 3.SNFM** folder and click on **HTTPort 3.SNFM**.
+
+	!IMAGE[Screenshot](screens/lqxy41rx.jpg)
+
+34. [ ] An Introduction wizard appears, click **Next** \(5 times\) till the end of the wizard and then click **Close**.
+
+	!IMAGE[Screenshot](screens/2t3b55si.jpg)
+
+	!IMAGE[Screenshot](screens/ezdxcltn.jpg)
+
+35. [ ] The HTTPort main window (**HTTPort 3.SNFM**\) appears.
+
+36. [ ] Select the **Proxy** tab and enter the IP address of **FTP Server** machine i.e., **172.19.19.9** \(since **HTTHost** is running in that machine\), and enter **80** as Port number. In the **Misc. options** section, under the **Bypass mode:** field, select **Remote host** option from the drop-down list. In the **Use personal remote host at \(blank = use public\)** section, re-enter the IP address **FTP Server** i.e., **172.19.19.9** and 80 as the port number. Enter **magic** in the **Password:** field.
+
+	!IMAGE[Screenshot](screens/i4plcrox.jpg)
+
+37. [ ] Select the **Port mapping** tab and click **Add** to create New Mapping.
+
+	!IMAGE[Screenshot](screens/s5srjlzs.jpg)
+
+38. [ ] Right-click the **New Mapping** node, and click **Edit**.
+
+	!IMAGE[Screenshot](screens/ab1bflo0.jpg)
+
+39. [ ] Rename this to **ftp old home** (you can enter a name of your choice). Right-click the node below **Local port**, then click **Edit** and enter 21 as the port value. Right-click the node below **Remote host**, click **Edit** and rename it as **172.19.19.17**. Right-click the node below **Remote port**, then click **Edit** and enter 21 as the port value.
+
+	&gt; [!ALERT] **172.19.19.17** specified in the **Remote host** node is the IP address of the FTP server hosted on the **Sales Department** machine.
+
+	!IMAGE[Screenshot](screens/kgra23cb.jpg)
+
+40. [ ] Switch back to the **Proxy** tab and click **Start** to begin the **HTTP tunneling**.
+
+	!IMAGE[Screenshot](screens/wd2enmn1.jpg)
+
+41. [ ] **HTTPort** intercepts the FTP request to localhost and tunnels it through HTTHost running on the remote machine (172.19.19.9). The client does not directly access 172.19.19.9. This means you cannot directly connect to 172.19.19.17 due to the firewall rule, instead, you will be connecting to the tunnel on localhost by issuing the command **ftp 127.0.0.1**, which will forward the traffic to the FTP server 172.19.19.17 via 172.19.19.9.
+
+42. [ ] Launch the **Command Prompt** and type **ftp 172.19.19.17**, and press **Enter**. The ftp connection will be blocked by the outbound firewall rule.
+
+	!IMAGE[Screenshot](screens/rpef4o5m.jpg)
+
+43. [ ] Now launch a new **Command Prompt**, type **ftp 127.0.0.1** and press **Enter**. You should be able to connect to the FTP server (172.19.19.17).
+
+44. [ ] The tunnel is now active, you will now be prompted for credentials. Enter the credentials of any user account of the **Sales Department**. In this lab, we are using the credentials of the **Admin** account. Type the username (**Admin**\) and password (**test@123**\), and press **Enter**.
+
+	&gt; [!ALERT] The password you enter won&#39;t be visible.
+
+	!IMAGE[Screenshot](screens/te1srtrq.jpg)
+
+45. [ ] You have successfully logged in, even after adding a firewall outbound rule inferring that a tunnel has been established by **HTTPort** and **HTTHost**, bypassing the firewall. Now you have access to the FTP directory located in the **Sales Department** machine, you will have to create a directory before being able to add files. Type **mkdir Test** and press **Enter**.
+
+	!IMAGE[Screenshot](screens/xg25ua2j.jpg)
+
+46. [ ] Click @lab.VirtualMachine(SalesDepartment).SelectLink. Login to the machine with Username **Admin** and password as **test@123**.
+
+47. [ ] Navigate to **C:\\FTP**. A directory named **Test** will be created in the **FTP** folder as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/fwcfcniu.jpg)
+
+48. [ ] Thus, you have successfully bypassed the Windows firewall using HTTP Tunneling. On completion of the exercise, delete the created outbound rule, stop HttHost and HTTPort and disable the firewall using the Control Panel \(which was enabled in the beginning of the lab) in the host machine i.e., Windows Server 2022. Also, start the World Wide Web Publishing Service in **FTP Server** machine and disable the firewall using the Control Panel. Close all the applications, files, and folders that were opened while performing this exercise.
+
+In this lab you have learned how to analyze and document the results related to the lab exercise. Give your opinion on your target’s security posture and exposure.
+
+===
+
+#Exercise 4: Evading Perimeter Defences Using Social-Engineer Toolkit (SET)
+
+An important part of penetration testing is the ability to evade detection when it is part of the scope of work. We will attempt an evasion of Windows Defender using PowerShell techniques.
+
+The objective of this lab is to teach students to use the Social Engineering Toolkit to evade detection by Windows Defender. The technique can also be used against any anti-virus and many other host-based protection tools.
+
+###Lab Objective
+
+In this lab, you will 
+
+- Create the PowerShell script
+
+- Send the PowerShell code file to the target machine
+
+- Attempt to exploit the machine
+  
+###Lab Tasks
+
+1. [] Our target machine is **Windows Server 2019**. With time, it becomes more difficult to bypass protections. The techniques that are currently successful may not work later, but testers must test these techniques for access and documentation.
+
+2. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink. Parrot logon screen appears, type **toor** in the Password field and press **Enter**.
+
+	&gt;[!Knowledge] If you are already logged in, skip to **step 3**.
+
+3. [] Launch a terminal and type **sudo setoolkit** and press **Enter**. Type **toor** in the password field and press **Enter** to log in.
+
+	!IMAGE[Screenshot](screens/oluxpdih.jpg)
+
+4. [] Type **y** and press **Enter** to accept the terms and services of the setoolkit.
+
+	!IMAGE[Screenshot](screens/v3zdkxbz.jpg)
+
+5. [] Type **1** and press **Enter** to select the **Social-Engineering Attacks** option.
+
+	!IMAGE[Screenshot](screens/fiicnzs5.jpg)
+
+6. [] As the menu shows, there are many vectors to choose from; choose one, but feel free to research and explore. Next, type **9** and press **Enter** to select the **PowerShell Attack Vectors**.
+
+	!IMAGE[Screenshot](screens/h41qyi4y.jpg)
+
+7. [] As you review the options, read the module instructions. **Create a PowerShell shellcode**, copy it to the **Windows Server 2019** machine, and check if you can acquire a shell to your **Parrot** machine.
+
+	&gt;[!Alert] Note that you are focusing on the power of client-side attacks, which, for the most part, is the main vector for attacking the latest versions of Windows.
+
+8. [] Type **1** to select the first option and press **Enter**.
+
+	!IMAGE[Screenshot](screens/exuqukpu.jpg)
+
+9. [] Type the IP address of the **Parrot** machine and press **Enter**. Here, the IP address of the Parrot machine is **192.168.0.18**.
+
+	!IMAGE[Screenshot](screens/j21baaub.jpg)
+
+10. [] You can accept the default port or choose one of your own; note that this would be important if you had to egress. Use a custom port and enter **443**. To accept the default port, just press **Enter**.
+
+	!IMAGE[Screenshot](screens/xocdawez.jpg)
+
+11. [] When prompted, start the listener by typing **yes** and pressing **Enter**.
+
+	!IMAGE[Screenshot](screens/gad1j5yu.jpg)
+
+12. [] The Metasploit will start; place the **PowerShell** code in the folder.
+
+	!IMAGE[Screenshot](screens/ca4roxzj.jpg)
+
+13. [] Moving the file across to the machine you are going to attempt to gain access to is usually done using a phishing vector. However, you can use a number of different methods. The file we want to copy is **x86_powershell_injection.txt** and is located at **/root/.set/reports/powershell**.
+
+14. [] Once you have transferred the file, paste its contents into a **Command prompt** window. Note that we are emulating the client side here—even post-exploitation. An example of what the code looks like is shown in the screenshot in next strep.
+
+15. [] Log in to your **email account** and copy the code, paste it into a new email, and save it as a **draft**. Close the Text editor window once you have explored the code.
+
+	&gt;[!Alert] Press **Ctrl+H** to view the hidden files and folders, as **.set** is a hidden folder.
+
+	!IMAGE[Screenshot](screens/ns355wkw.jpg)
+
+	!IMAGE[Screenshot](screens/bnlxcjg2.jpg)
+
+19. [] You can perform the attack against **Windows Server 2019**. Click @lab.VirtualMachine(WindowsServer2019).SelectLink to select, and click @lab.CtrlAltDelete.
+
+20. [] Click +++Pa$$w0rd+++ to log in as **Administrator**. Once you are logged into the machine, type **powershell** in the **Search** field, right-click on the **Windows PowerShell** icon, and click **Run as administrator**, as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/rprhnyme.jpg)
+
+21. [] Now, open your email account, copy the PowerShell script, and paste it into the **Windows PowerShell** window and press **Enter**.
+
+	!IMAGE[Screenshot](screens/lcveiyeg.jpg)
+
+22. [] As soon as you press Enter, the Windows PowerShell window closes. Now, switch to @lab.VirtualMachine(ParrotSecurity).SelectLink machine and observe that a meterpreter session has opened, as shown in the screenshot.
+
+	!IMAGE[Screenshot](screens/1czcafxz.jpg)
+
+23. [] You may want to set up the payload without HTTPS. This way, the exchange of certificates and handshake does not have to take place. This concludes the lab exercise.
+
+===
+
+#Exercise 5: Using Proxychains to Avoid Detection and Bypass Perimeter Defences
+
+###Scenario
+
+As a penetration tester, you need to assess the security of a high-profile organization that employs multiple layers of network defenses, including firewalls, IDS/IPS, and IP-based geolocation restrictions. Your reconnaissance may indicate that the organization&#39;s perimeter defenses block direct connections from unknown or suspicious IP addresses, effectively preventing external scans or unauthorized access attempts. To overcome this challenge, you can use Proxychains to route your traffic through multiple proxy servers, disguising your original IP and avoiding detection. By chaining proxies located in different geographic regions, you successfully bypass IP-based restrictions while maintaining anonymity.
+
+###Lab Objective
+
+In this lab, we will use proxychains to conduct a scan
+  
+### Lab Tasks
+
+1. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink. Parrot logon screen appears, type **toor** in the Password field and press **Enter**.
+
+	&gt;[!Knowledge] If you are already logged in, skip to **step 2**.
+
+2. [] Launch a terminal window, type **pluma /etc/proxychains.conf**, and press **Enter**. Carefully review the information and note the configuration at the bottom. Although this serves our purpose for the lab, you may add more information to the file. Close the text editor window.
+
+	!IMAGE[Screenshot](screens/ybzgswdq.jpg)
+
+3. [] In the terminal window, type **msfconsole** and press **Enter** to launch Metasploit Framework.
+
+	!IMAGE[Screenshot](screens/ikiuegpo.jpg)
+
+4. [] In the msfconsole, type **search socks** and press **Enter**.
+
+	!IMAGE[Screenshot](screens/nx1zbjhq.jpg)
+
+5. [] Select the server; type **use auxiliary/server/socks_proxy** and press **Enter**.
+
+	!IMAGE[Screenshot](screens/fcdx4jro.jpg)
+
+6. [] Once the module is loaded, type **info** and press **Enter** to read about the module.
+
+	!IMAGE[Screenshot](screens/hm3pfeom.jpg)
+
+7. [] To set up the port, type **set SRVPORT 9050** and press **Enter**.
+
+	!IMAGE[Screenshot](screens/kpco2wpq.jpg)
+
+8. [] Type **run** and press **Enter** to run the server.
+
+	!IMAGE[Screenshot](screens/ztulirbr.jpg)
+
+9. [] To verify whether the server is running or not, open a new terminal window and type **sudo netstat -atn** and press **Enter**. Type **toor** and press **Enter**, when prompted for the password. You should see the port open and listening.
+
+	!IMAGE[Screenshot](screens/vdvyuzqw.jpg)
+
+10. [] Run **proxychains**, type **sudo proxychains nmap -sS 192.168.0.51** and press **Enter**.
+
+	&gt;[!Hint] 192.168.0.51 is the IP address of the **RPC Server Ubuntu** machine.
+
+	!IMAGE[Screenshot](screens/acnor3tk.jpg)
+
+===
+
+#Exercise 6: Performing WAF Fingerprinting
+
+WAF (Web Application Firewall) fingerprinting identifies specific WAFs by analyzing their responses to various requests, revealing their presence and type. Detection involves recognizing WAF signatures and behaviors. Bypassing techniques exploit weaknesses or use obfuscation to evade WAF filters, relying on a deep understanding of the WAF&#39;s rules and configurations.
+
+###Lab Objective
+
+In this lab you will 
+
+- Use nmap script to perform WAF and IDS/IPS detection
+
+- Use WhatWaf tool to determine the WAF behing a web application
+
+###Lab Tasks
+
+1. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Open a terminal and execute **sudo su** to run the programs as a root user (When prompted, enter the password **toor**).
+
+2. [] Here, we will scan the target to identify the Web Application Firewall. To do so, enter **nmap --script http-waf-detect certifiedhacker.com**.
+
+	!IMAGE[Screenshot](screens/l0ukemgh.jpg)
+
+3. [] From the result, we can see that the scan displays the WAF and IDS/IPS, as shown in the above screenshot.
+
+4. [] Now we will use the Whatwaf tool to glean some information regarding WAF on the target.
+
+5. [] In the terminal, enter **whatwaf -u http://certifiedhacker.com** to perform scanning for WAF.
+
+	&gt;[!note] If you get any errors after detecting the WAF, ignore them.
+
+	!IMAGE[Screenshot](screens/oi3ciir0.jpg)
+
+	!IMAGE[Screenshot](screens/zgtusedb.jpg)
+
+6. [] The result shows that we have detected ModSecurity and Open Source WAF on our target.
+
+===
+
+# Exercise 7: Enumeating Firewall Access Control List  and Bypassing WAF using Nmap
+
+In the previous lab we have detected the WAF on www.certifiedhacke.com, now, we will perfom nmap scans beyond those WAF to gather open ports and other information.
+
+### Lab Tasks
+
+1. [] In the @lab.VirtualMachine(ParrotSecurity).SelectLink machine, open a terminal window with sudo privileges, and run **nmap -sS -O certifiedhacker.com** to perform a SYN Stealth scan.
+
+	&gt;[!note] In the above command, **-sS** performs a SYN scan, and **-O** performs OS detection.
+
+	!IMAGE[Screenshot](screens/gnvml34t.jpg)
+
+	!IMAGE[Screenshot](screens/2n2o1r21.jpg)
+
+2. [] To scan a specific port, use the **nmap -sS -O certifiedhacker.com -p 80** command.
+
+
+	!IMAGE[Screenshot](screens/zebqgnca.jpg)
+
+3. [] Now, we will try to bypass the firewall using fragmented packets. To do so, run the **nmap -f certifiedhacker.com** command.
+
+	&gt;[!note] The **-f** option is used to send fragmented packets.
+
+	!IMAGE[Screenshot](screens/fsqnjosy.jpg)
+
+4. [] To send fragmented packets by setting a specific MTU, run the **nmap -mtu 24 certifiedhacker.com** command.
+
+	&gt;[!note] **-mtu** stands for Maximum Transmission Unit.
+
+	!IMAGE[Screenshot](screens/l2dto3zo.jpg)
+
+5. [] Now, we will try to bypass the firewall by spoofing the source port. To do so, run the **nmap --source-port 53 certifiedhacker.com** command.
+
+	!IMAGE[Screenshot](screens/uxsn1q0y.jpg)
+
+6. [] We will try to bypass the firewall by MAC address spoofing by specifying a MAC address from a vendor. To do so, run the **nmap -sT -Pn --spoof-mac Dell certifiedhacker.com** command.
+
+	&gt;[!note] The **-sT** performs a TCP connect scan, **-Pn** disables host discovery, and **--spoof-mac Dell** spoofs the MAC address of a Dell vendor.
+
+	!IMAGE[Screenshot](screens/qcfxhhmd.jpg)
+
+7. [] This concludes enumerating the access control list and bypassing the Web Application Firewall using Nmap.
+
+8. [] Close all open windows.">
+    <input type="hidden" id="activities" value="[]">
+    <input type="hidden" id="activityGroups" value="[]">
+    <input type="hidden" id="replacementTokens" value="[{&quot;Token&quot;:&quot;@lab.LabProfile.Id&quot;,&quot;Replacement&quot;:&quot;155856&quot;},{&quot;Token&quot;:&quot;@lab.CtrlAltDelete&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;ctrlAltDeleteLink icon-link special-action-link&#39;&gt;Ctrl+Alt+Delete&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Username&quot;,&quot;Replacement&quot;:&quot;pentester&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268660&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268661&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Password&quot;,&quot;Replacement&quot;:&quot;admin@123&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268661&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268661&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268771&#39;&gt;Sales Department&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).Username&quot;,&quot;Replacement&quot;:&quot;Admin&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).Password&quot;,&quot;Replacement&quot;:&quot;test@123&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268771&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268771&#39;&gt;Sales Department&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268773&#39;&gt;Windows Server 2019&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268773&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268773&#39;&gt;Windows Server 2019&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(RPCServerUbuntu).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268662&#39;&gt;RPC Server Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(RPCServerUbuntu).Username&quot;,&quot;Replacement&quot;:&quot;Ubuntu&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(RPCServerUbuntu).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(RPCServerUbuntu).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268662&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(RPCServerUbuntu).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268662&#39;&gt;RPC Server Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268659&#39;&gt;Windows Server 2022&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268659&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268659&#39;&gt;Windows Server 2022&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(FTPServer).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;269780&#39;&gt;FTP Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(FTPServer).Username&quot;,&quot;Replacement&quot;:&quot;Admin&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(FTPServer).Password&quot;,&quot;Replacement&quot;:&quot;test@123&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(FTPServer).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;269780&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(FTPServer).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;269780&#39;&gt;FTP Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.Title&quot;,&quot;Replacement&quot;:&quot;&lt;h1 class=\&quot;lab-title primary-color\&quot;&gt;Perimeter Defence Evasion Techniques&lt;/h1&gt;&quot;},{&quot;Token&quot;:&quot;@lab.LanguageName&quot;,&quot;Replacement&quot;:&quot;English&quot;},{&quot;Token&quot;:&quot;@lab.LanguageCode&quot;,&quot;Replacement&quot;:&quot;en&quot;},{&quot;Token&quot;:&quot;@lab.LanguageRegionCode&quot;,&quot;Replacement&quot;:&quot;en-US&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.Id&quot;,&quot;Replacement&quot;:&quot;{LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.GlobalId&quot;,&quot;Replacement&quot;:&quot;{lod_LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.StartDate&quot;,&quot;Replacement&quot;:&quot;20250124&quot;},{&quot;Token&quot;:&quot;@lab.User.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.FirstName&quot;,&quot;Replacement&quot;:&quot;{USER_FIRSTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.LastName&quot;,&quot;Replacement&quot;:&quot;{USER_LASTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.Email&quot;,&quot;Replacement&quot;:&quot;{EMAIL}&quot;},{&quot;Token&quot;:&quot;@lab.User.ExternalId&quot;,&quot;Replacement&quot;:&quot;{USER_EXTERNALID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Name&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_NAME}&quot;},{&quot;Token&quot;:&quot;@lab.Tag&quot;,&quot;Replacement&quot;:&quot;{TAG}&quot;}]">
+    <input type="hidden" id="replacements">
+    <input type="hidden" id="variables">
+
+    <textarea id="copyInput" value="" style="position: absolute; left:-10000px; top:-10000px; "></textarea>
+
+    <div id="Model" data-id="155856" data-contentroot="https://labondemand.blob.core.windows.net/content/lab155856/" data-scrolltop="" data-themescript="">
+
+
+
+</div></body></html>

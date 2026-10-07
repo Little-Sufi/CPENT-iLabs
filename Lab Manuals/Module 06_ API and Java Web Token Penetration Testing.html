@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Module 06: API and Java Web Token Penetration Testing</title>
+
+
+    <script src="./Module 06_ API and Java Web Token Penetration Testing_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Module 06_ API and Java Web Token Penetration Testing_files/Localize" type="text/javascript"></script>
+    <script src="./Module 06_ API and Java Web Token Penetration Testing_files/showdown.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./Module 06_ API and Java Web Token Penetration Testing_files/prettify.css">
+    <script src="./Module 06_ API and Java Web Token Penetration Testing_files/yaml.min.js.download"></script>
+    <script src="./Module 06_ API and Java Web Token Penetration Testing_files/LocalizeTo" type="text/javascript"></script>
+    <link href="./Module 06_ API and Java Web Token Penetration Testing_files/CloudClient.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body, html {
+            font-family: Segoe UI,Tahoma,Verdana,Arial,sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background-color: #efefef;
+            color: #000;
+            height: 100%;
+        }
+
+        body {
+            overflow: auto;
+        }
+
+        #outputWrapper {
+            background-color: #efefef;
+            min-height: 100%;
+        }
+
+        .instructionsPreview {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .instructionsPreview .page {
+            position: relative;
+            display: block !important;
+            padding: 15px 20px;
+            background-color: #fff;
+            page-break-after: always;
+            min-height: 650px;
+        }
+
+        .instructionsPreview .page:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        @font-face {
+            font-family: "lod";
+            src: url("/fonts/lod.woff?v=18") format("woff"), url("/fonts/lod.ttf?v=18") format("truetype"), url("/fonts/lod.svg?v=18") format("svg");
+        }
+
+        .editLink:before {
+            content: "\E70F";
+            font-family: "lod";
+            margin-right: 4px;
+            display: inline-block;
+        }
+
+        @media print {
+            body, html {
+                height: auto;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            #outputWrapper {
+                background-color: transparent;
+            }
+
+            .instructionsPreview {
+                padding: 0;
+            }
+
+                .instructionsPreview .page:not(:first-child) {
+                    margin-top: 0px;
+                }
+        }
+
+        @page {
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-top: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+    </style>
+    <link id="themeStylesheet" href="./Module 06_ API and Java Web Token Penetration Testing_files/Blue.css" rel="stylesheet">
+
+</head>
+<body>
+        <div style="padding:10px 20px;">
+            <a class="editLink" href="https://labondemand.com/LabProfile/EditInstructions/155864?InstructionsSetId=248766">Edit</a>
+        </div>
+
+    <div id="outputWrapper">
+        <div id="instructions" class="instructionsPreview instructions"><div class="page" id="page0"><h1 class="lab-title primary-color">API and Java Web Token Penetration Testing</h1>
+<h2 id="scenario">Scenario</h2>
+<p>With the increasing adoption of microservices and cloud-based applications, APIs and Java Web Tokens (JWTs) have become critical for secure communication and authentication. However, these technologies are prime targets for attackers due to their widespread use and potential for misconfiguration. Conducting penetration testing on APIs and JWTs ensures that vulnerabilities such as broken authentication, inadequate rate limiting, and insecure token management are identified and mitigated before exploitation occurs. By simulating real-world attack scenarios, this testing strengthens the organization's ability to safeguard sensitive data, maintain compliance with industry standards, and protect the integrity of its applications.</p>
+<p>APIs and JWT implementations can unknowingly expose sensitive endpoints without regular security assessments, enabling attackers to escalate privileges, bypass authentication, or manipulate data. Testing for weaknesses such as replay attacks, token tampering, and improper error handling helps to ensure robust security measures are in place. By proactively addressing these vulnerabilities, the organization reduces the risk of breaches, builds customer trust, and maintains a competitive edge in delivering secure and reliable digital services. Investing in API and JWT penetration testing is a preventative measure and a strategic move to uphold operational resilience and regulatory compliance in a rapidly evolving threat landscape.</p>
+<h2 id="objective">Objective</h2>
+<p>We will be performing the following labs in this module:</p>
+<ul>
+<li>Performing Information Gathering on the Damn Vulnerable Web Services (DVWS) Platform</li>
+<li>Performing API Reconnaissance using AI</li>
+<li>Scanning and Identifying Vulnerabilities in APIs</li>
+<li>Exploiting NoSQL Injection for Denial-of-Service</li>
+<li>Exploiting Insecure JSON Web Token(JWT) Implementations</li>
+<li>Exploiting Broken Object Level Authorization (BOLA) Vulnerability to Manipulate API Requests</li>
+<li>Exploiting Broken Function Level Authorization (BFLA) Flaws to Manipulate API Requests</li>
+<li>Exploiting Hidden API Functionality Exposure to Gather Information on the Target Application</li>
+<li>Exploiting XPath Injection Vulnerabilities in API Implementations</li>
+<li>Bruteforcing Weak Secret Keys in JSON Web Tokens (JWT) Implementations</li>
+</ul>
+<blockquote class="expandable alert"><details><summary><strong>Important Notice: Third-Party Connected Apps and Paid Services</strong></summary>
+</details></blockquote>
+<p><strong>Introduction</strong></p>
+<blockquote>
+  <p>The guiding principle of EC-Council Education Content and Labs is simple: We want to provide a safe environment to learn, practice, and assess cybersecurity skills that directly translate to job-ready skills. We believe in providing our students, educator partners, and professionals with real software and live experiences that behave like those in the "real world" because they are the actual tools and services used in the field, not simulations.</p>
+  <p><strong>Third-Party and Internet-Connected Resources</strong></p>
+  <p>To provide the most realistic learning experience, EC-Council may employ connections to live networks and services through its labs and lab platforms. While many software and service providers provide education use licenses, trials, or are Open Source, some require a live account with setup requirements and agreements you must review and consent to to participate in and/or complete the exercises in our Labs.</p>
+  <p><strong>Subscription Fees and/or License Fees</strong></p>
+  <p>While EC-Council will never ask you for payment details or sensitive information during our course of learning, some of our Live Labs use paid OpenAI API keys. To use these, you will need to add credit card information for a payment method and buy API credits at https://platform.openai.com/. </p>
+  <p><strong>Alternatives</strong></p>
+  <p>If you are unable to buy OpenAI API credits, EC-Council provides comprehensive Lab Guides that include complete instruction sets with screenshots (images) of each step. EC-Council also provides a video-based walk-through of each lab for you to follow along without actually buying OpenAI API credits. Though you won't be performing the hands-on lab, you will still receive adequate exposure to the steps, techniques, and knowledge elements required for you to prepare for certification or grasp the knowledge conveyed in the program.</p>
+</blockquote>
+<blockquote class="alert">
+  <p><strong>Note:</strong> All lab manuals are accessible in the <strong>Lab Manuals</strong> folder located on the <strong>Desktop</strong> of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.</p>
+</blockquote>
+</div><div class="page" id="page1">
+<h1 id="exercise-1-performing-information-gathering-on-the-damn-vulnerable-web-services-dvws-platform">Exercise 1: Performing Information Gathering on the Damn Vulnerable Web Services (DVWS) Platform</h1>
+<p>We will learn techniques to perform information gathering on the Damn Vulnerable Web Services (DVWS) platform to uncover critical data points such as API endpoints, service details, and application structure. We will also use tools and techniques to enumerate resources, identify potential attack surfaces, and gather information for further security assessment.</p>
+<h3 id="lab-tasks">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex0"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex0"><span></span></label> Click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to the Ubuntu machine. Login using <strong>ubuntu/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex1"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex1"><span></span></label> Open the terminal,rRun <strong>sudo su</strong> and move to dvws-node folder with <strong>cd dvws-node</strong> command. (When prompted, type <strong>toor</strong> as password.)</p></li>
+<li class="task-list-item" id="taskIndex2"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex2"><span></span></label> Run <strong>docker-compose up</strong> to run the dvws-node application. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/2n1nyxqu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex3"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex3"><span></span></label> Launch a new terminal and execute <strong>sudo nano /etc/hosts</strong> to make an entry into the host file, as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/wjrwlytf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex4"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex4"><span></span></label> Save the file and exit the text editor.</p></li>
+<li class="task-list-item" id="taskIndex5"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex5"><span></span></label> Now, click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine. Type <strong>sudo su</strong> and enter <strong>toor</strong> as the password. Login using <strong>pentester/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex6"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex6"><span></span></label> Open the terminal and execute <strong>nmap -sS 192.168.0.19</strong> to scan the target.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/zwi2pq24.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex7"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex7"><span></span></label> There are some interesting ports for our attack surface, so to look at the services on these ports, execute <strong>nmap -sV 192.168.0.19</strong></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bpam1zs2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex8"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex8"><span></span></label> Web Services or APIs frequently support XML data from users. In DVWS, a SOAP server is accessible at <strong>http://dvws.local/dvwsuserservice?wsdl</strong>, displaying the supported operations. Launch <strong>Firefox</strong> and navigate to <strong>http://192.168.0.19:8080/dvwsuserservice?wsdl</strong> to access it.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/1m4gzuhe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex9"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex9"><span></span></label> Having extracted the WSDL, we can parse its operations to determine the request needed to check if a user exists. </p></li>
+<li class="task-list-item" id="taskIndex10"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex10"><span></span></label> Launch <strong>Burpsuite</strong> and navigate to <strong>Proxy</strong> tab to open burpsuite's browser. In the browser, navigate to <strong>http://192.168.0.19:8080/dvwsuserservice?wsdl</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/sqj3tcwc.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex11"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex11"><span></span></label> Switch back to burpsuite and check the HTTP history tab under the Proxy tab to find the request. Right-click on the GET request and click on <strong>Send to Repeater</strong>, as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/rad4i0bl.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex12"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex12"><span></span></label> In the Request pane, delete all the contents and enter the following request to the SOAP service:</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 1.1.png" alt="image 1.1.png"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 1.2.png" alt="image 1.2.png"></p></li>
+</ol>
+<pre><code class="prettyprint prettyprinted" style=""><span class="pln">POST </span><span class="pun">/</span><span class="pln">dvwsuserservice</span><span class="pun">/</span><span class="pln"> HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+</span><span class="typ">User</span><span class="pun">-</span><span class="typ">Agent</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Mozilla</span><span class="pun">/</span><span class="lit">5.0</span><span class="pln"> </span><span class="pun">(</span><span class="pln">X11</span><span class="pun">;</span><span class="pln"> </span><span class="typ">Linux</span><span class="pln"> x86_64</span><span class="pun">)</span><span class="pln"> </span><span class="typ">AppleWebKit</span><span class="pun">/</span><span class="lit">537.36</span><span class="pln"> </span><span class="pun">(</span><span class="pln">KHTML</span><span class="pun">,</span><span class="pln"> like </span><span class="typ">Gecko</span><span class="pun">)</span><span class="pln"> </span><span class="typ">Chrome</span><span class="pun">/</span><span class="lit">85.0</span><span class="pun">.</span><span class="lit">4164.0</span><span class="pln"> </span><span class="typ">Safari</span><span class="pun">/</span><span class="lit">537.36</span><span class="pln"> autochrome</span><span class="pun">/</span><span class="pln">red
+</span><span class="typ">Connection</span><span class="pun">:</span><span class="pln"> close
+</span><span class="typ">SOAPAction</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Username</span><span class="pln">
+</span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Type</span><span class="pun">:</span><span class="pln"> text</span><span class="pun">/</span><span class="pln">xml</span><span class="pun">;</span><span class="pln">charset</span><span class="pun">=</span><span class="pln">UTF</span><span class="pun">-</span><span class="lit">8</span><span class="pln">
+</span><span class="typ">Host</span><span class="pun">:</span><span class="pln"> dvws</span><span class="pun">.</span><span class="kwd">local</span><span class="pln">
+</span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Length</span><span class="pun">:</span><span class="pln"> </span><span class="lit">463</span><span class="pln">
+
+</span><span class="pun">&lt;</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Envelope</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xsi</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xsd</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">soapenv</span><span class="pun">=</span><span class="str">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">urn</span><span class="pun">=</span><span class="str">"urn:examples:usernameservice"</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Header</span><span class="pun">/&gt;</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Body</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">urn</span><span class="pun">:</span><span class="typ">Username</span><span class="pln"> soapenv</span><span class="pun">:</span><span class="pln">encodingStyle</span><span class="pun">=</span><span class="str">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">username xsi</span><span class="pun">:</span><span class="pln">type</span><span class="pun">=</span><span class="str">"xsd:string"</span><span class="pun">&gt;</span><span class="pln">gero et</span><span class="pun">&lt;/</span><span class="pln">username</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">urn</span><span class="pun">:</span><span class="typ">Username</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Body</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&lt;/</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Envelope</span><span class="pun">&gt;</span></code></pre>
+<ol start="14" class="taskList">
+<li class="task-list-item" id="taskIndex13"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex13"><span></span></label> Click on <strong>Send</strong> to send the request to the SOAP service. Observe the response as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 1.3.png" alt="image 1.3.png"></p></li>
+<li class="task-list-item" id="taskIndex14"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex14"><span></span></label> With this data, we can perform various checks. When gathering information, you send data to elicit a response, which you then analyze to find ways to gain access or enumerate information.</p></li>
+<li class="task-list-item" id="taskIndex15"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex15"><span></span></label> The XML library utilized by the SOAP server to process this request supports the use of external entities. This implies that it might be possible to reference an external file within the XML payload of a request. To verify this behavior, send the following request from the burp repeater:</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 2.1.png" alt="image 2.1.png"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 2.2.png" alt="image 2.2.png"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 2.3.png" alt="image 2.3.png"></p></li>
+</ol>
+<pre><code class="prettyprint prettyprinted" style=""><span class="pln"> POST </span><span class="pun">/</span><span class="pln">dvwsuserservice</span><span class="pun">/</span><span class="pln"> HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln">
+ </span><span class="typ">Upgrade</span><span class="pun">-</span><span class="typ">Insecure</span><span class="pun">-</span><span class="typ">Requests</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pln">
+ </span><span class="typ">User</span><span class="pun">-</span><span class="typ">Agent</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Mozilla</span><span class="pun">/</span><span class="lit">5.0</span><span class="pln"> </span><span class="pun">(</span><span class="pln">X11</span><span class="pun">;</span><span class="pln"> </span><span class="typ">Linux</span><span class="pln"> x86_64</span><span class="pun">)</span><span class="pln"> </span><span class="typ">AppleWebKit</span><span class="pun">/</span><span class="lit">537.36</span><span class="pln"> </span><span class="pun">(</span><span class="pln">KHTML</span><span class="pun">,</span><span class="pln"> like </span><span class="typ">Gecko</span><span class="pun">)</span><span class="pln"> </span><span class="typ">Chrome</span><span class="pun">/</span><span class="lit">85.0</span><span class="pun">.</span><span class="lit">4164.0</span><span class="pln"> </span><span class="typ">Safari</span><span class="pun">/</span><span class="lit">537.36</span><span class="pln"> autochrome</span><span class="pun">/</span><span class="pln">red
+ </span><span class="typ">Connection</span><span class="pun">:</span><span class="pln"> close
+ </span><span class="typ">SOAPAction</span><span class="pun">:</span><span class="pln"> </span><span class="typ">Username</span><span class="pln">
+ </span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Type</span><span class="pun">:</span><span class="pln"> text</span><span class="pun">/</span><span class="pln">xml</span><span class="pun">;</span><span class="pln">charset</span><span class="pun">=</span><span class="pln">UTF</span><span class="pun">-</span><span class="lit">8</span><span class="pln">
+ </span><span class="typ">Host</span><span class="pun">:</span><span class="pln"> </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">0.19</span><span class="pun">:</span><span class="lit">8080</span><span class="pln">
+ </span><span class="typ">Content</span><span class="pun">-</span><span class="typ">Length</span><span class="pun">:</span><span class="pln"> </span><span class="lit">569</span><span class="pln">
+
+ </span><span class="pun">&lt;?</span><span class="pln">xml version</span><span class="pun">=</span><span class="str">"1.0"</span><span class="pln"> encoding</span><span class="pun">=</span><span class="str">"UTF-8"</span><span class="pun">?&gt;</span><span class="pln">
+ </span><span class="pun">&lt;!</span><span class="pln">DOCTYPE root </span><span class="pun">[</span><span class="pln"> </span><span class="pun">&lt;!</span><span class="pln">ENTITY exploit SYSTEM </span><span class="str">"file:///etc/passwd"</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">]&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Envelope</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xsi</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">xsd</span><span class="pun">=</span><span class="str">"http://www.w3.org/2001/XMLSchema"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">soapenv</span><span class="pun">=</span><span class="str">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="pln"> xmlns</span><span class="pun">:</span><span class="pln">urn</span><span class="pun">=</span><span class="str">"urn:examples:usernameservice"</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Header</span><span class="pun">/&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Body</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">urn</span><span class="pun">:</span><span class="typ">Username</span><span class="pln"> soapenv</span><span class="pun">:</span><span class="pln">encodingStyle</span><span class="pun">=</span><span class="str">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;</span><span class="pln">username xsi</span><span class="pun">:</span><span class="pln">type</span><span class="pun">=</span><span class="str">"xsd:string"</span><span class="pun">&gt;&amp;</span><span class="pln">exploit</span><span class="pun">;&lt;/</span><span class="pln">username</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;/</span><span class="pln">urn</span><span class="pun">:</span><span class="typ">Username</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;/</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Body</span><span class="pun">&gt;</span><span class="pln">
+ </span><span class="pun">&lt;/</span><span class="pln">soapenv</span><span class="pun">:</span><span class="typ">Envelope</span><span class="pun">&gt;</span></code></pre>
+<ol start="17" class="taskList">
+<li class="task-list-item" id="taskIndex16"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex16"><span></span></label> We have broken out of the XML and successfully accessed an external entity.</p></li>
+<li class="task-list-item" id="taskIndex17"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex17"><span></span></label> This concludes the demonstration of accessing an external entity in dvws-node.</p></li>
+</ol>
+</div><div class="page" id="page2">
+<h1 id="exercise-2--performing-api-reconnaissance-using-ai">Exercise 2:  Performing API Reconnaissance using AI</h1>
+<p>This lab will demonstrate how AI-powered tools can enhance API reconnaissance by automating information gathering and vulnerability discovery processes. This lab uses AI-based techniques and tools to identify exposed API endpoints, analyze documentation, and discover sensitive data paths efficiently. 
+By interacting with real-world scenarios and AI tools, you will learn how to leverage AI for intelligent query generation, endpoint enumeration, and metadata analysis, improving your API penetration testing skills with contextual accuracy and speed.</p>
+<p>In this exercise, we will use ShellGPT to perform API reconnaissance. ShellGPT is a powerful tool leveraging AI, specifically GPT-4, to assist in various tasks for penetration testing.</p>
+<blockquote class="expandable alert"><details><summary><strong>Prerequisite for the Lab - Steps to Create OpenAI API Keys</strong></summary>
+  <p><strong>Note:</strong> You need not follow the steps in this alert box if you have already created an OpenAI API key and have access to it. You can follow these steps to create OpenAI API keys on this VM or your local host system.</p>
+  <ol>
+  <li><p>Visit the OpenAI platform (<strong>https://platform.openai.com</strong>) and sign up or log in to your existing account. </p></li>
+  <li><p>Once logged in, click the profile icon at the top-right, click the <strong>Your profile</strong> option, and navigate to the <strong>Billing</strong> section.</p></li>
+  <li><p>Under Billing section, go to <strong>Payment methods</strong> and click <strong>Add payment method</strong> to add a payment method.</p></li>
+  <li><p>Go to <strong>Overview</strong> and click <strong>Add to credit balance</strong>.</p></li>
+  <li><p>Enter minimum amount, i.e. <strong>$5</strong> for <strong>Amount to add</strong>, and click <strong>continue</strong>. Please refer to <strong>https://openai.com/api/pricing/</strong> for API pricing details.</p></li>
+  <li><p>Click <strong>Confirm payment</strong> and complete the transaction to add the credit balance.</p></li>
+  <li><p>Launch a web browser and go to <strong>https://platform.openai.com/api-keys</strong>.</p></li>
+  <li><p>An <strong>OpenAI Platform</strong> webpage appears, click on <strong>Login</strong> and log in to the OpenAI account that you created at the start of this lab.</p></li>
+  <li><p>You will be redirected to the <strong>Project API Keys</strong> window, click on the <strong>+ Create new secret key</strong> button to create a new key.</p>
+  <p>
+  <img src="./Module 06_ API and Java Web Token Penetration Testing_files/1.jpg" alt="2023-12-13_10-43-46.jpg"></p></li>
+  <li><p>A <strong>Create new secret</strong> <strong>key</strong> window appears, provide a name for the secret key (here, <strong>CPENT</strong>), leave all the settings as default, and click on the <strong>Create secret key</strong> button.</p>
+  <p>
+  <img src="./Module 06_ API and Java Web Token Penetration Testing_files/2.jpg" alt="2024-05-17_11-27-16qqq.jpg"></p></li>
+  <li><p><strong>Save your key</strong> pop-up appears, click <strong>Copy</strong> button to copy the key. Save the key securely on your local host system as we will need this key in the next modules also to perform SGPT labs. </p>
+  <p>
+  <img src="./Module 06_ API and Java Web Token Penetration Testing_files/3.jpg" alt="2024-05-17_11-32-00.jpg"></p></li>
+  </ol>
+</details></blockquote>
+<blockquote class="alert">
+  <p>The commands generated by ShellGPT may vary depending on the prompt used and the tools available on the machine. Due to these variables, the output generated by ShellGPT might differ from what is shown in the screenshots. These differences arise from the dynamic nature of the AI's processing and the diverse environments in which it operates. As a result, you may observe differences in command syntax, execution, and results while performing this lab task.</p>
+</blockquote>
+<h3 id="lab-tasks-1">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex18"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex18"><span></span></label> In the <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine, launch the command-line terminal, type <strong>sudo su</strong>, and press <strong>Enter</strong>. Log in using <strong>pentester/toor</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>Type <strong>toor</strong> as password.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/4.jpg" alt="Screenshot"></p>
+<ol start="2" class="taskList">
+<li class="task-list-item" id="taskIndex19"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex19"><span></span></label> Run <strong>sgpt</strong> command to launch the <strong>ShellGPT</strong> tool.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/5.jpg" alt="2024-05-17_11-36-02.jpg"></p></li>
+<li class="task-list-item" id="taskIndex20"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex20"><span></span></label> You will be prompted to enter your OpenAI API key, copy and paste your API key in the terminal window, and press <strong>Enter</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>The secret key you have entered will not be visible.</p>
+</blockquote>
+<blockquote class="note">
+  <p>If you have not yet created an OpenAI API key, please refer to the "<strong>Prerequisite for the Lab - Steps to Create OpenAI API Keys</strong>" alert block at the beginning of this lab.</p>
+</blockquote>
+<ol start="4" class="taskList">
+<li class="task-list-item" id="taskIndex21"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex21"><span></span></label> If the API key integration is successful you should receive a message, as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/6.jpg" alt="2024-05-17_11-39-27.jpg"></p></li>
+<li class="task-list-item" id="taskIndex22"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex22"><span></span></label> To create and execute a custom script and automate API reconnaissance using ShellGPT, run <strong>sgpt --shell "On the target URL https://petstore.swagger.io/ perform API reconnaissance, extract API routes, enumerate API's structure, identify API functionality, and discover API technologies. Organize and display the results in clearly labeled sections for each type of information and save the results in a text file. Install all the required dependencies and libraries."</strong> command.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/4ji5yba5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex23"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex23"><span></span></label> In the prompt type <strong>E</strong> and press <strong>Enter</strong> to execute the command. </p></li>
+</ol>
+<blockquote class="note">
+  <p>This will create an output text file and save the results. </p>
+</blockquote>
+<ol start="7" class="taskList">
+<li class="task-list-item" id="taskIndex24"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex24"><span></span></label> Open the output file generated (here, <strong>api_recon.txt</strong>) and check the results after completion of the execution for further analysis. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/c2wsujs4.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/vigo20mt.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex25"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex25"><span></span></label> This concludes the lab exercise.</p></li>
+</ol>
+</div><div class="page" id="page3">
+<h1 id="exercise-3-scanning-and-identifying-vulnerabilities-in-apis">Exercise 3: Scanning and Identifying Vulnerabilities in APIs</h1>
+<p>This lab aims to demonstrate the challenges and techniques involved in effectively scanning and identifying vulnerabilities in APIs. Using tools like Nikto and OWASP ZAP, the lab highlights the limitations of automated scanners in detecting API-specific vulnerabilities. It emphasizes the importance of manual exploration and contextual inclusion for accurate results.</p>
+<p>By interacting with the OWASP crAPI application, you can learn to identify critical issues like Remote File Inclusion (RFI) and validate findings manually, improving their API penetration testing and authenticated scanning skills.</p>
+<h3 id="lab-tasks-2">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex26"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex26"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to the <strong>Ubuntu</strong> machine. Login using <strong>ubuntu</strong>/<strong>toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex27"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex27"><span></span></label> Launch a terminal and acquire root privileges by executing the <strong>sudo su</strong> command. (When prompted, enter the password <strong>toor</strong>).</p></li>
+<li class="task-list-item" id="taskIndex28"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex28"><span></span></label> In the terminal window, type <strong>docker-compose --version</strong> to verify the docker version.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/z3k4gtle.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex29"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex29"><span></span></label> Run <strong>curl -o docker-compose.yml https://raw.githubusercontent.com/OWASP/crAPI/main/deploy/docker/docker-compose.yml</strong> to download crAPI deployment file.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/coiaquxj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex30"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex30"><span></span></label> Open the docker-compose.yml file in a text editor by executing the command <strong>gedit docker-compose.yml</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hlme2le2.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/s3ot0lay.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex31"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex31"><span></span></label> In the <strong>docker-compose.yml</strong> file, scroll down to <strong>line 157</strong> make the changes as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/30sn4tl5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex32"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex32"><span></span></label> Scroll further down to <strong>line 237</strong> and make the change as shown in the screenshot in the <strong>mailhog</strong> section.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/w2trhdf5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex33"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex33"><span></span></label> Once the modifications are completed, <strong>save</strong> and close the file. </p></li>
+<li class="task-list-item" id="taskIndex34"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex34"><span></span></label> Run the file by executing <strong>docker-compose -f docker-compose.yml --compatibility up -d</strong> command.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ekjqogsx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex35"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex35"><span></span></label> Click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to <strong>Parrot machine</strong> (When prompted, type <strong>toor</strong> as password.)</p></li>
+<li class="task-list-item" id="taskIndex36"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex36"><span></span></label> Launch the OWASP Zap from the Menu bar.</p></li>
+<li class="task-list-item" id="taskIndex37"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex37"><span></span></label> The <strong>OWASP ZAP</strong> initializing window appears; wait for it to complete.</p></li>
+<li class="task-list-item" id="taskIndex38"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex38"><span></span></label> After completing initialization, a prompt that reads <strong>Do you want to persist the ZAP Session?</strong> appears; select the <strong>No, I do not want to persist this session at this moment in time</strong> radio button and click <strong>Start</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If a <strong>Manage Add-ons</strong> window appears, click the <strong>Close</strong> button.</p>
+</blockquote>
+<blockquote class="note">
+  <p>If <strong>OWASP ZAP</strong> window appears, click <strong>No</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ivofawgo.jpg" alt="Screenshot"></p>
+<ol start="14" class="taskList">
+<li class="task-list-item" id="taskIndex39"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex39"><span></span></label> Click on <strong>Manual Explore</strong> in OWASP ZAP window and click on <strong>Launch Browser</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/01ulvqa3.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/laeey1zw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex40"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex40"><span></span></label> In the <strong>ZAP browser</strong>, navigate to <strong>https://192.168.0.19:8888</strong> to open the <strong>crAPI</strong> login page.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/fmwudpbt.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex41"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex41"><span></span></label> Click on <strong>Signup</strong> to create a new account.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/tz1amkbx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex42"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex42"><span></span></label> In the <strong>Sign Up</strong> window, fill in all the details and click on <strong>Signup</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/wc0lx3n2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex43"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex43"><span></span></label> The <strong>Success</strong> pop-up appears, click <strong>OK</strong> .</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bwxwotjg.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex44"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex44"><span></span></label> Click the <strong>Login</strong> button and enter the credentials as displayed in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/5aifzwtq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex45"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex45"><span></span></label> Once logged in, take a few minutes and review the site via the Zap browser, click on <strong>Shop</strong>, then explore the different items. Now, return to <strong>ZAP</strong> and right-click and select <strong>Include in Context --&gt; Default Context</strong></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/aoeubzhv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex46"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex46"><span></span></label> In <strong>Session Properties</strong> window click <strong>OK</strong>.</p></li>
+<li class="task-list-item" id="taskIndex47"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex47"><span></span></label> Now, right-click on the target and select <strong>Attack --&gt; Active Scan</strong> to launch automated attacks towards the API.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/o2e52bmt.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex48"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex48"><span></span></label> In <strong>Active Scan</strong> window, verify the target ip in <strong>Starting Point</strong> field and click on <strong>Start Scan</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hfhutj5b.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex49"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex49"><span></span></label> <strong>OWASP ZAP</strong> starts active scanning. Navigate to the <strong>Active Scan</strong> tab to observe the various scanned links.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hukwmp1o.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex50"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex50"><span></span></label> After completing the active scan, the results appear under the <strong>Alerts</strong> tab, displaying the various vulnerabilities and issues associated with the target website, as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/dkboibfy.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex51"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex51"><span></span></label> As observed in the Alerts, we have a Remote File Inclusion vulnerability and, with that, a significant finding.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If you do not see the vulnerability, you might have to <strong>Add a Vehicle</strong> and interact more with the application.</p>
+</blockquote>
+<ol start="27" class="taskList">
+<li class="task-list-item" id="taskIndex52"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex52"><span></span></label> This technique can increase the accuracy of automated vulnerability scanners and help you with authenticated attacks, not just checking websites/APIs from the outside.</p></li>
+<li class="task-list-item" id="taskIndex53"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex53"><span></span></label> Try to verify the vulnerability manually to ensure you are not getting False Positives (you can even try the payload used by the scanner to replicate the vulnerability.)</p></li>
+<li class="task-list-item" id="taskIndex54"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex54"><span></span></label> This concludes the demonstration of scanning API using ZAP.</p></li>
+</ol>
+</div><div class="page" id="page4">
+<h1 id="exercise-4-exploiting-nosql-injection-for-denial-of-service">Exercise 4: Exploiting NoSQL Injection for Denial-of-Service</h1>
+<p>This task demonstrates a <strong>NoSQL</strong> <strong>Denial-of-Service (DoS)</strong> attack by injecting a sleep command into an API query, exploiting MongoDB's behavior to delay execution and exhaust server resources. The challenge is performed using OWASP Juice Shop, which uses MongoDB as its NoSQL database and is hosted locally on port 80, allowing interaction with its backend API to test the sleep injection technique. </p>
+<h3 id="lab-tasks-3">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex55"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex55"><span></span></label> Click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to <strong>Ubuntu</strong> machine, type <strong>toor</strong> in the Password field, and press <strong>Enter</strong>.</p></li>
+<li class="task-list-item" id="taskIndex56"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex56"><span></span></label> Open a terminal with sudo privileges and run <strong>docker run -d -p 80:3000 bkimminich/juice-shop</strong> command to run juice-shop.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If you receive any error message, run <strong>service apache2 stop</strong> command.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ifhaybaj.jpg" alt="Screenshot"></p>
+<ol start="3" class="taskList">
+<li class="task-list-item" id="taskIndex57"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex57"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275767">Windows 11</a> to switch to the Windows 11 machine and log in using <strong>Admin/Pa$$w0rd</strong>.</p></li>
+<li class="task-list-item" id="taskIndex58"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex58"><span></span></label> Launch a any browser and type <strong>192.168.0.19:80</strong> to open the <strong>OWASP Juice Shop</strong> web page hosted in local network. In <strong>Welcome to OWASP Juice Shop</strong> pop-up, click <strong>Dismiss</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/dnwpeza4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex59"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex59"><span></span></label> Typically, NoSQL injection attacks execute when the attack string is parsed, evaluated, or concatenated into a NoSQL API call.</p></li>
+<li class="task-list-item" id="taskIndex60"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex60"><span></span></label> Once the Juice Shop application is reloaded, open <strong>Inspect Elements</strong>, navigate to the <strong>Network</strong> tab, reload the page, select any one of the items (here, Apple Iuice is selected), and analyze the traffic to identify the <strong>/rest/products/1/reviews</strong> endpoint.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 4.1.png" alt="image 4.1.png"></p></li>
+<li class="task-list-item" id="taskIndex61"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex61"><span></span></label> You can test the backend API functionality by querying in this way: <strong>http://192.168.0.19/rest/products/1/reviews</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/cjyrjhcs.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex62"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex62"><span></span></label> Identify the injection point by analyzing the URL structure and craft the payload using the sleep command <strong>sleep(integer_ms)</strong>. The changed URL is: <strong>http://192.168.0.19/rest/products/sleep(2000)/reviews</strong></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/rh51ymly.jpg" alt="Screenshot"></p></li>
+</ol>
+</div><div class="page" id="page5">
+<h1 id="exercise-5-exploiting-insecure-json-web-tokenjwt-implementations">Exercise 5: Exploiting Insecure JSON Web Token(JWT) Implementations</h1>
+<p>In this lab exercise, we shall try to forge an unsigned JSON Web Token (JWT) of a non-existent user.</p>
+<h3 id="lab-tasks-4">Lab Tasks</h3>
+<blockquote class="note">
+  <p>If the OWASP Juiceshop docker is already running, skip to Step#3.</p>
+</blockquote>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex63"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex63"><span></span></label> Click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to <strong>Ubuntu</strong> machine, type <strong>toor</strong> in the Password field, and press <strong>Enter</strong>.</p></li>
+<li class="task-list-item" id="taskIndex64"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex64"><span></span></label> Open a terminal with sudo privileges and run <strong>sudo docker run -d -p 80:3000 bkimminich/juice-shop</strong> command to run juice-shop.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If you receive any error message, run <strong>service apache2 stop</strong> command. Enter <strong>toor</strong> as the password.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/a0apuqru.jpg" alt="Screenshot"></p>
+<ol start="3" class="taskList">
+<li class="task-list-item" id="taskIndex65"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex65"><span></span></label> After running the command, click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to Prrot Security machine, log in with <strong>penester</strong>/<strong>toor</strong>. Open a web browser, and in the address bar, type <strong>http://192.168.0.19</strong> and press <strong>Enter</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>If prompted with a message about the vulnerable server, read through it, then click <strong>Dismiss</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/5tiolala.jpg" alt="Screenshot"></p>
+<ol start="4" class="taskList">
+<li class="task-list-item" id="taskIndex66"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex66"><span></span></label> OWASP juice Shop window appears; we will now register for an account; to do so, click on <strong>Account</strong> --&gt; <strong>Login</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/pm3fqrch.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex67"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex67"><span></span></label> In the Login page, click on <strong>Not yet a customer?</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/qcex4l2i.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex68"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex68"><span></span></label> User Registration page appears; fill all the fields and click on <strong>Register</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/l1ok0n3b.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex69"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex69"><span></span></label> You will be redirected to a login page. With or without logging in to the page, browse the URL <strong>http://192.168.0.19/#/score-board</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/3rp11frl.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex70"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex70"><span></span></label> Minimize the browser window. Now, we need to intercept the login request on Burp Suite through Burp Suite's Chromium browser. So, start the Burp proxy by clicking <strong>Applications</strong> --&gt; <strong>Pentesting</strong> --&gt; <strong>Web Application Analysis</strong> --&gt; <strong>Web Application Proxies</strong> --&gt; <strong>Burpsuite CE</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>In the <strong>Burp Suite Community Edition</strong> window click <strong>OK</strong>, in the <strong>Terms and Conditions</strong> window, click <strong>I Accept</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/3s4h4r5t.jpg" alt="Screenshot"></p>
+<ol start="9" class="taskList">
+<li class="task-list-item" id="taskIndex71"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex71"><span></span></label> In the <strong>Welcome to Burp Suite Community Edition</strong> window, select <strong>Temporary project</strong> and click <strong>Next</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/jghtq3qm.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex72"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex72"><span></span></label> In the next window, select <strong>Use Burp defaults</strong> and click <strong>Start Burp</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If a dialog-box appears stating <strong>Burp Suite is out of date</strong>, click <strong>OK</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/jta03x12.jpg" alt="Screenshot"></p>
+<ol start="11" class="taskList">
+<li class="task-list-item" id="taskIndex73"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex73"><span></span></label> In the Burp Suite window, navigate to the <strong>Proxy</strong> tab, disable intercept i.e., <strong>Intercept is off</strong> (until you browse the Juice Shop login page), and click the <strong>Open browser</strong> button to open the Burp Suite Chromium browser.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/m2qe5113.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex74"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex74"><span></span></label> In the Burp Suite browser window, type <strong>http://192.168.0.19</strong> in the address bar and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/z5qvg0e2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex75"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex75"><span></span></label> Click on <strong>Account</strong> --&gt; <strong>Login</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hy4k3bvh.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex76"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex76"><span></span></label> Type the <strong>Email</strong> address and <strong>Password</strong>. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/g24dorok.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex77"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex77"><span></span></label> Now, we shall intercept the login request. So, before logging in, Switch to the Burp Suite window and enable intercept.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/zntotx24.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex78"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex78"><span></span></label> Switch to the juice shop login page and click <strong>Log in</strong>. </p></li>
+</ol>
+<blockquote class="note">
+  <p>If the page does not load, turn off the intercept, log in to the account, and then, turn the intercept back on.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/qj2jbfqv.jpg" alt="Screenshot"></p>
+<!--17. [] After login, we see the Products page. The **Add to Basket** button appears, click on that.
+
+ !IMAGE[image 5.1.png](instructions248766/image 5.1.png) -->
+<ol start="18" class="taskList">
+<li class="task-list-item" id="taskIndex79"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex79"><span></span></label> Now, switch back to the Burp Proxy window, and in the <strong>Intercept</strong> tab, you can see that the request is captured. Keep clicking <strong>Forward</strong> until you see a request containing <strong>Authorization</strong> bearer. Right-click on the request and click <strong>Send to Repeater</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/lyhkqjm0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex80"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex80"><span></span></label> Go to the <strong>Repeater</strong> tab and copy the Authorization Bearer Token. This is the token that helps the server identify the user. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/aau2e53y.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex81"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex81"><span></span></label> The objective of this lab is to pick the token, remove the signing algorithm, modify the email address to <strong>jwtn3d@juice-sh.op</strong>, encode the header and payload, and then, send the modified request to Repeater. This way, we are forging an unsigned token of a non-existent user with the email address <strong>jwtn3d@juice-sh.op</strong>.
+To do this, we will first decrypt the jwt token, remove the signed algorithm from the header, modify the email address in the payload, and encode the header and payload back.</p></li>
+<li class="task-list-item" id="taskIndex82"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex82"><span></span></label> We will be decrypting the JWT token through the website <strong>https://jwt.io</strong>. Navigate to the website and paste the token. The decoded values can be seen on the right-hand side of the webpage as shown in the following screenshot:</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/dknvuod0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex83"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex83"><span></span></label> The signed algorithm is RS256. We shall now change it to <strong>none</strong>. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/shk1qe4s.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex84"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex84"><span></span></label> We need to Base64URL encode this modified header. In this lab, we will be using the online tool <strong>https://base64.guru/standards/base64url/encode</strong>. So, copy the modified header, navigate to this page, paste the content, and encode it.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/2ny24sjq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex85"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex85"><span></span></label> Copy the encoded data.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ayc2fjf3.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex86"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex86"><span></span></label> Paste it in a text file and add a period at the end.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/xwkcnkjs.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex87"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex87"><span></span></label> We will follow the same process to modify the payload and encode it. So, switch to <strong>https://jwt.io</strong> and replace the email to <strong>jwtn3d@juice-sh.op</strong>. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/kmrdhgtu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex88"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex88"><span></span></label> Copy the modified payload.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/iexzmjwb.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex89"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex89"><span></span></label> Switch to https://base64.guru/standards/base64url/encode, replace the header data with payload data, and encode it.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hk2ekfb3.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex90"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex90"><span></span></label> Copy the encoded data.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/lrth2wim.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex91"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex91"><span></span></label> Switch to the text editor and paste it after the period.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/xd2ois2v.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex92"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex92"><span></span></label> Upon pasting the payload, add a period at the end of the payload and copy the entire text. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/xksujawe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex93"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex93"><span></span></label> Switch back to the Burp Repeater and replace the Authorization Bearer with the content you copied from the previous step.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/4oafqvfj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex94"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex94"><span></span></label> Send this modified request.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/rwkad3a1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex95"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex95"><span></span></label> Now, switch to the Firefox browser where you have opened the juice shop scoreboard (<strong>http://192.168.0.19/#/score-board</strong>). You will observe that the challenge has been completed successfully. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/r4vzj4tf.jpg" alt="Screenshot"></p></li>
+</ol>
+</div><div class="page" id="page6">
+<h1 id="exercise-6-exploiting-broken-object-level-authorization-bola-vulnerability-to-manipulate-api-requests">Exercise 6: Exploiting Broken Object Level Authorization (BOLA) Vulnerability to Manipulate API Requests</h1>
+<p>In this task, we focus on OWASP crAPI (Completely Ridiculous API), a purpose-built vulnerable application designed to help security enthusiasts practice and understand the OWASP Top 10 API security risks. crAPI mimics a real-world B2C car service platform with features such as vehicle management, community posts, and user authentication. The challenge involves testing for Broken Object Level Authorization (BOLA), a critical API vulnerability that allows unauthorized access to other users' data by manipulating API requests. By interacting with crAPI's backend services and intercepting requests using Burp Suite, we demonstrate how BOLA can be exploited to retrieve and manipulate sensitive information like vehicle IDs, highlighting the importance of proper access controls in API development.</p>
+<h3 id="lab-tasks-5">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex96"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex96"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to the <strong>Ubuntu</strong> machine. Login using <strong>ubuntu/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex97"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex97"><span></span></label> Launch a terminal and acquire root privileges by executing the <strong>sudo su</strong> command. (When prompted, enter the password <strong>toor</strong>).</p></li>
+<li class="task-list-item" id="taskIndex98"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex98"><span></span></label> In the terminal window, type <strong>docker-compose --version</strong> to verify the docker version.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/z3k4gtle.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex99"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex99"><span></span></label> Run <strong>curl -o docker-compose.yml https://raw.githubusercontent.com/OWASP/crAPI/main/deploy/docker/docker-compose.yml</strong> to download crAPI deployment file.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/coiaquxj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex100"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex100"><span></span></label> Open the docker-compose.yml file in a text editor by executing the command <strong>gedit docker-compose.yml</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hlme2le2.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/s3ot0lay.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex101"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex101"><span></span></label> In the <strong>docker-compose.yml</strong> file, scroll down to <strong>line 157</strong> make the changes as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/30sn4tl5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex102"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex102"><span></span></label> Scroll further down to <strong>line 237</strong> and make the change as shown in the screenshot in the <strong>mailhog</strong> section.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/w2trhdf5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex103"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex103"><span></span></label> Once the modifications are completed, <strong>save</strong> and close the file. </p></li>
+<li class="task-list-item" id="taskIndex104"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex104"><span></span></label> Run the file by executing <strong>sudo docker-compose -f docker-compose.yml --compatibility up -d</strong> command.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ekjqogsx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex105"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex105"><span></span></label> Now, click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine. Login using <strong>attacker/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex106"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex106"><span></span></label> Launch <strong>Firefox</strong> and navigate to <strong>http://192.168.0.19:8888</strong> to open <strong>crAPI</strong> login page.</p></li>
+<li class="task-list-item" id="taskIndex107"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex107"><span></span></label> Click on <strong>Signup</strong> to create a new account.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/tz1amkbx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex108"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex108"><span></span></label> In the Sign-Up window, fill in all the details and click on <strong>Signup</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/wc0lx3n2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex109"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex109"><span></span></label> The <strong>Success</strong> pop-up appears, click <strong>OK</strong> .</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bwxwotjg.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex110"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex110"><span></span></label> Log in with the newly created account as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/qhhwg1z4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex111"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex111"><span></span></label> Once you are logged in, click on the <strong>+ Add a Vehicle</strong> button to add a vehicle.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/a0sy5czv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex112"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex112"><span></span></label> In the next window, you will be prompted for <strong>Pin Code</strong> and <strong>VIN</strong>. To obtain that, open a new browser tab and navigate to <strong>http://192.168.0.19:8025</strong>. This will open crAPI's built-in mail tool <strong>Mailhog</strong> service where we can retrieve the car details.</p></li>
+<li class="task-list-item" id="taskIndex113"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex113"><span></span></label> Open the recently received mail. Here, you can see the vehicle information as shown in the screenshot.</p></li>
+</ol>
+<blockquote class="note">
+  <p>The vehicle details might change when you perform the lab.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/x2ic0tc1.jpg" alt="Screenshot"></p>
+<ol start="19" class="taskList">
+<li class="task-list-item" id="taskIndex114"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex114"><span></span></label> Switch to <strong>crAPI</strong> tab, fill in the vehical details and click on <strong>Verify Vehicle Details</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ib1g3iz0.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/ff2wo5qs.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex115"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex115"><span></span></label> After successful verification, the Vehicle Details page will appear as shown in the screenshot.</p></li>
+</ol>
+<blockquote class="note">
+  <p>The result might vary when you perform the lab.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/345z1czn.jpg" alt="Screenshot"></p>
+<ol start="21" class="taskList">
+<li class="task-list-item" id="taskIndex116"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex116"><span></span></label> Click on the dropdown arrow on the top-right corner and click <strong>Logout</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/afw5izxh.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex117"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex117"><span></span></label> Now we will exploit the Broken Object-Level Authorization (BOLA) vulnerability in crAPI.</p></li>
+<li class="task-list-item" id="taskIndex118"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex118"><span></span></label> Minimize the browser window, click the <strong>Applications</strong> menu from the top left corner of <strong>Desktop</strong>, and navigate to <strong>Pentesting</strong> --&gt; <strong>Web Application Analysis</strong> --&gt; <strong>Web Application Proxies</strong> --&gt; <strong>Burpsuite CE</strong> to launch the <strong>Burpsuite CE</strong> application.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/sinmgrjj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex119"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex119"><span></span></label> The <strong>Burp Suite Community Edition</strong> pop-up appears, click <strong>OK</strong>.</p></li>
+<li class="task-list-item" id="taskIndex120"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex120"><span></span></label> In the <strong>Terms and Conditions</strong> wizard, click the <strong>I Accept</strong> button.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If <strong>Delete old temporary files?</strong> pop-up appears, click <strong>Delete</strong>.</p>
+</blockquote>
+<ol start="26" class="taskList">
+<li class="task-list-item" id="taskIndex121"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex121"><span></span></label> The <strong>Burp Suite</strong> main window appears; ensure that the <strong>Temporary project</strong> radio button is selected and click the <strong>Next</strong> button, as shown in the screenshot.</li>
+</ol>
+<blockquote class="note">
+  <p>If an update window appears, click <strong>Close</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bviasabg.jpg" alt="Screenshot"></p>
+<ol start="27" class="taskList">
+<li class="task-list-item" id="taskIndex122"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex122"><span></span></label> In the next window, select the <strong>Use Burp defaults</strong> radio button and click the <strong>Start Burp</strong> button.</li>
+</ol>
+<blockquote class="note">
+  <p>If a pop-up appears stating Burp Suite is out of date, select Don't show again for this version checkbox and click <strong>OK</strong>.</p>
+</blockquote>
+<ol start="28" class="taskList">
+<li class="task-list-item" id="taskIndex123"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex123"><span></span></label> The Burp Suite main window appears; click the <strong>Proxy</strong> tab from the available options in the top section of the window, off the intercept, and click on <strong>Open browser</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/c1a1danq.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex124"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex124"><span></span></label> A new browser window appears, navigate to <strong>http://192.168.0.19:8888</strong> to open <strong>crAPI</strong> login page. Login with the new account that we created in the previous steps.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bcdw5qjw.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/o11sr12r.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex125"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex125"><span></span></label> Switch back to Burpsuite and navigate to <strong>Proxy --&gt; HTTP history</strong> tab and you will see there is a request requirement for a vehicle ID.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/s4oobcxp.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex126"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex126"><span></span></label> Now will try to extract the vehicle IDs of other users. For this, click on the <strong>Community</strong> option dashboard and open a post.</p></li>
+</ol>
+<blockquote class="note">
+  <p>Click on three dots, to see the <strong>Community</strong> option.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/phyl2w0l.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/yvxf0s03.jpg" alt="yvxf0s03.jpg"></p>
+<ol start="32" class="taskList">
+<li class="task-list-item" id="taskIndex127"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex127"><span></span></label> Once you open a post, switch back to Burpsuite and observe that we have the VehicleID in the Response. Copy the Vehicle ID of another user from the Community Response.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/pkc32uqm.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex128"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex128"><span></span></label> Locate the intercepted request for the vehicle in the <strong>HTTP History</strong> tab, right-click on the request, and select <strong>Send to Repeater</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/1givx0rc.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex129"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex129"><span></span></label> Go to the <strong>Repeater</strong> tab, replace the VehicleID in the request with the copied VehicleID, and press <strong>Send</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/up0qxou1.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bmwro8q8.jpg" alt="bmwro8q8.jpg"></p></li>
+<li class="task-list-item" id="taskIndex130"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex130"><span></span></label> Using the provided ID, we were able to access the location of another user's vehicle, which is likely not intended or authorized.</p></li>
+<li class="task-list-item" id="taskIndex131"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex131"><span></span></label> This concludes the demonstration of exploiting BOLA vulnerability. Document the BOLA vulnerability, its impact, and potential risks such as unauthorized access or data manipulation.</p></li>
+</ol>
+</div><div class="page" id="page7">
+<h1 id="exercise-7-exploiting-broken-function-level-authorization-bfla-flaws-to-manipulate-api-requests">Exercise 7: Exploiting Broken Function Level Authorization (BFLA) Flaws to Manipulate API Requests</h1>
+<p>BFLA (Broken Function Level Authorization) vulnerability occurs when an application fails to properly enforce access controls on specific functions, allowing unauthorized users to execute actions or access data that should be restricted to higher privilege levels. This vulnerability typically arises due to inadequate role validation or improperly configured authorization mechanisms.</p>
+<p>Attackers can exploit BFLA vulnerabilities by manipulating API endpoints, parameters, or HTTP methods to gain unauthorized access to sensitive operations, such as modifying data, accessing administrative functions, or escalating privileges. To mitigate BFLA, implement robust role-based access control (RBAC), ensure thorough authorization checks for all endpoints, and regularly test for authorization flaws during security assessments.</p>
+<h3 id="lab-objective">Lab Objective</h3>
+<p>We will understand and exploit Broken Function Level Authorization (BFLA) vulnerabilities by identifying and manipulating API requests to access unauthorized functions or sensitive data. </p>
+<h3 id="lab-tasks-6">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex132"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex132"><span></span></label> In <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine, launch <strong>Firefox</strong> and navigate to <strong>http://192.168.0.19:8888/</strong> to open <strong>crAPI</strong> login page.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/3wdnlliw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex133"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex133"><span></span></label> Since we have already created an account in the previous exercise, log into your crAPI account.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/s3lnpyar.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex134"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex134"><span></span></label> Once logged in, click on the profile icon as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/e5p0l3p0.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex135"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex135"><span></span></label> <strong>Your Profile</strong> page appears, under <strong>My Personal Video</strong> section hover over 
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/dyvh7n4z.jpg" alt="dyvh7n4z.jpg"> icon and click on the <strong>Upload Video</strong> button to add a personal video.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/vxi4cmq3.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex136"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex136"><span></span></label> In the <strong>File Upload</strong> window browse a video file to upload and click on <strong>Open</strong>. Click <strong>OK</strong> on the <strong>Success</strong> pop-up.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If the file is not available, create a dummy mp4 file.</p>
+</blockquote>
+<ol start="6" class="taskList">
+<li class="task-list-item" id="taskIndex137"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex137"><span></span></label> Launch <strong>Burpsuite</strong>; click the <strong>Proxy</strong> tab from the available options in the top section of the window, off the intercept, and click on <strong>Open browser</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/e2t5mrd2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex138"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex138"><span></span></label> A new browser window appears, navigate to <strong>http://192.168.0.19:8888</strong> to open the crAPI login page. Log into your crAPI account.</p></li>
+<li class="task-list-item" id="taskIndex139"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex139"><span></span></label> Once logged in, navigate to the profile page, and in <strong>My Personal Video</strong> click on <strong>Change Video Name</strong>. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/2tc1cdfd.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex140"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex140"><span></span></label> In <strong>Enter a new Video Name</strong> window, type <strong>Video1</strong> and click on <strong>Change Video Name</strong>. Once done click <strong>OK</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/hsopjzlk.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/01pzbk3y.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex141"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex141"><span></span></label> Switch to Burpsuite; navigate to <strong>Proxy --&gt; HTTP history</strong> and locate a <strong>PUT</strong> request. Send the request to the <strong>Repeater</strong> tab.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/gnpeykfv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex142"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex142"><span></span></label> In <strong>Repeaters</strong> tab, change the <strong>HTTP</strong> method from <strong>PUT</strong> to <strong>OPTIONS</strong> to explore the <strong>HTTP</strong> methods that are allowed, nd click on <strong>Send</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/24k4pkdf.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/5swmg5aw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex143"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex143"><span></span></label> Since the <strong>DELETE</strong> method is permitted, we will initiate a request with an empty request body. </p></li>
+<li class="task-list-item" id="taskIndex144"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex144"><span></span></label> So, change the HTTP request to <strong>DELETE</strong> and send the request.</p></li>
+<li class="task-list-item" id="taskIndex145"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex145"><span></span></label> The server responds with a message, <strong>"This is an admin function. Try to access the admin API."</strong> as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/0mpbupn2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex146"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex146"><span></span></label> Since the delete functionality is an admin function, manipulate the request further.</p></li>
+<li class="task-list-item" id="taskIndex147"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex147"><span></span></label> Change the <strong>user</strong> to <strong>admin</strong> in the packet URL, and resend the request as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/3ugrqvc1.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex148"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex148"><span></span></label> This successfully deleted the video. However, we have to exploit the BFLA vulnerability and delete the video of another user. </p></li>
+<li class="task-list-item" id="taskIndex149"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex149"><span></span></label> To do so, examine the endpoint further, we can notice that it utilizes a numerical value at the end which might be a unique identifier.</p></li>
+<li class="task-list-item" id="taskIndex150"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex150"><span></span></label> Change the ID to <strong>5</strong> and send the request.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/s51byiz4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex151"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex151"><span></span></label> We have successfully exploited the BFLA vulnerability by deleting the video of the user with the unique identifier set to <strong>5</strong>.</p></li>
+<li class="task-list-item" id="taskIndex152"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex152"><span></span></label> This concludes the demonstration of exploiting BFLA vulnerability in crAPI.</p></li>
+</ol>
+</div><div class="page" id="page8">
+<h1 id="exercise-8-exploiting-hidden-api-functionality-exposure-to-gather-information-on-the-target-application">Exercise 8: Exploiting Hidden API Functionality Exposure to Gather Information on the Target Application</h1>
+<p>The objective of this lab is to identify and exploit hidden or undocumented API functionalities to gather sensitive information about the target application. </p>
+<h3 id="lab-tasks-7">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex153"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex153"><span></span></label> Click on <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to the Ubuntu machine. Login using <strong>ubuntu/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex154"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex154"><span></span></label> Run <strong>sudo su</strong> and move to dvws-node folder with <strong>cd dvws-node</strong> command. (When prompted, type <strong>toor</strong> as password.)</p></li>
+<li class="task-list-item" id="taskIndex155"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex155"><span></span></label> Run <strong>docker-compose up</strong> to run the dvws-node application. </p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/2n1nyxqu.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex156"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex156"><span></span></label> In <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> machine, launch Burpsuite, navigate to the <strong>Proxy</strong> tab, turn off the intercept, and open the BurpSuite browser.</p></li>
+<li class="task-list-item" id="taskIndex157"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex157"><span></span></label> In burp's browser navigate to <strong>http://192.168.0.19:8080/api-docs/</strong> to open swagger UI documentation of dvws-node.</p></li>
+</ol>
+<blockquote class="note">
+  <p>Switch to the BurpSuite window and click on Forward to forward the request. Ensure that you forward all requests.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/qxobowkl.jpg" alt="Screenshot"></p>
+<ol start="6" class="taskList">
+<li class="task-list-item" id="taskIndex158"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex158"><span></span></label> In swagger UI documentation scroll down to <strong>/api/v1/info</strong> and click on <strong>Try it out --&gt; Execute</strong>. </li>
+</ol>
+<blockquote class="note">
+  <p>Switch to the BurpSuite window and click on Forward to forward the request. Ensure that you forward all requests.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bgqxokax.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/cmyyqtbw.jpg" alt="Screenshot"></p>
+<ol start="7" class="taskList">
+<li class="task-list-item" id="taskIndex159"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex159"><span></span></label> Switch back to burpsuite; in the HTTP history tab locate the GET request and send it to <strong>Repeater</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/bnnxuwvf.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex160"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex160"><span></span></label> Navigate to the Repeater tab. Click on the pencil icon beside the <strong>Target</strong> section at the top right of the <strong>Response</strong> window and in the <strong>Configure target details window</strong> type <strong>192.168.0.19</strong> as <strong>Host</strong> and <strong>8080</strong> as port number and click <strong>OK</strong>.</p></li>
+<li class="task-list-item" id="taskIndex161"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex161"><span></span></label> In the <strong>Raw</strong> section, delete the current <strong>Request</strong>, modify the request as shown in the screenshot, and click <strong>Send</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/1sywesovb.jpg" alt="1sywesovb.jpg"></p></li>
+<li class="task-list-item" id="taskIndex162"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex162"><span></span></label> From the above Get request we can gather much information pertaining to the application.</p></li>
+</ol>
+</div><div class="page" id="page9">
+<h1 id="exercise-9--exploiting-xpath-injection-vulnerabilities-in-api-implementations">Exercise 9:  Exploiting XPath Injection Vulnerabilities in API Implementations</h1>
+<p>The objective of this lab is to demonstrate and exploit XPath Injection vulnerabilities in web applications that use XML-based queries to retrieve data.</p>
+<h3 id="lab-tasks-8">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex163"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex163"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine. Login with <strong>attacker/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex164"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex164"><span></span></label> Launch <strong>Burpsuite</strong> and navigate to <strong>Proxy</strong> tab, Off the intercept, and click on Open browser to launch Burpsuite's browser.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/rrdlbxik.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex165"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex165"><span></span></label> Navigate to <strong>192.168.0.19:8080</strong> and log in to your account. If you have not yet registered, create an account in DVWS.</p></li>
+</ol>
+<blockquote class="note">
+  <p>type username, password and click on <strong>Register</strong> to create an account. Then click on <strong>Login</strong>.</p>
+</blockquote>
+<blockquote class="note">
+  <p>Switch to the BurpSuite window and click on Forward to forward the request.</p>
+</blockquote>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/kc2ckhwk.jpg" alt="Screenshot"></p>
+<ol start="4" class="taskList">
+<li class="task-list-item" id="taskIndex166"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex166"><span></span></label> Once logged in switch back to burpsuite and open the <strong>HTTP history</strong> tab. Locate the GET request <strong>/api/v2/release/0.0.1</strong> and send it to the <strong>Repeater</strong> tab as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/beln42iw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex167"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex167"><span></span></label> Modify this logic to include a payload and test for code injection. The payload we will use is: <strong>0.0.1' or 1=1 or 'a'='a</strong></p></li>
+<li class="task-list-item" id="taskIndex168"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex168"><span></span></label> The payload must be <strong>hex-encoded</strong> and appropriately adjusted to ensure its acceptance. An example of the expected outcome is provided below:</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 9.1.png" alt="image 9.1.png"></p></li>
+<li class="task-list-item" id="taskIndex169"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex169"><span></span></label> Change the value as shown in the image. Then click on <strong>Send</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image 9.2.png" alt="image 9.2.png"></p></li>
+<li class="task-list-item" id="taskIndex170"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex170"><span></span></label> With the configuration contents successfully extracted, we now have access to user credentials, including those for a root user.</p></li>
+</ol>
+</div><div class="page" id="page10">
+<h1 id="exercise-10--bruteforcing-weak-secret-keys-in-json-web-tokens-jwt-implementations">Exercise 10:  Bruteforcing Weak Secret Keys in JSON Web Tokens (JWT) Implementations</h1>
+<p>Demonstrate how to identify and exploit weak secret keys in JSON Web Tokens (JWT) by performing a brute-force attack. The lab will guide participants in using automated tools to enumerate potential secret keys, analyze the JWT structure, and forge a valid token to bypass authentication or escalate privileges within the target application.</p>
+<h3 id="lab-tasks-9">Lab Tasks</h3>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex171"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex171"><span></span></label>Click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="275476">Ubuntu</a> to switch to the Ubuntu machine. Login using <strong>ubuntu/toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex172"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex172"><span></span></label> Open a terminal window and run <strong>sudo su</strong> (use toor as password) to gain root privileges and then use the command <strong>cd dvws-node</strong> to move into the <strong>dvws-node</strong> application directory.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image1.png"></p></li>
+<li class="task-list-item" id="taskIndex173"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex173"><span></span></label> Run <strong>docker-compose up</strong> to start the <strong>dvws-node</strong> application.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image2.png"></p></li>
+<li class="task-list-item" id="taskIndex174"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex174"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/155864?instructionsSetId=248766#" class="selectMachineLink icon-link special-action-link" data-data="268660">Parrot Security</a> to switch to the Parrot Security machine. Login to the Parrot Security machine using the username <strong>pentester</strong> and the password <strong>toor</strong>.</p></li>
+<li class="task-list-item" id="taskIndex175"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex175"><span></span></label> Launch Burp Suite and navigate to the <strong>Proxy</strong> tab. Turn off intercept and click on the <strong>Open Browser</strong> button to launch Burp Suite's built-in browser.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image4.1.png" alt="image4.1.png"></p></li>
+<li class="task-list-item" id="taskIndex176"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex176"><span></span></label> In the browser, navigate to <strong>192.168.0.19:8080</strong> and log in using the username <strong>test</strong> and password <strong>test</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image5.png"></p></li>
+<li class="task-list-item" id="taskIndex177"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex177"><span></span></label> Once logged in, switch back to Burp Suite and enable the intercept by clicking the <strong>Intercept is off</strong> button, which will toggle to <strong>Intercept is on</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image7.png"></p></li>
+<li class="task-list-item" id="taskIndex178"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex178"><span></span></label> With the intercept enabled, switch back to Burp Suite's browser and click the <strong>Admin Area</strong> button, as shown in the screenshot.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image8.png"></p></li>
+<li class="task-list-item" id="taskIndex179"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex179"><span></span></label> Switch back to Burp Suite. <strong>Forward</strong> the requests until you see a request containing the <strong>Bearer</strong> token in the Authorization header.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image9.png"></p></li>
+<li class="task-list-item" id="taskIndex180"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex180"><span></span></label> Right-click on the request and select <strong>Send to Repeater</strong>.</p></li>
+<li class="task-list-item" id="taskIndex181"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex181"><span></span></label> Click on <strong>Send</strong>. Observe that the response indicates an error: "Error: User is missing <strong>[user: admin]</strong> privilege". This indicates that we need to gain admin privileges to access this page.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image11.png"></p></li>
+<li class="task-list-item" id="taskIndex182"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex182"><span></span></label> Go back to the <strong>Proxy</strong> tab in Burp Suite and copy the <strong>Bearer</strong> token from the captured request.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image13.png"></p></li>
+<li class="task-list-item" id="taskIndex183"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex183"><span></span></label> Launch the command-line terminal and type <strong>cd jwt_tool/</strong> to navigate into the <strong>jwt_tool</strong> directory.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image15.png"></p></li>
+<li class="task-list-item" id="taskIndex184"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex184"><span></span></label> Now, use <strong>jwt_tool</strong> to check the token information. Run <strong>python3 jwt_tool.py &lt;token&gt;</strong> (Replace <strong>&lt;token&gt;</strong> with the copied bearer token) command. After running the command, you will see the decoded token's header and payload scrolling down the terminal.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image16.png"></p></li>
+<li class="task-list-item" id="taskIndex185"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex185"><span></span></label> Next, brute-force the JWT token to discover the signing key using a wordlist.</p></li>
+</ol>
+<p>Type: <strong>python3 jwt_tool.py &lt;token&gt; -C -d /usr/share/seclists/Passwords/Common-Credentials/10k-most-common.txt</strong> (Replace <strong>&lt;token&gt;</strong> with the copied bearer token) and press <strong>Enter</strong>.</p>
+<p>After the brute force, the output will reveal the key, which in this case is <strong>access</strong>.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image18.png"></p>
+<ol start="17" class="taskList">
+<li class="task-list-item" id="taskIndex186"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex186"><span></span></label> Open the website <a href="https://jwt.io/">https://jwt.io/</a> in your browser. Paste the JWT token into the <strong>Encoded</strong> section.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image19.png"></p></li>
+<li class="task-list-item" id="taskIndex187"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex187"><span></span></label> In the "Decoded" section, modify the payload to add <strong>["user:admin"]</strong> and remove any existing permission settings, making the user an admin.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image20.png"></p></li>
+<li class="task-list-item" id="taskIndex188"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex188"><span></span></label> Paste the secret key (<strong>access</strong>) into the "verify signature" box.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image21.png"></p></li>
+<li class="task-list-item" id="taskIndex189"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex189"><span></span></label> After adding the JWT key, copy the latest modified encoded token.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image22.png"></p></li>
+<li class="task-list-item" id="taskIndex190"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex190"><span></span></label> Switch back to Burp Suite, navigate to the <strong>Intercept</strong> section in the <strong>Proxy</strong> tab, and change the <strong>Bearer</strong> token in the Authorization header to the modified, encoded value copied from <strong>jwt.io</strong>. Then <strong>Forward</strong> the request.</p>
+<p><br>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image23.png"></p></li>
+<li class="task-list-item" id="taskIndex191"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex191"><span></span></label> Now switch to Burp Suite's browser, navigate back to the <strong>Admin Area</strong>, and you will see that you are logged in as the <strong>admin</strong> user, as indicated in the "User Information" section.</p>
+<p>
+<img src="./Module 06_ API and Java Web Token Penetration Testing_files/image24.png"></p></li>
+<li><p>This concludes the demonstration of Bruteforcing Weak Secret Keys in JWT Implementations.</p></li>
+</ol></div></div>
+    </div>
+    <input type="hidden" id="rawContent" value="@lab.Title
+
+##Scenario
+
+With the increasing adoption of microservices and cloud-based applications, APIs and Java Web Tokens (JWTs) have become critical for secure communication and authentication. However, these technologies are prime targets for attackers due to their widespread use and potential for misconfiguration. Conducting penetration testing on APIs and JWTs ensures that vulnerabilities such as broken authentication, inadequate rate limiting, and insecure token management are identified and mitigated before exploitation occurs. By simulating real-world attack scenarios, this testing strengthens the organization&#39;s ability to safeguard sensitive data, maintain compliance with industry standards, and protect the integrity of its applications.
+
+APIs and JWT implementations can unknowingly expose sensitive endpoints without regular security assessments, enabling attackers to escalate privileges, bypass authentication, or manipulate data. Testing for weaknesses such as replay attacks, token tampering, and improper error handling helps to ensure robust security measures are in place. By proactively addressing these vulnerabilities, the organization reduces the risk of breaches, builds customer trust, and maintains a competitive edge in delivering secure and reliable digital services. Investing in API and JWT penetration testing is a preventative measure and a strategic move to uphold operational resilience and regulatory compliance in a rapidly evolving threat landscape.
+
+
+##Objective
+
+We will be performing the following labs in this module:
+- Performing Information Gathering on the Damn Vulnerable Web Services (DVWS) Platform
+- Performing API Reconnaissance using AI
+- Scanning and Identifying Vulnerabilities in APIs
+- Exploiting NoSQL Injection for Denial-of-Service
+- Exploiting Insecure JSON Web Token(JWT) Implementations
+- Exploiting Broken Object Level Authorization (BOLA) Vulnerability to Manipulate API Requests
+- Exploiting Broken Function Level Authorization (BFLA) Flaws to Manipulate API Requests
+- Exploiting Hidden API Functionality Exposure to Gather Information on the Target Application
+- Exploiting XPath Injection Vulnerabilities in API Implementations
+- Bruteforcing Weak Secret Keys in JSON Web Tokens (JWT) Implementations
+
+
+&gt;[+alert] **Important Notice: Third-Party Connected Apps and Paid Services**
+&gt;
+
+**Introduction**
+&gt;
+The guiding principle of EC-Council Education Content and Labs is simple: We want to provide a safe environment to learn, practice, and assess cybersecurity skills that directly translate to job-ready skills. We believe in providing our students, educator partners, and professionals with real software and live experiences that behave like those in the &quot;real world&quot; because they are the actual tools and services used in the field, not simulations.
+&gt;
+**Third-Party and Internet-Connected Resources**
+&gt;
+To provide the most realistic learning experience, EC-Council may employ connections to live networks and services through its labs and lab platforms. While many software and service providers provide education use licenses, trials, or are Open Source, some require a live account with setup requirements and agreements you must review and consent to to participate in and/or complete the exercises in our Labs.
+&gt;
+**Subscription Fees and/or License Fees**
+&gt;
+While EC-Council will never ask you for payment details or sensitive information during our course of learning, some of our Live Labs use paid OpenAI API keys. To use these, you will need to add credit card information for a payment method and buy API credits at https://platform.openai.com/. 
+&gt;
+**Alternatives**
+&gt;
+If you are unable to buy OpenAI API credits, EC-Council provides comprehensive Lab Guides that include complete instruction sets with screenshots (images) of each step. EC-Council also provides a video-based walk-through of each lab for you to follow along without actually buying OpenAI API credits. Though you won&#39;t be performing the hands-on lab, you will still receive adequate exposure to the steps, techniques, and knowledge elements required for you to prepare for certification or grasp the knowledge conveyed in the program.
+&gt;
+
+&gt;[!alert] **Note:** All lab manuals are accessible in the **Lab Manuals** folder located on the **Desktop** of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.
+===
+
+#Exercise 1: Performing Information Gathering on the Damn Vulnerable Web Services (DVWS) Platform
+
+We will learn techniques to perform information gathering on the Damn Vulnerable Web Services (DVWS) platform to uncover critical data points such as API endpoints, service details, and application structure. We will also use tools and techniques to enumerate resources, identify potential attack surfaces, and gather information for further security assessment.
+
+###Lab Tasks
+
+1. [] Click on @lab.VirtualMachine(Ubuntu).SelectLink to switch to the Ubuntu machine. Login using **ubuntu/toor**.
+
+2. [] Open the terminal,rRun **sudo su** and move to dvws-node folder with **cd dvws-node** command. (When prompted, type **toor** as password.)
+
+3. [] Run **docker-compose up** to run the dvws-node application. 
+
+ !IMAGE[Screenshot](screens/2n1nyxqu.jpg)
+
+4. [] Launch a new terminal and execute **sudo nano /etc/hosts** to make an entry into the host file, as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/wjrwlytf.jpg)
+
+5. [] Save the file and exit the text editor.
+
+6. [] Now, click on @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Type **sudo su** and enter **toor** as the password. Login using **pentester/toor**.
+
+7. [] Open the terminal and execute **nmap -sS 192.168.0.19** to scan the target.
+
+ !IMAGE[Screenshot](screens/zwi2pq24.jpg)
+
+8. [] There are some interesting ports for our attack surface, so to look at the services on these ports, execute **nmap -sV 192.168.0.19**
+
+ !IMAGE[Screenshot](screens/bpam1zs2.jpg)
+
+9. [] Web Services or APIs frequently support XML data from users. In DVWS, a SOAP server is accessible at **http://dvws.local/dvwsuserservice?wsdl**, displaying the supported operations. Launch **Firefox** and navigate to **http://192.168.0.19:8080/dvwsuserservice?wsdl** to access it.
+
+ !IMAGE[Screenshot](screens/1m4gzuhe.jpg)
+
+10. [] Having extracted the WSDL, we can parse its operations to determine the request needed to check if a user exists. 
+
+11. [] Launch **Burpsuite** and navigate to **Proxy** tab to open burpsuite&#39;s browser. In the browser, navigate to **http://192.168.0.19:8080/dvwsuserservice?wsdl**.
+
+ !IMAGE[Screenshot](screens/sqj3tcwc.jpg)
+
+12. [] Switch back to burpsuite and check the HTTP history tab under the Proxy tab to find the request. Right-click on the GET request and click on **Send to Repeater**, as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/rad4i0bl.jpg)
+
+13. [] In the Request pane, delete all the contents and enter the following request to the SOAP service:
+
+ !IMAGE[image 1.1.png](instructions248766/image 1.1.png)
+
+ !IMAGE[image 1.2.png](instructions248766/image 1.2.png)
+
+```
+POST /dvwsuserservice/ HTTP/1.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4164.0 Safari/537.36 autochrome/red
+Connection: close
+SOAPAction: Username
+Content-Type: text/xml;charset=UTF-8
+Host: dvws.local
+Content-Length: 463
+
+&lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:examples:usernameservice&quot;&gt;
+&lt;soapenv:Header/&gt;
+&lt;soapenv:Body&gt;
+ &lt;urn:Username soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
+ &lt;username xsi:type=&quot;xsd:string&quot;&gt;gero et&lt;/username&gt;
+&lt;/urn:Username&gt;
+&lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;
+
+ ```
+14. [] Click on **Send** to send the request to the SOAP service. Observe the response as shown in the screenshot.
+
+ !IMAGE[image 1.3.png](instructions248766/image 1.3.png)
+
+15. [] With this data, we can perform various checks. When gathering information, you send data to elicit a response, which you then analyze to find ways to gain access or enumerate information.
+
+16. [] The XML library utilized by the SOAP server to process this request supports the use of external entities. This implies that it might be possible to reference an external file within the XML payload of a request. To verify this behavior, send the following request from the burp repeater:
+
+ !IMAGE[image 2.1.png](instructions248766/image 2.1.png)
+
+ !IMAGE[image 2.2.png](instructions248766/image 2.2.png)
+
+ !IMAGE[image 2.3.png](instructions248766/image 2.3.png)
+
+ ```
+ POST /dvwsuserservice/ HTTP/1.1
+ Upgrade-Insecure-Requests: 1
+ User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4164.0 Safari/537.36 autochrome/red
+ Connection: close
+ SOAPAction: Username
+ Content-Type: text/xml;charset=UTF-8
+ Host: 192.168.0.19:8080
+ Content-Length: 569
+
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;!DOCTYPE root [ &lt;!ENTITY exploit SYSTEM &quot;file:///etc/passwd&quot;&gt; ]&gt;
+ &lt;soapenv:Envelope xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:urn=&quot;urn:examples:usernameservice&quot;&gt;
+ &lt;soapenv:Header/&gt;
+ &lt;soapenv:Body&gt;
+ &lt;urn:Username soapenv:encodingStyle=&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&gt;
+ &lt;username xsi:type=&quot;xsd:string&quot;&gt;&amp;exploit;&lt;/username&gt;
+ &lt;/urn:Username&gt;
+ &lt;/soapenv:Body&gt;
+ &lt;/soapenv:Envelope&gt;
+ ```
+
+17. [] We have broken out of the XML and successfully accessed an external entity.
+
+18. [] This concludes the demonstration of accessing an external entity in dvws-node.
+
+===
+
+#Exercise 2:  Performing API Reconnaissance using AI
+
+This lab will demonstrate how AI-powered tools can enhance API reconnaissance by automating information gathering and vulnerability discovery processes. This lab uses AI-based techniques and tools to identify exposed API endpoints, analyze documentation, and discover sensitive data paths efficiently. 
+By interacting with real-world scenarios and AI tools, you will learn how to leverage AI for intelligent query generation, endpoint enumeration, and metadata analysis, improving your API penetration testing skills with contextual accuracy and speed.
+
+In this exercise, we will use ShellGPT to perform API reconnaissance. ShellGPT is a powerful tool leveraging AI, specifically GPT-4, to assist in various tasks for penetration testing.
+
+&gt;[+alert] **Prerequisite for the Lab - Steps to Create OpenAI API Keys**
+&gt; 
+**Note:** You need not follow the steps in this alert box if you have already created an OpenAI API key and have access to it. You can follow these steps to create OpenAI API keys on this VM or your local host system.
+&gt;
+1. Visit the OpenAI platform (**https://platform.openai.com**) and sign up or log in to your existing account. 
+&gt;
+2. Once logged in, click the profile icon at the top-right, click the **Your profile** option, and navigate to the **Billing** section.
+&gt;
+3. Under Billing section, go to **Payment methods** and click **Add payment method** to add a payment method.
+&gt;
+4. Go to **Overview** and click **Add to credit balance**.
+&gt;
+5. Enter minimum amount, i.e. **$5** for **Amount to add**, and click **continue**. Please refer to **https://openai.com/api/pricing/** for API pricing details.
+&gt;
+6. Click **Confirm payment** and complete the transaction to add the credit balance.
+&gt;
+7. Launch a web browser and go to **https://platform.openai.com/api-keys**.
+&gt;
+8. An **OpenAI Platform** webpage appears, click on **Login** and log in to the OpenAI account that you created at the start of this lab.
+&gt;
+9. You will be redirected to the **Project API Keys** window, click on the **+ Create new secret key** button to create a new key.
+&gt;
+ !IMAGE[2023-12-13_10-43-46.jpg](instructions248766/1.jpg)
+&gt;
+10. A **Create new secret** **key** window appears, provide a name for the secret key (here, **CPENT**), leave all the settings as default, and click on the **Create secret key** button.
+&gt;
+ !IMAGE[2024-05-17_11-27-16qqq.jpg](instructions248766/2.jpg)
+&gt;
+11. **Save your key** pop-up appears, click **Copy** button to copy the key. Save the key securely on your local host system as we will need this key in the next modules also to perform SGPT labs. 
+&gt;
+ !IMAGE[2024-05-17_11-32-00.jpg](instructions248766/3.jpg)
+&gt;
+
+&gt;[!Alert] The commands generated by ShellGPT may vary depending on the prompt used and the tools available on the machine. Due to these variables, the output generated by ShellGPT might differ from what is shown in the screenshots. These differences arise from the dynamic nature of the AI&#39;s processing and the diverse environments in which it operates. As a result, you may observe differences in command syntax, execution, and results while performing this lab task.
+
+###Lab Tasks
+
+1. [] In the @lab.VirtualMachine(ParrotSecurity).SelectLink machine, launch the command-line terminal, type **sudo su**, and press **Enter**. Log in using **pentester/toor**.
+
+&gt;[!Note] Type **toor** as password.
+
+ !IMAGE[Screenshot](instructions248766/4.jpg)
+
+
+2. [] Run **sgpt** command to launch the **ShellGPT** tool.
+
+ !IMAGE[2024-05-17_11-36-02.jpg](instructions248766/5.jpg)
+
+3. [] You will be prompted to enter your OpenAI API key, copy and paste your API key in the terminal window, and press **Enter**.
+
+&gt;[!Note] The secret key you have entered will not be visible.
+
+&gt;[!Note] If you have not yet created an OpenAI API key, please refer to the &quot;**Prerequisite for the Lab - Steps to Create OpenAI API Keys**&quot; alert block at the beginning of this lab.
+
+4. [] If the API key integration is successful you should receive a message, as shown in the screenshot.
+
+ !IMAGE[2024-05-17_11-39-27.jpg](instructions248766/6.jpg)
+
+5. [] To create and execute a custom script and automate API reconnaissance using ShellGPT, run **sgpt --shell &quot;On the target URL https://petstore.swagger.io/ perform API reconnaissance, extract API routes, enumerate API&#39;s structure, identify API functionality, and discover API technologies. Organize and display the results in clearly labeled sections for each type of information and save the results in a text file. Install all the required dependencies and libraries.&quot;** command.
+
+ !IMAGE[Screenshot](screens/4ji5yba5.jpg)
+
+6. [] In the prompt type **E** and press **Enter** to execute the command. 
+
+&gt;[!Note] This will create an output text file and save the results. 
+
+7. [] Open the output file generated (here, **api_recon.txt**) and check the results after completion of the execution for further analysis. 
+
+ !IMAGE[Screenshot](screens/c2wsujs4.jpg)
+
+ !IMAGE[Screenshot](screens/vigo20mt.jpg)
+    
+8. [] This concludes the lab exercise.
+
+===
+
+#Exercise 3: Scanning and Identifying Vulnerabilities in APIs
+
+This lab aims to demonstrate the challenges and techniques involved in effectively scanning and identifying vulnerabilities in APIs. Using tools like Nikto and OWASP ZAP, the lab highlights the limitations of automated scanners in detecting API-specific vulnerabilities. It emphasizes the importance of manual exploration and contextual inclusion for accurate results.
+
+By interacting with the OWASP crAPI application, you can learn to identify critical issues like Remote File Inclusion (RFI) and validate findings manually, improving their API penetration testing and authenticated scanning skills.
+
+### Lab Tasks
+
+1. [] Click @lab.VirtualMachine(Ubuntu).SelectLink to switch to the **Ubuntu** machine. Login using **ubuntu**/**toor**.
+
+2. [] Launch a terminal and acquire root privileges by executing the **sudo su** command. (When prompted, enter the password **toor**).
+
+3. [] In the terminal window, type **docker-compose --version** to verify the docker version.
+
+ !IMAGE[Screenshot](screens/z3k4gtle.jpg)
+
+4. [] Run **curl -o docker-compose.yml https://raw.githubusercontent.com/OWASP/crAPI/main/deploy/docker/docker-compose.yml** to download crAPI deployment file.
+
+ !IMAGE[Screenshot](screens/coiaquxj.jpg)
+
+5. [] Open the docker-compose.yml file in a text editor by executing the command **gedit docker-compose.yml**.
+    
+ !IMAGE[Screenshot](screens/hlme2le2.jpg)
+
+ !IMAGE[Screenshot](screens/s3ot0lay.jpg)
+
+6. [] In the **docker-compose.yml** file, scroll down to **line 157** make the changes as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/30sn4tl5.jpg)
+
+7. [] Scroll further down to **line 237** and make the change as shown in the screenshot in the **mailhog** section.
+
+ !IMAGE[Screenshot](screens/w2trhdf5.jpg)
+
+8. [] Once the modifications are completed, **save** and close the file. 
+
+9. [] Run the file by executing **docker-compose -f docker-compose.yml --compatibility up -d** command.
+    
+ !IMAGE[Screenshot](screens/ekjqogsx.jpg)
+
+10. [] Click on @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to **Parrot machine** (When prompted, type **toor** as password.)
+
+11. [] Launch the OWASP Zap from the Menu bar.
+
+12. [] The **OWASP ZAP** initializing window appears; wait for it to complete.
+
+13. [] After completing initialization, a prompt that reads **Do you want to persist the ZAP Session?** appears; select the **No, I do not want to persist this session at this moment in time** radio button and click **Start**.
+
+&gt;[!Note] If a **Manage Add-ons** window appears, click the **Close** button.
+
+&gt;[!Note] If **OWASP ZAP** window appears, click **No**.
+
+ !IMAGE[Screenshot](screens/ivofawgo.jpg)
+
+14. [] Click on **Manual Explore** in OWASP ZAP window and click on **Launch Browser**.
+
+ !IMAGE[Screenshot](screens/01ulvqa3.jpg)
+
+ !IMAGE[Screenshot](screens/laeey1zw.jpg)
+
+15. [] In the **ZAP browser**, navigate to **https://192.168.0.19:8888** to open the **crAPI** login page.
+
+ !IMAGE[Screenshot](screens/fmwudpbt.jpg)
+
+16. [] Click on **Signup** to create a new account.
+
+ !IMAGE[Screenshot](screens/tz1amkbx.jpg)
+
+17. [] In the **Sign Up** window, fill in all the details and click on **Signup**.
+
+ !IMAGE[Screenshot](screens/wc0lx3n2.jpg)
+
+18. [] The **Success** pop-up appears, click **OK** .
+
+ !IMAGE[Screenshot](screens/bwxwotjg.jpg)
+
+
+19. [] Click the **Login** button and enter the credentials as displayed in the screenshot.
+
+ !IMAGE[Screenshot](screens/5aifzwtq.jpg)
+
+20. [] Once logged in, take a few minutes and review the site via the Zap browser, click on **Shop**, then explore the different items. Now, return to **ZAP** and right-click and select **Include in Context --&gt; Default Context**
+
+ !IMAGE[Screenshot](screens/aoeubzhv.jpg)
+
+21. [] In **Session Properties** window click **OK**.
+
+22. [] Now, right-click on the target and select **Attack --&gt; Active Scan** to launch automated attacks towards the API.
+    
+ !IMAGE[Screenshot](screens/o2e52bmt.jpg)
+
+23. [] In **Active Scan** window, verify the target ip in **Starting Point** field and click on **Start Scan**.
+
+ !IMAGE[Screenshot](screens/hfhutj5b.jpg)
+
+24. [] **OWASP ZAP** starts active scanning. Navigate to the **Active Scan** tab to observe the various scanned links.
+
+ !IMAGE[Screenshot](screens/hukwmp1o.jpg)
+
+25. [] After completing the active scan, the results appear under the **Alerts** tab, displaying the various vulnerabilities and issues associated with the target website, as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/dkboibfy.jpg)
+
+26. [] As observed in the Alerts, we have a Remote File Inclusion vulnerability and, with that, a significant finding.
+
+&gt;[!Note] If you do not see the vulnerability, you might have to **Add a Vehicle** and interact more with the application.
+
+27. [] This technique can increase the accuracy of automated vulnerability scanners and help you with authenticated attacks, not just checking websites/APIs from the outside.
+
+28. [] Try to verify the vulnerability manually to ensure you are not getting False Positives (you can even try the payload used by the scanner to replicate the vulnerability.)
+
+29. [] This concludes the demonstration of scanning API using ZAP.
+
+===
+
+#Exercise 4: Exploiting NoSQL Injection for Denial-of-Service
+
+This task demonstrates a **NoSQL** **Denial-of-Service (DoS)** attack by injecting a sleep command into an API query, exploiting MongoDB&#39;s behavior to delay execution and exhaust server resources. The challenge is performed using OWASP Juice Shop, which uses MongoDB as its NoSQL database and is hosted locally on port 80, allowing interaction with its backend API to test the sleep injection technique. 
+
+
+###Lab Tasks
+
+1. [] Click on @lab.VirtualMachine(Ubuntu).SelectLink to switch to **Ubuntu** machine, type **toor** in the Password field, and press **Enter**.
+
+2. [] Open a terminal with sudo privileges and run **docker run -d -p 80:3000 bkimminich/juice-shop** command to run juice-shop.
+
+&gt;[!Note] If you receive any error message, run **service apache2 stop** command.
+
+ !IMAGE[Screenshot](screens/ifhaybaj.jpg)
+
+3. [] Click @lab.VirtualMachine(Windows11).SelectLink to switch to the Windows 11 machine and log in using **Admin/Pa$$w0rd**.
+
+4. [] Launch a any browser and type **192.168.0.19:80** to open the **OWASP Juice Shop** web page hosted in local network. In **Welcome to OWASP Juice Shop** pop-up, click **Dismiss**.
+
+ !IMAGE[Screenshot](screens/dnwpeza4.jpg)
+
+5. [] Typically, NoSQL injection attacks execute when the attack string is parsed, evaluated, or concatenated into a NoSQL API call.
+
+6. [] Once the Juice Shop application is reloaded, open **Inspect Elements**, navigate to the **Network** tab, reload the page, select any one of the items (here, Apple Iuice is selected), and analyze the traffic to identify the **/rest/products/1/reviews** endpoint.
+
+ !IMAGE[image 4.1.png](instructions248766/image 4.1.png)
+
+7. [] You can test the backend API functionality by querying in this way: **http://192.168.0.19/rest/products/1/reviews**.
+
+ !IMAGE[Screenshot](screens/cjyrjhcs.jpg)
+
+8. [] Identify the injection point by analyzing the URL structure and craft the payload using the sleep command **sleep(integer_ms)**. The changed URL is: **http://192.168.0.19/rest/products/sleep(2000)/reviews**
+
+ !IMAGE[Screenshot](screens/rh51ymly.jpg)
+
+
+===
+
+#Exercise 5: Exploiting Insecure JSON Web Token(JWT) Implementations
+
+In this lab exercise, we shall try to forge an unsigned JSON Web Token (JWT) of a non-existent user.
+
+###Lab Tasks
+
+&gt;[!note] If the OWASP Juiceshop docker is already running, skip to Step#3.
+
+1. [] Click on @lab.VirtualMachine(Ubuntu).SelectLink to switch to **Ubuntu** machine, type **toor** in the Password field, and press **Enter**.
+
+2. [] Open a terminal with sudo privileges and run **sudo docker run -d -p 80:3000 bkimminich/juice-shop** command to run juice-shop.
+
+&gt;[!Note] If you receive any error message, run **service apache2 stop** command. Enter **toor** as the password.
+
+ !IMAGE[Screenshot](screens/a0apuqru.jpg)
+
+3. [] After running the command, click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to Prrot Security machine, log in with **penester**/**toor**. Open a web browser, and in the address bar, type **http://192.168.0.19** and press **Enter**.
+
+&gt;[!Note] If prompted with a message about the vulnerable server, read through it, then click **Dismiss**.
+
+ !IMAGE[Screenshot](screens/5tiolala.jpg)
+
+4. [] OWASP juice Shop window appears; we will now register for an account; to do so, click on **Account** --&gt; **Login**.
+
+ !IMAGE[Screenshot](screens/pm3fqrch.jpg)
+
+5. [] In the Login page, click on **Not yet a customer?**.
+
+ !IMAGE[Screenshot](screens/qcex4l2i.jpg)
+
+6. [] User Registration page appears; fill all the fields and click on **Register**.
+
+ !IMAGE[Screenshot](screens/l1ok0n3b.jpg)
+
+7. [] You will be redirected to a login page. With or without logging in to the page, browse the URL **http://192.168.0.19/#/score-board**.
+
+ !IMAGE[Screenshot](screens/3rp11frl.jpg)
+
+8. [] Minimize the browser window. Now, we need to intercept the login request on Burp Suite through Burp Suite&#39;s Chromium browser. So, start the Burp proxy by clicking **Applications** --&gt; **Pentesting** --&gt; **Web Application Analysis** --&gt; **Web Application Proxies** --&gt; **Burpsuite CE**.
+
+&gt;[!Note] In the **Burp Suite Community Edition** window click **OK**, in the **Terms and Conditions** window, click **I Accept**.
+
+ !IMAGE[Screenshot](screens/3s4h4r5t.jpg)
+
+9. [] In the **Welcome to Burp Suite Community Edition** window, select **Temporary project** and click **Next**.
+
+ !IMAGE[Screenshot](screens/jghtq3qm.jpg)
+
+10. [] In the next window, select **Use Burp defaults** and click **Start Burp**.
+
+&gt;[!Note] If a dialog-box appears stating **Burp Suite is out of date**, click **OK**.
+
+ !IMAGE[Screenshot](screens/jta03x12.jpg)
+
+11. [] In the Burp Suite window, navigate to the **Proxy** tab, disable intercept i.e., **Intercept is off** (until you browse the Juice Shop login page), and click the **Open browser** button to open the Burp Suite Chromium browser.
+
+ !IMAGE[Screenshot](screens/m2qe5113.jpg)
+
+12. [] In the Burp Suite browser window, type **http://192.168.0.19** in the address bar and press **Enter**.
+
+ !IMAGE[Screenshot](screens/z5qvg0e2.jpg)
+
+13. [] Click on **Account** --&gt; **Login**.
+
+ !IMAGE[Screenshot](screens/hy4k3bvh.jpg)
+
+14. [] Type the **Email** address and **Password**. 
+
+ !IMAGE[Screenshot](screens/g24dorok.jpg)
+
+15. [] Now, we shall intercept the login request. So, before logging in, Switch to the Burp Suite window and enable intercept.
+
+ !IMAGE[Screenshot](screens/zntotx24.jpg)
+
+16. [] Switch to the juice shop login page and click **Log in**. 
+
+&gt;[!Note] If the page does not load, turn off the intercept, log in to the account, and then, turn the intercept back on.
+
+ !IMAGE[Screenshot](screens/qj2jbfqv.jpg)
+
+&lt;!--17. [] After login, we see the Products page. The **Add to Basket** button appears, click on that.
+
+ !IMAGE[image 5.1.png](instructions248766/image 5.1.png) --&gt;
+
+18. [] Now, switch back to the Burp Proxy window, and in the **Intercept** tab, you can see that the request is captured. Keep clicking **Forward** until you see a request containing **Authorization** bearer. Right-click on the request and click **Send to Repeater**.
+
+ !IMAGE[Screenshot](screens/lyhkqjm0.jpg)
+
+19. [] Go to the **Repeater** tab and copy the Authorization Bearer Token. This is the token that helps the server identify the user. 
+
+ !IMAGE[Screenshot](screens/aau2e53y.jpg)
+
+20. [] The objective of this lab is to pick the token, remove the signing algorithm, modify the email address to **jwtn3d@juice-sh.op**, encode the header and payload, and then, send the modified request to Repeater. This way, we are forging an unsigned token of a non-existent user with the email address **jwtn3d@juice-sh.op**.
+To do this, we will first decrypt the jwt token, remove the signed algorithm from the header, modify the email address in the payload, and encode the header and payload back.
+
+21. [] We will be decrypting the JWT token through the website **https://jwt.io**. Navigate to the website and paste the token. The decoded values can be seen on the right-hand side of the webpage as shown in the following screenshot:
+
+ !IMAGE[Screenshot](screens/dknvuod0.jpg)
+
+22. [] The signed algorithm is RS256. We shall now change it to **none**. 
+
+ !IMAGE[Screenshot](screens/shk1qe4s.jpg)
+
+23. [] We need to Base64URL encode this modified header. In this lab, we will be using the online tool **https://base64.guru/standards/base64url/encode**. So, copy the modified header, navigate to this page, paste the content, and encode it.
+
+ !IMAGE[Screenshot](screens/2ny24sjq.jpg)
+
+24. [] Copy the encoded data.
+
+ !IMAGE[Screenshot](screens/ayc2fjf3.jpg)
+
+25. [] Paste it in a text file and add a period at the end.
+   
+ !IMAGE[Screenshot](screens/xwkcnkjs.jpg)
+
+26. [] We will follow the same process to modify the payload and encode it. So, switch to **https://jwt.io** and replace the email to **jwtn3d@juice-sh.op**. 
+
+ !IMAGE[Screenshot](screens/kmrdhgtu.jpg)
+
+27. [] Copy the modified payload.
+
+ !IMAGE[Screenshot](screens/iexzmjwb.jpg)
+
+28. [] Switch to https://base64.guru/standards/base64url/encode, replace the header data with payload data, and encode it.
+
+ !IMAGE[Screenshot](screens/hk2ekfb3.jpg)
+
+29. [] Copy the encoded data.
+
+ !IMAGE[Screenshot](screens/lrth2wim.jpg)
+
+30. [] Switch to the text editor and paste it after the period.
+
+ !IMAGE[Screenshot](screens/xd2ois2v.jpg)
+
+
+31. [] Upon pasting the payload, add a period at the end of the payload and copy the entire text. 
+
+ !IMAGE[Screenshot](screens/xksujawe.jpg)
+
+32. [] Switch back to the Burp Repeater and replace the Authorization Bearer with the content you copied from the previous step.
+
+ !IMAGE[Screenshot](screens/4oafqvfj.jpg)
+
+33. [] Send this modified request.
+
+ !IMAGE[Screenshot](screens/rwkad3a1.jpg)
+
+34. [] Now, switch to the Firefox browser where you have opened the juice shop scoreboard (**http://192.168.0.19/#/score-board**). You will observe that the challenge has been completed successfully. 
+
+ !IMAGE[Screenshot](screens/r4vzj4tf.jpg)
+
+===
+
+#Exercise 6: Exploiting Broken Object Level Authorization (BOLA) Vulnerability to Manipulate API Requests
+
+In this task, we focus on OWASP crAPI (Completely Ridiculous API), a purpose-built vulnerable application designed to help security enthusiasts practice and understand the OWASP Top 10 API security risks. crAPI mimics a real-world B2C car service platform with features such as vehicle management, community posts, and user authentication. The challenge involves testing for Broken Object Level Authorization (BOLA), a critical API vulnerability that allows unauthorized access to other users&#39; data by manipulating API requests. By interacting with crAPI&#39;s backend services and intercepting requests using Burp Suite, we demonstrate how BOLA can be exploited to retrieve and manipulate sensitive information like vehicle IDs, highlighting the importance of proper access controls in API development.
+
+###Lab Tasks
+
+1. [] Click @lab.VirtualMachine(Ubuntu).SelectLink to switch to the **Ubuntu** machine. Login using **ubuntu/toor**.
+
+2. [] Launch a terminal and acquire root privileges by executing the **sudo su** command. (When prompted, enter the password **toor**).
+
+3. [] In the terminal window, type **docker-compose --version** to verify the docker version.
+
+ !IMAGE[Screenshot](screens/z3k4gtle.jpg)
+
+4. [] Run **curl -o docker-compose.yml https://raw.githubusercontent.com/OWASP/crAPI/main/deploy/docker/docker-compose.yml** to download crAPI deployment file.
+
+ !IMAGE[Screenshot](screens/coiaquxj.jpg)
+
+5. [] Open the docker-compose.yml file in a text editor by executing the command **gedit docker-compose.yml**.
+    
+ !IMAGE[Screenshot](screens/hlme2le2.jpg)
+
+ !IMAGE[Screenshot](screens/s3ot0lay.jpg)
+
+6. [] In the **docker-compose.yml** file, scroll down to **line 157** make the changes as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/30sn4tl5.jpg)
+
+7. [] Scroll further down to **line 237** and make the change as shown in the screenshot in the **mailhog** section.
+
+ !IMAGE[Screenshot](screens/w2trhdf5.jpg)
+
+8. [] Once the modifications are completed, **save** and close the file. 
+
+9. [] Run the file by executing **sudo docker-compose -f docker-compose.yml --compatibility up -d** command.
+    
+ !IMAGE[Screenshot](screens/ekjqogsx.jpg)
+
+10. [] Now, click on @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Login using **attacker/toor**.
+
+11. [] Launch **Firefox** and navigate to **http://192.168.0.19:8888** to open **crAPI** login page.
+
+12. [] Click on **Signup** to create a new account.
+
+ !IMAGE[Screenshot](screens/tz1amkbx.jpg)
+
+13. [] In the Sign-Up window, fill in all the details and click on **Signup**.
+
+ !IMAGE[Screenshot](screens/wc0lx3n2.jpg)
+
+14. [] The **Success** pop-up appears, click **OK** .
+
+ !IMAGE[Screenshot](screens/bwxwotjg.jpg)
+
+15. [] Log in with the newly created account as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/qhhwg1z4.jpg)
+
+16. [] Once you are logged in, click on the **+ Add a Vehicle** button to add a vehicle.
+
+ !IMAGE[Screenshot](screens/a0sy5czv.jpg)
+
+17. [] In the next window, you will be prompted for **Pin Code** and **VIN**. To obtain that, open a new browser tab and navigate to **http://192.168.0.19:8025**. This will open crAPI&#39;s built-in mail tool **Mailhog** service where we can retrieve the car details.
+
+18. [] Open the recently received mail. Here, you can see the vehicle information as shown in the screenshot.
+
+&gt;[!Note] The vehicle details might change when you perform the lab.
+
+ !IMAGE[Screenshot](screens/x2ic0tc1.jpg)
+
+19. [] Switch to **crAPI** tab, fill in the vehical details and click on **Verify Vehicle Details**.
+
+ !IMAGE[Screenshot](screens/ib1g3iz0.jpg)
+
+ !IMAGE[Screenshot](screens/ff2wo5qs.jpg)
+
+20. [] After successful verification, the Vehicle Details page will appear as shown in the screenshot.
+
+&gt;[!Note] The result might vary when you perform the lab.
+
+ !IMAGE[Screenshot](screens/345z1czn.jpg)
+
+21. [] Click on the dropdown arrow on the top-right corner and click **Logout**.
+
+ !IMAGE[Screenshot](screens/afw5izxh.jpg)
+
+15. [] Now we will exploit the Broken Object-Level Authorization (BOLA) vulnerability in crAPI.
+
+16. [] Minimize the browser window, click the **Applications** menu from the top left corner of **Desktop**, and navigate to **Pentesting** --&gt; **Web Application Analysis** --&gt; **Web Application Proxies** --&gt; **Burpsuite CE** to launch the **Burpsuite CE** application.
+
+ !IMAGE[Screenshot](screens/sinmgrjj.jpg)
+
+24. [] The **Burp Suite Community Edition** pop-up appears, click **OK**.
+
+25. [] In the **Terms and Conditions** wizard, click the **I Accept** button.
+
+&gt;[!Note] If **Delete old temporary files?** pop-up appears, click **Delete**.
+
+26. [] The **Burp Suite** main window appears; ensure that the **Temporary project** radio button is selected and click the **Next** button, as shown in the screenshot.
+
+&gt;[!Note] If an update window appears, click **Close**.
+
+ !IMAGE[Screenshot](screens/bviasabg.jpg)
+
+27. [] In the next window, select the **Use Burp defaults** radio button and click the **Start Burp** button.
+
+&gt;[!Note] If a pop-up appears stating Burp Suite is out of date, select Don&#39;t show again for this version checkbox and click **OK**.
+
+28. [] The Burp Suite main window appears; click the **Proxy** tab from the available options in the top section of the window, off the intercept, and click on **Open browser**.
+
+ !IMAGE[Screenshot](screens/c1a1danq.jpg)
+
+29. [] A new browser window appears, navigate to **http://192.168.0.19:8888** to open **crAPI** login page. Login with the new account that we created in the previous steps.
+
+ !IMAGE[Screenshot](screens/bcdw5qjw.jpg)
+
+ !IMAGE[Screenshot](screens/o11sr12r.jpg)
+
+30. [] Switch back to Burpsuite and navigate to **Proxy --&gt; HTTP history** tab and you will see there is a request requirement for a vehicle ID.
+
+ !IMAGE[Screenshot](screens/s4oobcxp.jpg)
+
+31. [] Now will try to extract the vehicle IDs of other users. For this, click on the **Community** option dashboard and open a post.
+
+&gt;[!Note] Click on three dots, to see the **Community** option.
+
+ !IMAGE[Screenshot](screens/phyl2w0l.jpg)
+
+ !IMAGE[yvxf0s03.jpg](instructions248766/yvxf0s03.jpg)
+
+32. [] Once you open a post, switch back to Burpsuite and observe that we have the VehicleID in the Response. Copy the Vehicle ID of another user from the Community Response.
+
+ !IMAGE[Screenshot](screens/pkc32uqm.jpg)
+
+33. [] Locate the intercepted request for the vehicle in the **HTTP History** tab, right-click on the request, and select **Send to Repeater**.
+
+ !IMAGE[Screenshot](screens/1givx0rc.jpg)
+
+33. [] Go to the **Repeater** tab, replace the VehicleID in the request with the copied VehicleID, and press **Send**.
+
+ !IMAGE[Screenshot](screens/up0qxou1.jpg)
+
+ !IMAGE[bmwro8q8.jpg](instructions248766/bmwro8q8.jpg)
+
+34. [] Using the provided ID, we were able to access the location of another user&#39;s vehicle, which is likely not intended or authorized.
+
+34. [] This concludes the demonstration of exploiting BOLA vulnerability. Document the BOLA vulnerability, its impact, and potential risks such as unauthorized access or data manipulation.
+
+===
+
+#Exercise 7: Exploiting Broken Function Level Authorization (BFLA) Flaws to Manipulate API Requests
+
+BFLA (Broken Function Level Authorization) vulnerability occurs when an application fails to properly enforce access controls on specific functions, allowing unauthorized users to execute actions or access data that should be restricted to higher privilege levels. This vulnerability typically arises due to inadequate role validation or improperly configured authorization mechanisms.
+
+Attackers can exploit BFLA vulnerabilities by manipulating API endpoints, parameters, or HTTP methods to gain unauthorized access to sensitive operations, such as modifying data, accessing administrative functions, or escalating privileges. To mitigate BFLA, implement robust role-based access control (RBAC), ensure thorough authorization checks for all endpoints, and regularly test for authorization flaws during security assessments.
+
+###Lab Objective
+
+We will understand and exploit Broken Function Level Authorization (BFLA) vulnerabilities by identifying and manipulating API requests to access unauthorized functions or sensitive data. 
+
+### Lab Tasks
+
+1. [] In @lab.VirtualMachine(ParrotSecurity).SelectLink machine, launch **Firefox** and navigate to **http://192.168.0.19:8888/** to open **crAPI** login page.
+
+ !IMAGE[Screenshot](screens/3wdnlliw.jpg)
+
+2. [] Since we have already created an account in the previous exercise, log into your crAPI account.
+
+ !IMAGE[Screenshot](screens/s3lnpyar.jpg)
+
+3. [] Once logged in, click on the profile icon as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/e5p0l3p0.jpg)
+
+4. [] **Your Profile** page appears, under **My Personal Video** section hover over !IMAGE[dyvh7n4z.jpg](instructions248766/dyvh7n4z.jpg) icon and click on the **Upload Video** button to add a personal video.
+
+ !IMAGE[Screenshot](screens/vxi4cmq3.jpg)
+
+5. [] In the **File Upload** window browse a video file to upload and click on **Open**. Click **OK** on the **Success** pop-up.
+
+&gt;[!Note] If the file is not available, create a dummy mp4 file.
+
+6. [] Launch **Burpsuite**; click the **Proxy** tab from the available options in the top section of the window, off the intercept, and click on **Open browser**.
+
+ !IMAGE[Screenshot](screens/e2t5mrd2.jpg)
+
+7. [] A new browser window appears, navigate to **http://192.168.0.19:8888** to open the crAPI login page. Log into your crAPI account.
+
+8. [] Once logged in, navigate to the profile page, and in **My Personal Video** click on **Change Video Name**. 
+
+ !IMAGE[Screenshot](screens/2tc1cdfd.jpg)
+
+9. [] In **Enter a new Video Name** window, type **Video1** and click on **Change Video Name**. Once done click **OK**.
+
+ !IMAGE[Screenshot](screens/hsopjzlk.jpg)
+
+ !IMAGE[Screenshot](screens/01pzbk3y.jpg)
+
+10. [] Switch to Burpsuite; navigate to **Proxy --&gt; HTTP history** and locate a **PUT** request. Send the request to the **Repeater** tab.
+
+ !IMAGE[Screenshot](screens/gnpeykfv.jpg)
+
+11. [] In **Repeaters** tab, change the **HTTP** method from **PUT** to **OPTIONS** to explore the **HTTP** methods that are allowed, nd click on **Send**.
+
+ !IMAGE[Screenshot](screens/24k4pkdf.jpg)
+
+ !IMAGE[Screenshot](screens/5swmg5aw.jpg)
+
+12. [] Since the **DELETE** method is permitted, we will initiate a request with an empty request body. 
+
+13. [] So, change the HTTP request to **DELETE** and send the request.
+
+14. [] The server responds with a message, **&quot;This is an admin function. Try to access the admin API.&quot;** as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/0mpbupn2.jpg)
+
+15. [] Since the delete functionality is an admin function, manipulate the request further.
+
+16. [] Change the **user** to **admin** in the packet URL, and resend the request as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/3ugrqvc1.jpg)
+
+17. [] This successfully deleted the video. However, we have to exploit the BFLA vulnerability and delete the video of another user. 
+
+18. [] To do so, examine the endpoint further, we can notice that it utilizes a numerical value at the end which might be a unique identifier.
+
+19. [] Change the ID to **5** and send the request.
+
+ !IMAGE[Screenshot](screens/s51byiz4.jpg)
+
+20. [] We have successfully exploited the BFLA vulnerability by deleting the video of the user with the unique identifier set to **5**.
+
+21. [] This concludes the demonstration of exploiting BFLA vulnerability in crAPI.
+
+===
+
+#Exercise 8: Exploiting Hidden API Functionality Exposure to Gather Information on the Target Application
+
+The objective of this lab is to identify and exploit hidden or undocumented API functionalities to gather sensitive information about the target application. 
+
+### Lab Tasks
+
+1. [] Click on @lab.VirtualMachine(Ubuntu).SelectLink to switch to the Ubuntu machine. Login using **ubuntu/toor**.
+
+2. [] Run **sudo su** and move to dvws-node folder with **cd dvws-node** command. (When prompted, type **toor** as password.)
+
+3. [] Run **docker-compose up** to run the dvws-node application. 
+
+ !IMAGE[Screenshot](screens/2n1nyxqu.jpg)
+
+4. [] In @lab.VirtualMachine(ParrotSecurity).SelectLink machine, launch Burpsuite, navigate to the **Proxy** tab, turn off the intercept, and open the BurpSuite browser.
+
+5. [] In burp&#39;s browser navigate to **http://192.168.0.19:8080/api-docs/** to open swagger UI documentation of dvws-node.
+
+&gt;[!Note] Switch to the BurpSuite window and click on Forward to forward the request. Ensure that you forward all requests.
+    
+ !IMAGE[Screenshot](screens/qxobowkl.jpg)
+
+6. [] In swagger UI documentation scroll down to **/api/v1/info** and click on **Try it out --&gt; Execute**. 
+
+&gt;[!Note] Switch to the BurpSuite window and click on Forward to forward the request. Ensure that you forward all requests.
+
+ !IMAGE[Screenshot](screens/bgqxokax.jpg)
+
+ !IMAGE[Screenshot](screens/cmyyqtbw.jpg)
+
+7. [] Switch back to burpsuite; in the HTTP history tab locate the GET request and send it to **Repeater**.
+
+ !IMAGE[Screenshot](screens/bnnxuwvf.jpg)
+
+8. [] Navigate to the Repeater tab. Click on the pencil icon beside the **Target** section at the top right of the **Response** window and in the **Configure target details window** type **192.168.0.19** as **Host** and **8080** as port number and click **OK**.
+
+9. [] In the **Raw** section, delete the current **Request**, modify the request as shown in the screenshot, and click **Send**.
+
+ !IMAGE[1sywesovb.jpg](instructions248766/1sywesovb.jpg)
+
+6. [] From the above Get request we can gather much information pertaining to the application.
+
+===
+
+#Exercise 9:  Exploiting XPath Injection Vulnerabilities in API Implementations
+
+The objective of this lab is to demonstrate and exploit XPath Injection vulnerabilities in web applications that use XML-based queries to retrieve data.
+
+###Lab Tasks
+
+1. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Login with **attacker/toor**.
+
+2. [] Launch **Burpsuite** and navigate to **Proxy** tab, Off the intercept, and click on Open browser to launch Burpsuite&#39;s browser.
+
+ !IMAGE[Screenshot](screens/rrdlbxik.jpg)
+
+3. [] Navigate to **192.168.0.19:8080** and log in to your account. If you have not yet registered, create an account in DVWS.
+
+&gt;[!Note] type username, password and click on **Register** to create an account. Then click on **Login**.
+ 
+&gt;[!Note] Switch to the BurpSuite window and click on Forward to forward the request.
+
+ !IMAGE[Screenshot](screens/kc2ckhwk.jpg)
+
+4. [] Once logged in switch back to burpsuite and open the **HTTP history** tab. Locate the GET request **/api/v2/release/0.0.1** and send it to the **Repeater** tab as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/beln42iw.jpg)
+
+5. [] Modify this logic to include a payload and test for code injection. The payload we will use is: **0.0.1&#39; or 1=1 or &#39;a&#39;=&#39;a**
+
+6. [] The payload must be **hex-encoded** and appropriately adjusted to ensure its acceptance. An example of the expected outcome is provided below:
+ 
+ !IMAGE[image 9.1.png](instructions248766/image 9.1.png)
+
+7. [] Change the value as shown in the image. Then click on **Send**.
+
+ !IMAGE[image 9.2.png](instructions248766/image 9.2.png)
+
+8. [] With the configuration contents successfully extracted, we now have access to user credentials, including those for a root user.
+
+===
+
+#Exercise 10:  Bruteforcing Weak Secret Keys in JSON Web Tokens (JWT) Implementations
+
+Demonstrate how to identify and exploit weak secret keys in JSON Web Tokens (JWT) by performing a brute-force attack. The lab will guide participants in using automated tools to enumerate potential secret keys, analyze the JWT structure, and forge a valid token to bypass authentication or escalate privileges within the target application.
+
+###Lab Tasks
+
+1. []Click @lab.VirtualMachine(Ubuntu).SelectLink to switch to the Ubuntu machine. Login using **ubuntu/toor**.
+
+2. [] Open a terminal window and run **sudo su** (use toor as password) to gain root privileges and then use the command **cd dvws-node** to move into the **dvws-node** application directory.
+
+ !IMAGE[](instructions248766/image1.png)
+
+3. [] Run **docker-compose up** to start the **dvws-node** application.
+
+ !IMAGE[](instructions248766/image2.png)
+    
+4. [] Click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Login to the Parrot Security machine using the username **pentester** and the password **toor**.
+
+5. [] Launch Burp Suite and navigate to the **Proxy** tab. Turn off intercept and click on the **Open Browser** button to launch Burp Suite&#39;s built-in browser.
+
+ !IMAGE[image4.1.png](instructions248766/image4.1.png)
+
+7. [] In the browser, navigate to **192.168.0.19:8080** and log in using the username **test** and password **test**.
+
+ !IMAGE[](instructions248766/image5.png)
+
+8. [] Once logged in, switch back to Burp Suite and enable the intercept by clicking the **Intercept is off** button, which will toggle to **Intercept is on**.
+
+ !IMAGE[](instructions248766/image7.png)
+
+9. [] With the intercept enabled, switch back to Burp Suite&#39;s browser and click the **Admin Area** button, as shown in the screenshot.
+
+ !IMAGE[](instructions248766/image8.png)
+
+10. [] Switch back to Burp Suite. **Forward** the requests until you see a request containing the **Bearer** token in the Authorization header.
+
+ !IMAGE[](instructions248766/image9.png)
+
+11. [] Right-click on the request and select **Send to Repeater**.
+
+12. [] Click on **Send**. Observe that the response indicates an error: &quot;Error: User is missing **[user: admin]** privilege&quot;. This indicates that we need to gain admin privileges to access this page.
+
+ !IMAGE[](instructions248766/image11.png)
+
+13. [] Go back to the **Proxy** tab in Burp Suite and copy the **Bearer** token from the captured request.
+
+ !IMAGE[](instructions248766/image13.png)
+
+14. [] Launch the command-line terminal and type **cd jwt_tool/** to navigate into the **jwt_tool** directory.
+
+ !IMAGE[](instructions248766/image15.png)
+
+15. [] Now, use **jwt_tool** to check the token information. Run **python3 jwt_tool.py &amp;lt;token&amp;gt;** (Replace **&amp;lt;token&amp;gt;** with the copied bearer token) command. After running the command, you will see the decoded token&#39;s header and payload scrolling down the terminal.
+
+ !IMAGE[](instructions248766/image16.png)
+  
+16. [] Next, brute-force the JWT token to discover the signing key using a wordlist.
+
+Type: **python3 jwt_tool.py &amp;lt;token&amp;gt; -C -d /usr/share/seclists/Passwords/Common-Credentials/10k-most-common.txt** (Replace **&amp;lt;token&amp;gt;** with the copied bearer token) and press **Enter**.
+
+ After the brute force, the output will reveal the key, which in this case is **access**.
+
+ !IMAGE[](instructions248766/image18.png)
+ 
+17. [] Open the website &lt;https://jwt.io/&gt; in your browser. Paste the JWT token into the **Encoded** section.
+
+ !IMAGE[](instructions248766/image19.png)
+
+18. [] In the &quot;Decoded&quot; section, modify the payload to add **[&quot;user:admin&quot;]** and remove any existing permission settings, making the user an admin.
+
+ !IMAGE[](instructions248766/image20.png)
+
+19. [] Paste the secret key (**access**) into the &quot;verify signature&quot; box.
+
+     !IMAGE[](instructions248766/image21.png)
+
+20. [] After adding the JWT key, copy the latest modified encoded token.
+
+     !IMAGE[](instructions248766/image22.png)
+
+21. [] Switch back to Burp Suite, navigate to the **Intercept** section in the **Proxy** tab, and change the **Bearer** token in the Authorization header to the modified, encoded value copied from **jwt.io**. Then **Forward** the request.
+
+      !IMAGE[](instructions248766/image23.png)
+
+22. [] Now switch to Burp Suite&#39;s browser, navigate back to the **Admin Area**, and you will see that you are logged in as the **admin** user, as indicated in the &quot;User Information&quot; section.
+
+ !IMAGE[](instructions248766/image24.png)
+
+23. This concludes the demonstration of Bruteforcing Weak Secret Keys in JWT Implementations.
+
+">
+    <input type="hidden" id="activities" value="[]">
+    <input type="hidden" id="activityGroups" value="[]">
+    <input type="hidden" id="replacementTokens" value="[{&quot;Token&quot;:&quot;@lab.LabProfile.Id&quot;,&quot;Replacement&quot;:&quot;155864&quot;},{&quot;Token&quot;:&quot;@lab.CtrlAltDelete&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;ctrlAltDeleteLink icon-link special-action-link&#39;&gt;Ctrl+Alt+Delete&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Username&quot;,&quot;Replacement&quot;:&quot;pentester&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268660&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268660&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;275767&#39;&gt;Windows 11&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11).Username&quot;,&quot;Replacement&quot;:&quot;Admin&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;275767&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Windows11).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;275767&#39;&gt;Windows 11&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;275476&#39;&gt;Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu).Username&quot;,&quot;Replacement&quot;:&quot;ubuntu&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;275476&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(Ubuntu).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;275476&#39;&gt;Ubuntu&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.Title&quot;,&quot;Replacement&quot;:&quot;&lt;h1 class=\&quot;lab-title primary-color\&quot;&gt;API and Java Web Token Penetration Testing&lt;/h1&gt;&quot;},{&quot;Token&quot;:&quot;@lab.LanguageName&quot;,&quot;Replacement&quot;:&quot;English&quot;},{&quot;Token&quot;:&quot;@lab.LanguageCode&quot;,&quot;Replacement&quot;:&quot;en&quot;},{&quot;Token&quot;:&quot;@lab.LanguageRegionCode&quot;,&quot;Replacement&quot;:&quot;en-US&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.Id&quot;,&quot;Replacement&quot;:&quot;{LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.GlobalId&quot;,&quot;Replacement&quot;:&quot;{lod_LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.StartDate&quot;,&quot;Replacement&quot;:&quot;20250124&quot;},{&quot;Token&quot;:&quot;@lab.User.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.FirstName&quot;,&quot;Replacement&quot;:&quot;{USER_FIRSTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.LastName&quot;,&quot;Replacement&quot;:&quot;{USER_LASTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.Email&quot;,&quot;Replacement&quot;:&quot;{EMAIL}&quot;},{&quot;Token&quot;:&quot;@lab.User.ExternalId&quot;,&quot;Replacement&quot;:&quot;{USER_EXTERNALID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Name&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_NAME}&quot;},{&quot;Token&quot;:&quot;@lab.Tag&quot;,&quot;Replacement&quot;:&quot;{TAG}&quot;}]">
+    <input type="hidden" id="replacements">
+    <input type="hidden" id="variables">
+
+    <textarea id="copyInput" value="" style="position: absolute; left:-10000px; top:-10000px; "></textarea>
+
+    <div id="Model" data-id="155864" data-contentroot="https://labondemand.blob.core.windows.net/content/lab155864/" data-scrolltop="" data-themescript="">
+
+
+
+</div></body></html>

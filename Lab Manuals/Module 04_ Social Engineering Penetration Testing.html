@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648 -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Module 04: Social Engineering Penetration Testing</title>
+
+
+    <script src="./Module 04_ Social Engineering Penetration Testing_files/jquery.min.js.download" type="text/javascript"></script>
+    <script src="./Module 04_ Social Engineering Penetration Testing_files/Localize" type="text/javascript"></script>
+    <script src="./Module 04_ Social Engineering Penetration Testing_files/showdown.min.js.download"></script>
+    <link rel="stylesheet" type="text/css" href="./Module 04_ Social Engineering Penetration Testing_files/prettify.css">
+    <script src="./Module 04_ Social Engineering Penetration Testing_files/yaml.min.js.download"></script>
+    <script src="./Module 04_ Social Engineering Penetration Testing_files/LocalizeTo" type="text/javascript"></script>
+    <link href="./Module 04_ Social Engineering Penetration Testing_files/CloudClient.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body, html {
+            font-family: Segoe UI,Tahoma,Verdana,Arial,sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+            background-color: #efefef;
+            color: #000;
+            height: 100%;
+        }
+
+        body {
+            overflow: auto;
+        }
+
+        #outputWrapper {
+            background-color: #efefef;
+            min-height: 100%;
+        }
+
+        .instructionsPreview {
+            padding: 20px;
+            height: 100%;
+        }
+
+        .instructionsPreview .page {
+            position: relative;
+            display: block !important;
+            padding: 15px 20px;
+            background-color: #fff;
+            page-break-after: always;
+            min-height: 650px;
+        }
+
+        .instructionsPreview .page:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        @font-face {
+            font-family: "lod";
+            src: url("/fonts/lod.woff?v=18") format("woff"), url("/fonts/lod.ttf?v=18") format("truetype"), url("/fonts/lod.svg?v=18") format("svg");
+        }
+
+        .editLink:before {
+            content: "\E70F";
+            font-family: "lod";
+            margin-right: 4px;
+            display: inline-block;
+        }
+
+        @media print {
+            body, html {
+                height: auto;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            div {
+                page-break-inside: avoid;
+            }
+
+            #outputWrapper {
+                background-color: transparent;
+            }
+
+            .instructionsPreview {
+                padding: 0;
+            }
+
+                .instructionsPreview .page:not(:first-child) {
+                    margin-top: 0px;
+                }
+        }
+
+        @page {
+            margin-left: 1.5cm;
+            margin-right: 1.5cm;
+            margin-top: 1.5cm;
+            margin-bottom: 1.5cm;
+        }
+    </style>
+    <link id="themeStylesheet" href="./Module 04_ Social Engineering Penetration Testing_files/Blue.css" rel="stylesheet">
+
+</head>
+<body>
+        <div style="padding:10px 20px;">
+            <a class="editLink" href="https://labondemand.com/LabProfile/EditInstructions/178695?InstructionsSetId=281648">Edit</a>
+        </div>
+
+    <div id="outputWrapper">
+        <div id="instructions" class="instructionsPreview instructions"><div class="page" id="page0"><h1 id="module-04-social-engineering-penetration-testing-methodology">Module 04: Social Engineering Penetration Testing Methodology</h1>
+<h2 id="scenario">Scenario</h2>
+<p>The main objective of social engineering penetration testing is to check the loyalty of employees in the organization, their awareness regarding phishing attacks, their ability to comply with security policies, and the application of their security training. Penetration testers may employ various techniques involving the use of phones, and physical, and internet-based engagements with the employees, to identify those who fall prey to these techniques. To perform social engineering pen testing, testers must gather all the information of the victim and use this information to gather sensitive organization data.</p>
+<p>As a penetration tester, you must know how to crack cloned malicious login pages, mask the cloned webpage URLs, and entice the employees in an organization to click them.</p>
+<h2 id="objective">Objective</h2>
+<p>This module aims to help students learn different techniques to gather information about a user. You will learn how to:</p>
+<ul>
+<li><p>Conduct a Phishing Campaign Using Social Engineering Toolkit</p></li>
+<li><p>Conduct a Phishing Campaign Using Dark-Phish</p></li>
+</ul>
+<blockquote class="alert">
+  <p><strong>Note:</strong> All lab manuals are accessible in the <strong>Lab Manuals</strong> folder located on the <strong>Desktop</strong> of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.</p>
+</blockquote>
+</div><div class="page" id="page1">
+<h1 id="exercise-1-sniff-credentials-using-the-social-engineer-toolkit-set">Exercise 1: Sniff credentials using the Social-Engineer Toolkit (SET)</h1>
+<p>The Social-Engineer Toolkit (SET) is an open-source Python-driven tool aimed at penetration testing via social engineering. SET is useful to attackers because it is freely available and can be used to carry out a range of attacks. For example, it allows attackers to compose phishing email messages, attach malicious files, and send them to many people using spear phishing. Additionally, SET’s multi-attack method allows Java applets, the Metasploit browser, and Credential Harvester/Tabnabbing to be used simultaneously. SET categorizes attacks based on the attack vector used, such as email, web, and USB.</p>
+<p>While SET can be used to carry out a variety of attacks, it is also an essential tool for penetration testers to identify vulnerabilities. For this reason, SET is the industry standard for social engineering penetration tests and is widely supported within the security community.</p>
+<p>As an ethical hacker, penetration tester, or security administrator, you should be familiar with SET and be able to use it to perform various tests for network vulnerabilities.</p>
+<p>Here, we will sniff user credentials using the SET.</p>
+<h2 id="objective-1">Objective</h2>
+<ul>
+<li><p>Sniffing User Credentials using SET's Site Cloner</p></li>
+<li><p>Sniffing user credentials using SET's QRCode Generator Attack Vector</p></li>
+</ul>
+<h2 id="task-1-sniffing-user-credentials-using-sets-site-cloner">Task 1: Sniffing User Credentials using SET's Site Cloner</h2>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex0"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex0"><span></span></label> Click on <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285848">Parrot Security</a> to switch to the Parrot Security machine. Login using <strong>pentester/toor</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>If a Question pop-up window appears asking you to update the machine, click <strong>No</strong> to close the window.</p>
+</blockquote>
+<ol start="2" class="taskList">
+<li class="task-list-item" id="taskIndex1"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex1"><span></span></label> Open a Terminal window and execute <strong>sudo su</strong> to run the programs as a root user (When prompted, enter the password <strong>toor</strong>).</li>
+</ol>
+<blockquote class="note">
+  <p>The password that you type will not be visible.</p>
+</blockquote>
+<ol start="3" class="taskList">
+<li class="task-list-item" id="taskIndex2"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex2"><span></span></label> Run <strong>setoolkit</strong> to launch Social-Engineer Toolkit.</li>
+</ol>
+<blockquote class="note">
+  <p>If a Do you agree to the terms of service [y/n] question appears, enter <strong>y</strong> and press <strong>Enter</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/lbqvhcyk.jpg" alt="Screenshot"></p>
+<ol start="4" class="taskList">
+<li class="task-list-item" id="taskIndex3"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex3"><span></span></label> The SET menu appears as shown in the screenshot below. Type <strong>1</strong> and press <strong>Enter</strong> to choose <strong>Social-Engineering Attacks</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/3turr1ly.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex4"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex4"><span></span></label> A list of options for Social-Engineering Attacks appears; type <strong>2</strong> and press <strong>Enter</strong> to choose <strong>Website Attack Vectors</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/l20xs3mm.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex5"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex5"><span></span></label> A list of options in Website Attack Vectors appears; type <strong>3</strong> and press <strong>Enter</strong> to choose <strong>Credential Harvester Attack Method</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/3d0wcwxe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex6"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex6"><span></span></label> Type <strong>2</strong> and press <strong>Enter</strong> to choose <strong>Site Cloner</strong> from the menu.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/jwznyjep.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex7"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex7"><span></span></label> Type the IP address of the local machine (<strong>192.168.0.18</strong>) in the prompt for “<strong>IP address for the POST back in Harvester/Tabnabbing</strong>” and press <strong>Enter</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>In this case, we are targeting the Parrot Security machine (IP address: 192.168.0.18).</p>
+</blockquote>
+<ol start="9" class="taskList">
+<li class="task-list-item" id="taskIndex8"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex8"><span></span></label> Now, you will be prompted to enter the URL to clone. Type the desired URL in the <strong>Enter the url to clone</strong> field and press <strong>Enter</strong>. In this task, we will clone the URL <strong>http://www.moviescope.com</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>You can clone any URL of your choice.</p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/5dipzdpu.jpg" alt="Screenshot"></p>
+<ol start="10" class="taskList">
+<li class="task-list-item" id="taskIndex9"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex9"><span></span></label> After cloning is completed, the credential harvester initiates as shown in the screenshot.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/jtv3qbkv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex10"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex10"><span></span></label> Having successfully cloned a website, you must now send the IP address of your Parrot Security machine to a victim and try to trick them into clicking on the link.</p></li>
+<li class="task-list-item" id="taskIndex11"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex11"><span></span></label> Click the <strong>Firefox</strong> icon from the top section of the Desktop to launch a web browser window and open your email account (in this example, we will be using Mozilla Firefox and Outlook). Log in and compose an email.</p></li>
+</ol>
+<blockquote class="note">
+  <p>You can log in to any email client of your interest.</p>
+</blockquote>
+<ol start="13" class="taskList">
+<li class="task-list-item" id="taskIndex12"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex12"><span></span></label> After logging into your email account, click the New Mail button in the left pane and compose a fake but enticing email to lure a user into opening the email and clicking on a malicious link.</p></li>
+<li class="task-list-item" id="taskIndex13"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex13"><span></span></label> One method to disguise a malicious link in a message is to use text that appears to be a legitimate MovieScope URL. However, the hyperlink can redirect users to a cloned, malicious version of the MovieScope page instead.</p></li>
+<li class="task-list-item" id="taskIndex14"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex14"><span></span></label> Position the cursor just above <strong>Regards</strong> to place the fake URL, then click the <strong>Insert link</strong> icon.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/xtbdy2ew.jpg" alt="xtbdy2ew.jpg"></p></li>
+<li class="task-list-item" id="taskIndex15"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex15"><span></span></label> In the <strong>Insert link</strong> window, first enter the fake URL in the <strong>Display as</strong> field. Next, input the actual address of your cloned site in the <strong>Web address (URL)</strong> field and click <strong>OK</strong>. In this case, the text displayed in the message will be <strong>www.moviescope.com/account-information</strong>, while the actual address of the cloned MovieScope site is <strong>http://192.168.0.18</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/mzixng9e.jpg" alt="mzixng9e.jpg"></p></li>
+<li class="task-list-item" id="taskIndex16"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex16"><span></span></label> The fake URL should appear in the message body.</p></li>
+<li class="task-list-item" id="taskIndex17"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex17"><span></span></label> Verify that the fake URL is linked to the correct cloned site: in Outlook, hover over the link; the actual URL will be displayed. Once verified, send the email to the intended user.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/x0hy6paj.jpg" alt="x0hy6paj.jpg"></p></li>
+<li class="task-list-item" id="taskIndex18"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex18"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285853">Windows Server 2022</a> to switch to the Windows machine and log in using <strong>Admin/Pa$$w0rd</strong>.</p></li>
+<li class="task-list-item" id="taskIndex19"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex19"><span></span></label> Open any web browser (here, we are using <strong>Google Chrome</strong>), and sign in to the email account to which you sent the phishing mail as an attacker. Open the email you sent previously and click to open the malicious link.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/lhwfvgxy.jpg" alt="lhwfvgxy.jpg"></p></li>
+<li class="task-list-item" id="taskIndex20"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex20"><span></span></label> When the victim (you in this case) clicks the URL, a new tab opens, and the victim sees a replica of www.moviescope.com.</p></li>
+<li class="task-list-item" id="taskIndex21"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex21"><span></span></label> The victim will be prompted to enter the username and password into the form fields, which appear as they do on the genuine website. When the victim enters the credentials and clicks Login, they will be redirected to the legitimate MovieScope login page. Note the different URLs in the browser address bar for the cloned and legitimate sites.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/xk3qjiod.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/geaoatxj.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex22"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex22"><span></span></label> Now, click on <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285848">Parrot Security</a> to switch back to the Parrot Security machine and switch to the terminal window.</p></li>
+<li class="task-list-item" id="taskIndex23"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex23"><span></span></label> Soon after the victim types in the Username and Password and clicks Login, SET records the credentials. The attacker can then use them to gain unauthorized access to the victim's account.</p></li>
+<li class="task-list-item" id="taskIndex24"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex24"><span></span></label> Scroll down to find the Username and Password displayed in plain text, as shown in the screenshot.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/9qd2tlvg.jpg" alt="9qd2tlvg.jpg"></p></li>
+<li class="task-list-item" id="taskIndex25"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex25"><span></span></label> Now, hit <strong>Ctrl+C</strong> and then, press <strong>Enter</strong> to return to the previous menu.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/5khyx12g.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex26"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex26"><span></span></label> Keep hitting Ctrl+C or keep entering 99 in the SET terminal until you come out of the SET terminal.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/14ffmcs0.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/ky5jskww.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex27"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex27"><span></span></label> Keep all current windows open as the next section builds on the content of this section.</p></li>
+</ol>
+<hr>
+<h2 id="task-2-sniffing-user-credentials-using-sets-qrcode-generator-attack-vector">Task 2: Sniffing User Credentials using SET's QRCode Generator Attack Vector</h2>
+<p>In this section of the lab, we are going to demonstrate steps to propagate the malicious cloned page via QR code. We will be using SET's QRCode Generator Attack Vector in conjunction with the Site Cloner utility in SET to create a QR code that points to the IP address of the Parrot Security machine (which is hosting the cloned page).</p>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex28"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex28"><span></span></label> If you have the terminal open from the previous section, execute the command <strong>setoolkit</strong> in it to launch Social-Engineer Toolkit. If the terminal is not open, open a new one and execute the <strong>sudo su</strong> command to run the programs as a root user (When prompted, enter the password <strong>toor</strong>).</li>
+</ol>
+<blockquote class="note">
+  <p>If a <strong>Do you agree to the terms of service [y/n]</strong> question appears, enter <strong>y</strong> and press <strong>Enter</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/yunkamia.jpg" alt="Screenshot"></p>
+<ol start="2" class="taskList">
+<li class="task-list-item" id="taskIndex29"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex29"><span></span></label> The SET menu appears as shown in the screenshot. Type <strong>1</strong> and press <strong>Enter</strong> to choose Social-Engineering Attacks.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/3turr1ly.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex30"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex30"><span></span></label> A list of options for Social-Engineering Attacks appears; type <strong>8</strong> and press <strong>Enter</strong> to choose QRCode Generator Attack Vector.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/nx23qq2f.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex31"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex31"><span></span></label> You need to enter the URL you want the QR code to map to. In this scenario, it is http://192.168.0.18. Type it and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/cp1plkvw.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex32"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex32"><span></span></label> The QR code is generated with the URL and saved to <strong>/root/.set/reports</strong> by default, with the name <strong>qrcode_attack.png</strong>. </p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/lmqq21sx.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex33"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex33"><span></span></label> If a message appears that says <strong>Press <return> to continue</return></strong>, press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/reivmfqg.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex34"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex34"><span></span></label> A list of options for Social-Engineering Attacks appears; type <strong>2</strong> and press <strong>Enter</strong> to choose <strong>Website Attack Vectors</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/l20xs3mm.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex35"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex35"><span></span></label> A list of options in Website Attack Vectors appears; type <strong>3</strong> and press <strong>Enter</strong> to choose <strong>Credential Harvester Attack Method</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/3d0wcwxe.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex36"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex36"><span></span></label> Type <strong>2</strong> and press <strong>Enter</strong> to choose <strong>Site Cloner</strong> from the menu.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/jwznyjep.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex37"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex37"><span></span></label> Type the IP address of the local machine (<strong>192.168.0.18</strong>) in the prompt for “<strong>IP address for the POST back in Harvester/Tabnabbing</strong>” and press <strong>Enter</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>In this case, we are targeting the Parrot Security machine (IP address: 192.168.0.18).</p>
+</blockquote>
+<ol start="9" class="taskList">
+<li class="task-list-item" id="taskIndex38"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex38"><span></span></label> Now, you will be prompted for the URL to be cloned; type the desired URL in the “<strong>Enter the url to clone</strong>” field and press <strong>Enter</strong>. In this task, we will clone the URL <strong>http://www.moviescope.com</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>You can clone any URL of your choice.</p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/5dipzdpu.jpg" alt="Screenshot"></p>
+<ol start="10" class="taskList">
+<li class="task-list-item" id="taskIndex39"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex39"><span></span></label> Once the cloning is complete, the Credential Harvester will be initiated, as shown in the screenshot below.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/jtv3qbkv.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex40"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex40"><span></span></label> Having successfully created a QR code and a cloned page, you must now send this to a victim and try to trick them into scanning the QR code and accessing the link beneath it. We will be using email as a medium to send the QR code.</p></li>
+<li class="task-list-item" id="taskIndex41"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex41"><span></span></label> Assuming you are logged in to your email account (in continuation to the previous section), click the <strong>New Mail</strong> button in the left pane and compose a fake but enticing email. </p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/email compose.png" alt="email compose.png"></p></li>
+<li class="task-list-item" id="taskIndex42"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex42"><span></span></label> Upon composition, attach the QR code to the email by clicking <strong>Attach file</strong> -&gt; <strong>Browse this computer</strong>.</p></li>
+</ol>
+<blockquote class="note">
+  <p>The steps to attach files may vary depending on the email client you are using. </p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/QR upload.png" alt="QR upload.png"></p>
+<ol start="15" class="taskList">
+<li class="task-list-item" id="taskIndex43"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex43"><span></span></label> <strong>File Upload</strong> window appears, navigate to <strong>/root/.set/reports</strong>, select <strong>qrcode_attack.jpg</strong> and click <strong>Open</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>The <strong>.set</strong> folder is not found, right-click and click on the <strong>Show Hidden Files</strong> option to see the folder. </p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/zukulot0.jpg" alt="Screenshot"></p>
+<ol start="16" class="taskList">
+<li class="task-list-item" id="taskIndex44"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex44"><span></span></label> The QR code is now appended to the email. You can now send it to the intended recipient.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/QR upload2.png" alt="QR upload2.png"></p></li>
+<li class="task-list-item" id="taskIndex45"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex45"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285853">Windows Server 2022</a> to switch to the Windows machine you accessed in the previous section.</p></li>
+<li class="task-list-item" id="taskIndex46"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex46"><span></span></label> Open <strong>Google Chrome</strong> and access the email account to which you sent the phishing mail as an attacker. Open the email you sent previously and click on the QR Code.</p></li>
+</ol>
+<blockquote class="note">
+  <p>A few email clients may move this email to the <strong>Spam</strong> folder. In such cases, you may check the <strong>Spam</strong> folder to access it.</p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/user_qr_access.png" alt="user_qr_access.png"></p>
+<ol start="21" class="taskList">
+<li class="task-list-item" id="taskIndex47"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex47"><span></span></label> In real-time, the user may scan the QR code from their mobile or use Google Lens (via Chrome browser) from their machine. In this lab, we will be scanning the code using Google Lens. To scan, click the Ellipsis icon present at the top-right corner of the browser window and select <strong>Search with Google Lens</strong>.</li>
+</ol>
+<blockquote class="note">
+  <p>If a pop-up displays, click <strong>OK</strong> to continue. </p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/svzu1l5b.jpg" alt="Screenshot"></p>
+<ol start="22" class="taskList">
+<li class="task-list-item" id="taskIndex48"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex48"><span></span></label> Hover the mouse cursor over the QR code and click on top of the code. You will be presented with two options on the right pane - <strong>Website</strong> and <strong>Copy URL</strong>. Click <strong>Website</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/r5irwcvw.jpg" alt="Screenshot"></p></li>
+</ol>
+<blockquote class="note">
+  <p>When the victim (you, in this case) clicks <strong>Website</strong>, a new tab opens up, and they will be presented with a replica of www.moviescope.com.</p>
+</blockquote>
+<ol start="22" class="taskList">
+<li class="task-list-item" id="taskIndex49"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex49"><span></span></label> The victim will be prompted to enter the username and password into the form fields, which appear as they do on the genuine website. When the victim enters the Username and Password and clicks Login, they will be redirected to the legitimate MovieScope login page. Note the different URLs in the browser address bar for the cloned and legitimate sites.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/eiga53fh.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/3v5vh2nb.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex50"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex50"><span></span></label> Now, click <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285848">Parrot Security</a> to switch back to the Parrot Security machine and then, switch to the terminal window.</p></li>
+<li class="task-list-item" id="taskIndex51"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex51"><span></span></label> Once the victim enters their Username and Password and clicks Login, SET captures these credentials. The attacker can then use them to gain unauthorized access to the victim's account.</p></li>
+<li class="task-list-item" id="taskIndex52"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex52"><span></span></label> Scroll down to find the Username and Password displayed in plain text, as shown in the screenshot.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/dlcimaty.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex53"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex53"><span></span></label> This concludes the demonstration of phishing user credentials using the SET.</p></li>
+<li class="task-list-item" id="taskIndex54"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex54"><span></span></label> Close all open windows and document all the acquired information.</p></li>
+</ol>
+</div><div class="page" id="page2">
+<h1 id="exercise-2-sniff-credentials-using-dark-phish">Exercise 2: Sniff Credentials using Dark-Phish</h1>
+<p>Dark-Phish is a specialized phishing tool designed for educational purposes and security testing. It is capable of simulating phishing attacks and facilitating the evaluation of system vulnerabilities and user awareness levels.</p>
+<p>Here, we will sniff user credentials using Dark-Phish.</p>
+<ol class="taskList">
+<li class="task-list-item" id="taskIndex55"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex55"><span></span></label> On <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285848">Parrot Security</a>, open a Terminal window, and execute <strong>sudo su</strong> to run the programs as a root user (When prompted, enter the password <strong>toor</strong>).</p></li>
+<li class="task-list-item" id="taskIndex56"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex56"><span></span></label> Run <strong>cd Dark-Phish/</strong> to navigate to Dark-Phish directory.</p></li>
+<li class="task-list-item" id="taskIndex57"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex57"><span></span></label> In this task, we will be hosting the PHP server on the local host. To do so, we need to change the localhost IP address in the <strong>darkphish.py</strong> file.</p></li>
+<li class="task-list-item" id="taskIndex58"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex58"><span></span></label> In the terminal window, type <strong>pluma dark-phish.py</strong> to edit the Python script in the Pluma text editor.</p></li>
+<li class="task-list-item" id="taskIndex59"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex59"><span></span></label> In the text editor, replace <strong>127.0.0.1</strong> with <strong>172.19.19.18</strong> in line 30 under the host field, save the file, and close the text editor window.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/jqvyc2l4.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex60"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex60"><span></span></label> Launch Dark-Phish by executing the <strong>python3 dark-phish.py</strong> command.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/vikc40ue.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex61"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex61"><span></span></label> The Dark-Phish menu appears as shown in the screenshot. You can observe numerous platform options presented by Dark-Phish. Now, type <strong>06</strong> and press <strong>Enter</strong> to choose <strong>Google</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/go04jcwt.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex62"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex62"><span></span></label> A list of hosting options appears; type <strong>01</strong> and hit Enter to choose Localhost.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/h43zsukr.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex63"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex63"><span></span></label> Modify the URL (Y/N) option appears; type <strong>N</strong> and press <strong>Enter</strong>.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/lc2go3c5.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex64"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex64"><span></span></label> Send link appears. Having successfully generated a phishing link, you must now send this link to a victim and try to trick them into clicking it. So, copy the link.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/zrrq0ye2.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex65"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex65"><span></span></label> Launch a web browser (here, <strong>Mozilla Firefox</strong>) and open your email account (in this example, we are using <strong>Outlook</strong>). Log in and compose an email.</p></li>
+</ol>
+<blockquote class="note">
+  <p>You can log in to any email service of your preference.</p>
+</blockquote>
+<ol start="12" class="taskList">
+<li class="task-list-item" id="taskIndex66"><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex66"><span></span></label> After logging into your email account, click the <strong>New Mail</strong> button in the left pane and compose a fake but enticing email to lure a user into opening the email and clicking on a malicious link.</li>
+</ol>
+<blockquote class="note">
+  <p>One method to conceal a malicious link in a message is to use text that appears to be a legitimate MovieScope URL. However, the hyperlink can redirect users to a cloned, malicious version of the MovieScope page instead.</p>
+</blockquote>
+<ol start="13" class="taskList">
+<li class="task-list-item" id="taskIndex67"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex67"><span></span></label> Select "<strong>here</strong>" to place the fake URL, then switch to Messages from the toolbar and click the <strong>Insert link</strong> icon.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/dp13.jpg" alt="dp13.jpg"></p></li>
+<li class="task-list-item" id="taskIndex68"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex68"><span></span></label> Paste the copied Send link in the Insert link window under the Web address (URL) field and click OK.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/9uucwbor.jpg" alt="9uucwbor.jpg"></p></li>
+<li class="task-list-item" id="taskIndex69"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex69"><span></span></label> To verify the URL, hover over the hyperlink, and the full URL will appear. Once verified, send the email to the intended user.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/6ssbrrk6.jpg" alt="6ssbrrk6.jpg"></p></li>
+<li class="task-list-item" id="taskIndex70"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex70"><span></span></label> Click <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285850">Sales Department</a> to switch to the <strong>Sales Department</strong> machine. Login with <strong>Admin/test@123</strong>.</p></li>
+<li class="task-list-item" id="taskIndex71"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex71"><span></span></label> Open the <strong>Google Chrome</strong> browser and sign in to the email account to which you sent the phishing mail as an attacker. Open the email you sent previously and click to open the malicious link.</p></li>
+</ol>
+<blockquote class="note">
+  <p>If the email does not appear in your Inbox, check the <strong>Spam</strong> folder.</p>
+</blockquote>
+<blockquote class="note">
+  <p>If a pop-up appears, click <strong>Open anyway</strong>.</p>
+</blockquote>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/o8e226ol.jpg" alt="o8e226ol.jpg"></p>
+<ol start="18" class="taskList">
+<li class="task-list-item" id="taskIndex72"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex72"><span></span></label> When the victim (you in this case) clicks the URL, a new tab opens, and displays a replica of the Google sign-in page.</p></li>
+<li class="task-list-item" id="taskIndex73"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex73"><span></span></label> The victim will be prompted to enter the username and password into the form fields, which appear as they do on a legitimate website. When the victim enters the Username and Password and signs into it, they will be redirected to the legitimate Google page. Note the different URLs in the browser address bar for the cloned and legitimate sites.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/xqhv51sa.jpg" alt="Screenshot"></p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/ivcfwfkp.jpg" alt="Screenshot"></p></li>
+<li class="task-list-item" id="taskIndex74"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex74"><span></span></label> Now, click <a href="https://labondemand.com/LabProfile/Instructions/178695?instructionsSetId=281648#" class="selectMachineLink icon-link special-action-link" data-data="285848">Parrot Security</a> to switch back to the Parrot Security machine and switch to the terminal window.</p></li>
+<li class="task-list-item" id="taskIndex75"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex75"><span></span></label> Soon after the victim clicks Sign in, Dark-Phish records the credentials. The attacker can then use these to gain unauthorized access to the victim's account.</p></li>
+<li class="task-list-item" id="taskIndex76"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex76"><span></span></label> The captured credentials are displayed in the terminal.</p>
+<p>
+<img src="./Module 04_ Social Engineering Penetration Testing_files/p9p97ix0.jpg" alt="p9p97ix0.jpg"></p></li>
+<li class="task-list-item" id="taskIndex77"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex77"><span></span></label> This concludes the demonstration of phishing user credentials using the Dark Phish.</p></li>
+<li class="task-list-item" id="taskIndex78"><p><label class="checkbox"><input type="checkbox" aria-labelledby="taskIndex78"><span></span></label> Close all open windows and document all the acquired information.</p></li>
+</ol></div></div>
+    </div>
+    <input type="hidden" id="rawContent" value="# Module 04: Social Engineering Penetration Testing Methodology
+
+## Scenario
+
+The main objective of social engineering penetration testing is to check the loyalty of employees in the organization, their awareness regarding phishing attacks, their ability to comply with security policies, and the application of their security training. Penetration testers may employ various techniques involving the use of phones, and physical, and internet-based engagements with the employees, to identify those who fall prey to these techniques. To perform social engineering pen testing, testers must gather all the information of the victim and use this information to gather sensitive organization data.
+
+As a penetration tester, you must know how to crack cloned malicious login pages, mask the cloned webpage URLs, and entice the employees in an organization to click them.
+
+## Objective
+
+This module aims to help students learn different techniques to gather information about a user. You will learn how to:
+
+- Conduct a Phishing Campaign Using Social Engineering Toolkit
+
+- Conduct a Phishing Campaign Using Dark-Phish
+
+&gt;[!alert] **Note:** All lab manuals are accessible in the **Lab Manuals** folder located on the **Desktop** of the machines. Please refer to the respective lab manual if you need to copy and paste any commands or code during the lab sessions.
+===
+
+# Exercise 1: Sniff credentials using the Social-Engineer Toolkit (SET)
+
+The Social-Engineer Toolkit (SET) is an open-source Python-driven tool aimed at penetration testing via social engineering. SET is useful to attackers because it is freely available and can be used to carry out a range of attacks. For example, it allows attackers to compose phishing email messages, attach malicious files, and send them to many people using spear phishing. Additionally, SET’s multi-attack method allows Java applets, the Metasploit browser, and Credential Harvester/Tabnabbing to be used simultaneously. SET categorizes attacks based on the attack vector used, such as email, web, and USB.
+
+While SET can be used to carry out a variety of attacks, it is also an essential tool for penetration testers to identify vulnerabilities. For this reason, SET is the industry standard for social engineering penetration tests and is widely supported within the security community.
+
+As an ethical hacker, penetration tester, or security administrator, you should be familiar with SET and be able to use it to perform various tests for network vulnerabilities.
+
+Here, we will sniff user credentials using the SET.
+
+## Objective
+
+- Sniffing User Credentials using SET&#39;s Site Cloner
+
+- Sniffing user credentials using SET&#39;s QRCode Generator Attack Vector
+
+## Task 1: Sniffing User Credentials using SET&#39;s Site Cloner
+
+1. [] Click on @lab.VirtualMachine(ParrotSecurity).SelectLink to switch to the Parrot Security machine. Login using **pentester/toor**.
+
+&gt;[!note] If a Question pop-up window appears asking you to update the machine, click **No** to close the window.
+
+2. [] Open a Terminal window and execute **sudo su** to run the programs as a root user (When prompted, enter the password **toor**).
+
+&gt;[!note] The password that you type will not be visible.
+
+3. [] Run **setoolkit** to launch Social-Engineer Toolkit.
+
+&gt;[!note] If a Do you agree to the terms of service [y/n] question appears, enter **y** and press **Enter**.
+
+ !IMAGE[Screenshot](screens/lbqvhcyk.jpg)
+
+4. [] The SET menu appears as shown in the screenshot below. Type **1** and press **Enter** to choose **Social-Engineering Attacks**.
+
+ !IMAGE[Screenshot](screens/3turr1ly.jpg)
+
+5. [] A list of options for Social-Engineering Attacks appears; type **2** and press **Enter** to choose **Website Attack Vectors**.
+
+ !IMAGE[Screenshot](screens/l20xs3mm.jpg)
+
+6. [] A list of options in Website Attack Vectors appears; type **3** and press **Enter** to choose **Credential Harvester Attack Method**.
+
+ !IMAGE[Screenshot](screens/3d0wcwxe.jpg)
+
+7. [] Type **2** and press **Enter** to choose **Site Cloner** from the menu.
+
+ !IMAGE[Screenshot](screens/jwznyjep.jpg)
+
+8. [] Type the IP address of the local machine (**192.168.0.18**) in the prompt for “**IP address for the POST back in Harvester/Tabnabbing**” and press **Enter**.
+
+&gt;[!note] In this case, we are targeting the Parrot Security machine (IP address: 192.168.0.18).
+
+9. [] Now, you will be prompted to enter the URL to clone. Type the desired URL in the **Enter the url to clone** field and press **Enter**. In this task, we will clone the URL **http://www.moviescope.com**.
+
+&gt;[!note] You can clone any URL of your choice.
+
+ !IMAGE[Screenshot](screens/5dipzdpu.jpg)
+
+10. [] After cloning is completed, the credential harvester initiates as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/jtv3qbkv.jpg)
+
+11. [] Having successfully cloned a website, you must now send the IP address of your Parrot Security machine to a victim and try to trick them into clicking on the link.
+
+12. [] Click the **Firefox** icon from the top section of the Desktop to launch a web browser window and open your email account (in this example, we will be using Mozilla Firefox and Outlook). Log in and compose an email.
+
+&gt;[!note] You can log in to any email client of your interest.
+
+13. [] After logging into your email account, click the New Mail button in the left pane and compose a fake but enticing email to lure a user into opening the email and clicking on a malicious link.
+
+14. [] One method to disguise a malicious link in a message is to use text that appears to be a legitimate MovieScope URL. However, the hyperlink can redirect users to a cloned, malicious version of the MovieScope page instead.
+
+15. [] Position the cursor just above **Regards** to place the fake URL, then click the **Insert link** icon.
+
+ !IMAGE[xtbdy2ew.jpg](instructions281648/xtbdy2ew.jpg)
+
+16. [] In the **Insert link** window, first enter the fake URL in the **Display as** field. Next, input the actual address of your cloned site in the **Web address (URL)** field and click **OK**. In this case, the text displayed in the message will be **www.moviescope.com/account-information**, while the actual address of the cloned MovieScope site is **http://192.168.0.18**.
+
+ !IMAGE[mzixng9e.jpg](instructions281648/mzixng9e.jpg)
+
+17. [] The fake URL should appear in the message body.
+
+18. [] Verify that the fake URL is linked to the correct cloned site: in Outlook, hover over the link; the actual URL will be displayed. Once verified, send the email to the intended user.
+
+ !IMAGE[x0hy6paj.jpg](instructions281648/x0hy6paj.jpg)
+
+19. [] Click @lab.VirtualMachine(WindowsServer2022).SelectLink to switch to the Windows machine and log in using **Admin/Pa$$w0rd**.
+
+20. [] Open any web browser (here, we are using **Google Chrome**), and sign in to the email account to which you sent the phishing mail as an attacker. Open the email you sent previously and click to open the malicious link.
+
+ !IMAGE[lhwfvgxy.jpg](instructions281648/lhwfvgxy.jpg)
+
+21. [] When the victim (you in this case) clicks the URL, a new tab opens, and the victim sees a replica of www.moviescope.com.
+
+22. [] The victim will be prompted to enter the username and password into the form fields, which appear as they do on the genuine website. When the victim enters the credentials and clicks Login, they will be redirected to the legitimate MovieScope login page. Note the different URLs in the browser address bar for the cloned and legitimate sites.
+
+ !IMAGE[Screenshot](screens/xk3qjiod.jpg)
+
+ !IMAGE[Screenshot](screens/geaoatxj.jpg)
+
+23. [] Now, click on @lab.VirtualMachine(ParrotSecurity).SelectLink to switch back to the Parrot Security machine and switch to the terminal window.
+
+24. [] Soon after the victim types in the Username and Password and clicks Login, SET records the credentials. The attacker can then use them to gain unauthorized access to the victim&#39;s account.
+
+25. [] Scroll down to find the Username and Password displayed in plain text, as shown in the screenshot.
+
+ !IMAGE[9qd2tlvg.jpg](instructions281648/9qd2tlvg.jpg)
+
+27. [] Now, hit **Ctrl+C** and then, press **Enter** to return to the previous menu.
+
+ !IMAGE[Screenshot](screens/5khyx12g.jpg)
+
+28. [] Keep hitting Ctrl+C or keep entering 99 in the SET terminal until you come out of the SET terminal.
+
+ !IMAGE[Screenshot](screens/14ffmcs0.jpg)
+
+ !IMAGE[Screenshot](screens/ky5jskww.jpg)
+
+29. [] Keep all current windows open as the next section builds on the content of this section.
+
+---
+
+## Task 2: Sniffing User Credentials using SET&#39;s QRCode Generator Attack Vector
+
+In this section of the lab, we are going to demonstrate steps to propagate the malicious cloned page via QR code. We will be using SET&#39;s QRCode Generator Attack Vector in conjunction with the Site Cloner utility in SET to create a QR code that points to the IP address of the Parrot Security machine (which is hosting the cloned page).
+
+1. [] If you have the terminal open from the previous section, execute the command **setoolkit** in it to launch Social-Engineer Toolkit. If the terminal is not open, open a new one and execute the **sudo su** command to run the programs as a root user (When prompted, enter the password **toor**).
+
+&gt;[!note] If a **Do you agree to the terms of service [y/n]** question appears, enter **y** and press **Enter**.
+
+ !IMAGE[Screenshot](screens/yunkamia.jpg)
+
+2. [] The SET menu appears as shown in the screenshot. Type **1** and press **Enter** to choose Social-Engineering Attacks.
+
+ !IMAGE[Screenshot](screens/3turr1ly.jpg)
+
+4. [] A list of options for Social-Engineering Attacks appears; type **8** and press **Enter** to choose QRCode Generator Attack Vector.
+
+ !IMAGE[Screenshot](screens/nx23qq2f.jpg)
+
+5. [] You need to enter the URL you want the QR code to map to. In this scenario, it is http://192.168.0.18. Type it and press **Enter**.
+
+ !IMAGE[Screenshot](screens/cp1plkvw.jpg)
+
+9. [] The QR code is generated with the URL and saved to **/root/.set/reports** by default, with the name **qrcode_attack.png**. 
+
+ !IMAGE[Screenshot](screens/lmqq21sx.jpg)
+
+10. [] If a message appears that says **Press &lt;return\&gt; to continue**, press **Enter**.
+
+ !IMAGE[Screenshot](screens/reivmfqg.jpg)
+
+5. [] A list of options for Social-Engineering Attacks appears; type **2** and press **Enter** to choose **Website Attack Vectors**.
+
+ !IMAGE[Screenshot](screens/l20xs3mm.jpg)
+
+6. [] A list of options in Website Attack Vectors appears; type **3** and press **Enter** to choose **Credential Harvester Attack Method**.
+
+ !IMAGE[Screenshot](screens/3d0wcwxe.jpg)
+
+7. [] Type **2** and press **Enter** to choose **Site Cloner** from the menu.
+
+ !IMAGE[Screenshot](screens/jwznyjep.jpg)
+
+8. [] Type the IP address of the local machine (**192.168.0.18**) in the prompt for “**IP address for the POST back in Harvester/Tabnabbing**” and press **Enter**.
+
+&gt;[!note] In this case, we are targeting the Parrot Security machine (IP address: 192.168.0.18).
+
+9. [] Now, you will be prompted for the URL to be cloned; type the desired URL in the “**Enter the url to clone**” field and press **Enter**. In this task, we will clone the URL **http://www.moviescope.com**.
+
+&gt;[!note] You can clone any URL of your choice.
+
+ !IMAGE[Screenshot](screens/5dipzdpu.jpg)
+
+10. [] Once the cloning is complete, the Credential Harvester will be initiated, as shown in the screenshot below.
+
+ !IMAGE[Screenshot](screens/jtv3qbkv.jpg)
+
+11. [] Having successfully created a QR code and a cloned page, you must now send this to a victim and try to trick them into scanning the QR code and accessing the link beneath it. We will be using email as a medium to send the QR code.
+
+12. [] Assuming you are logged in to your email account (in continuation to the previous section), click the **New Mail** button in the left pane and compose a fake but enticing email. 
+
+ !IMAGE[email compose.png](instructions281648/email compose.png)
+
+14. [] Upon composition, attach the QR code to the email by clicking **Attach file** -&gt; **Browse this computer**.
+
+&gt;[!note] The steps to attach files may vary depending on the email client you are using. 
+
+ !IMAGE[QR upload.png](instructions281648/QR upload.png)
+
+15. [] **File Upload** window appears, navigate to **/root/.set/reports**, select **qrcode_attack.jpg** and click **Open**.
+
+&gt;[!note] The **.set** folder is not found, right-click and click on the **Show Hidden Files** option to see the folder. 
+
+ !IMAGE[Screenshot](screens/zukulot0.jpg)
+
+16. [] The QR code is now appended to the email. You can now send it to the intended recipient.
+
+ !IMAGE[QR upload2.png](instructions281648/QR upload2.png)
+
+19. [] Click @lab.VirtualMachine(WindowsServer2022).SelectLink to switch to the Windows machine you accessed in the previous section.
+
+20. [] Open **Google Chrome** and access the email account to which you sent the phishing mail as an attacker. Open the email you sent previously and click on the QR Code.
+
+&gt;[!note] A few email clients may move this email to the **Spam** folder. In such cases, you may check the **Spam** folder to access it.
+
+ !IMAGE[user_qr_access.png](instructions281648/user_qr_access.png)
+
+21. [] In real-time, the user may scan the QR code from their mobile or use Google Lens (via Chrome browser) from their machine. In this lab, we will be scanning the code using Google Lens. To scan, click the Ellipsis icon present at the top-right corner of the browser window and select **Search with Google Lens**.
+
+&gt;[!note] If a pop-up displays, click **OK** to continue. 
+
+ !IMAGE[Screenshot](screens/svzu1l5b.jpg)
+
+22. [] Hover the mouse cursor over the QR code and click on top of the code. You will be presented with two options on the right pane - **Website** and **Copy URL**. Click **Website**.
+
+ !IMAGE[Screenshot](screens/r5irwcvw.jpg)
+
+&gt;[!Note] When the victim (you, in this case) clicks **Website**, a new tab opens up, and they will be presented with a replica of www.moviescope.com.
+
+22. [] The victim will be prompted to enter the username and password into the form fields, which appear as they do on the genuine website. When the victim enters the Username and Password and clicks Login, they will be redirected to the legitimate MovieScope login page. Note the different URLs in the browser address bar for the cloned and legitimate sites.
+
+ !IMAGE[Screenshot](screens/eiga53fh.jpg)
+
+ !IMAGE[Screenshot](screens/3v5vh2nb.jpg)
+
+23. [] Now, click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch back to the Parrot Security machine and then, switch to the terminal window.
+
+24. [] Once the victim enters their Username and Password and clicks Login, SET captures these credentials. The attacker can then use them to gain unauthorized access to the victim&#39;s account.
+
+25. [] Scroll down to find the Username and Password displayed in plain text, as shown in the screenshot.
+
+ !IMAGE[Screenshot](screens/dlcimaty.jpg)
+
+26. [] This concludes the demonstration of phishing user credentials using the SET.
+
+27. [] Close all open windows and document all the acquired information.
+
+===
+
+# Exercise 2: Sniff Credentials using Dark-Phish
+
+Dark-Phish is a specialized phishing tool designed for educational purposes and security testing. It is capable of simulating phishing attacks and facilitating the evaluation of system vulnerabilities and user awareness levels.
+
+Here, we will sniff user credentials using Dark-Phish.
+
+1. [] On @lab.VirtualMachine(ParrotSecurity).SelectLink, open a Terminal window, and execute **sudo su** to run the programs as a root user (When prompted, enter the password **toor**).
+
+2. [] Run **cd Dark-Phish/** to navigate to Dark-Phish directory.
+
+3. [] In this task, we will be hosting the PHP server on the local host. To do so, we need to change the localhost IP address in the **darkphish.py** file.
+
+4. [] In the terminal window, type **pluma dark-phish.py** to edit the Python script in the Pluma text editor.
+
+5. [] In the text editor, replace **127.0.0.1** with **172.19.19.18** in line 30 under the host field, save the file, and close the text editor window.
+
+ !IMAGE[Screenshot](screens/jqvyc2l4.jpg)
+
+6. [] Launch Dark-Phish by executing the **python3 dark-phish.py** command.
+
+ !IMAGE[Screenshot](screens/vikc40ue.jpg)
+
+7. [] The Dark-Phish menu appears as shown in the screenshot. You can observe numerous platform options presented by Dark-Phish. Now, type **06** and press **Enter** to choose **Google**.
+
+ !IMAGE[Screenshot](screens/go04jcwt.jpg)
+
+8. [] A list of hosting options appears; type **01** and hit Enter to choose Localhost.
+
+ !IMAGE[Screenshot](screens/h43zsukr.jpg)
+
+9. [] Modify the URL (Y/N) option appears; type **N** and press **Enter**.
+
+ !IMAGE[Screenshot](screens/lc2go3c5.jpg)
+
+10. [] Send link appears. Having successfully generated a phishing link, you must now send this link to a victim and try to trick them into clicking it. So, copy the link.
+
+ !IMAGE[Screenshot](screens/zrrq0ye2.jpg)
+
+11. [] Launch a web browser (here, **Mozilla Firefox**) and open your email account (in this example, we are using **Outlook**). Log in and compose an email.
+
+&gt;[!note] You can log in to any email service of your preference.
+
+12. [] After logging into your email account, click the **New Mail** button in the left pane and compose a fake but enticing email to lure a user into opening the email and clicking on a malicious link.
+
+&gt;[!note] One method to conceal a malicious link in a message is to use text that appears to be a legitimate MovieScope URL. However, the hyperlink can redirect users to a cloned, malicious version of the MovieScope page instead.
+
+13. [] Select &quot;**here**&quot; to place the fake URL, then switch to Messages from the toolbar and click the **Insert link** icon.
+
+ !IMAGE[dp13.jpg](instructions281648/dp13.jpg)
+
+14. [] Paste the copied Send link in the Insert link window under the Web address (URL) field and click OK.
+
+ !IMAGE[9uucwbor.jpg](instructions281648/9uucwbor.jpg)
+
+15. [] To verify the URL, hover over the hyperlink, and the full URL will appear. Once verified, send the email to the intended user.
+
+ !IMAGE[6ssbrrk6.jpg](instructions281648/6ssbrrk6.jpg)
+
+16. [] Click @lab.VirtualMachine(SalesDepartment).SelectLink to switch to the **Sales Department** machine. Login with **Admin/test@123**.
+
+17. [] Open the **Google Chrome** browser and sign in to the email account to which you sent the phishing mail as an attacker. Open the email you sent previously and click to open the malicious link.
+
+&gt;[!note] If the email does not appear in your Inbox, check the **Spam** folder.
+
+&gt;[!note] If a pop-up appears, click **Open anyway**.
+
+ !IMAGE[o8e226ol.jpg](instructions281648/o8e226ol.jpg)
+
+18. [] When the victim (you in this case) clicks the URL, a new tab opens, and displays a replica of the Google sign-in page.
+
+19. [] The victim will be prompted to enter the username and password into the form fields, which appear as they do on a legitimate website. When the victim enters the Username and Password and signs into it, they will be redirected to the legitimate Google page. Note the different URLs in the browser address bar for the cloned and legitimate sites.
+
+ !IMAGE[Screenshot](screens/xqhv51sa.jpg)
+    
+ !IMAGE[Screenshot](screens/ivcfwfkp.jpg)
+
+20. [] Now, click @lab.VirtualMachine(ParrotSecurity).SelectLink to switch back to the Parrot Security machine and switch to the terminal window.
+
+21. [] Soon after the victim clicks Sign in, Dark-Phish records the credentials. The attacker can then use these to gain unauthorized access to the victim&#39;s account.
+
+22. [] The captured credentials are displayed in the terminal.
+
+ !IMAGE[p9p97ix0.jpg](instructions281648/p9p97ix0.jpg)
+
+23. [] This concludes the demonstration of phishing user credentials using the Dark Phish.
+
+24. [] Close all open windows and document all the acquired information.
+
+
+">
+    <input type="hidden" id="activities" value="[]">
+    <input type="hidden" id="activityGroups" value="[]">
+    <input type="hidden" id="replacementTokens" value="[{&quot;Token&quot;:&quot;@lab.LabProfile.Id&quot;,&quot;Replacement&quot;:&quot;178695&quot;},{&quot;Token&quot;:&quot;@lab.CtrlAltDelete&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;ctrlAltDeleteLink icon-link special-action-link&#39;&gt;Ctrl+Alt+Delete&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;285848&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Username&quot;,&quot;Replacement&quot;:&quot;Attacker&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Password&quot;,&quot;Replacement&quot;:&quot;toor&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;285848&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(ParrotSecurity).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;285848&#39;&gt;Parrot Security&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;285850&#39;&gt;Sales Department&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).Username&quot;,&quot;Replacement&quot;:&quot;Admin&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).Password&quot;,&quot;Replacement&quot;:&quot;test@123&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;285850&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(SalesDepartment).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;285850&#39;&gt;Sales Department&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;285853&#39;&gt;Windows Server 2022&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).Password&quot;,&quot;Replacement&quot;:&quot;Pa$$$$w0rd&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;285853&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WindowsServer2022).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;285853&#39;&gt;Windows Server 2022&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).SelectLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;selectMachineLink icon-link special-action-link&#39; data-data=&#39;268661&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Username&quot;,&quot;Replacement&quot;:&quot;Administrator&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Password&quot;,&quot;Replacement&quot;:&quot;admin@123&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).Console&quot;,&quot;Replacement&quot;:&quot;&lt;div class=&#39;virtual-machine-console&#39; data-id=&#39;268661&#39; data-height=&#39;768&#39; data-width=&#39;1024&#39;&gt;&lt;/div&gt;&quot;},{&quot;Token&quot;:&quot;@lab.VirtualMachine(WebServer).NewWindowLink&quot;,&quot;Replacement&quot;:&quot;&lt;a href=&#39;#&#39; class=&#39;open-in-new-window-link icon-link special-action-link machine-new-window-link&#39; data-data=&#39;268661&#39;&gt;Web Server&lt;/a&gt;&quot;},{&quot;Token&quot;:&quot;@lab.Title&quot;,&quot;Replacement&quot;:&quot;&lt;h1 class=\&quot;lab-title primary-color\&quot;&gt;Social Engineering Penetration Testing&lt;/h1&gt;&quot;},{&quot;Token&quot;:&quot;@lab.LanguageName&quot;,&quot;Replacement&quot;:&quot;English&quot;},{&quot;Token&quot;:&quot;@lab.LanguageCode&quot;,&quot;Replacement&quot;:&quot;en&quot;},{&quot;Token&quot;:&quot;@lab.LanguageRegionCode&quot;,&quot;Replacement&quot;:&quot;en-US&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.Id&quot;,&quot;Replacement&quot;:&quot;{LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.GlobalId&quot;,&quot;Replacement&quot;:&quot;{lod_LAB_INSTANCE_ID}&quot;},{&quot;Token&quot;:&quot;@lab.LabInstance.StartDate&quot;,&quot;Replacement&quot;:&quot;20250124&quot;},{&quot;Token&quot;:&quot;@lab.User.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.FirstName&quot;,&quot;Replacement&quot;:&quot;{USER_FIRSTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.LastName&quot;,&quot;Replacement&quot;:&quot;{USER_LASTNAME}&quot;},{&quot;Token&quot;:&quot;@lab.User.Email&quot;,&quot;Replacement&quot;:&quot;{EMAIL}&quot;},{&quot;Token&quot;:&quot;@lab.User.ExternalId&quot;,&quot;Replacement&quot;:&quot;{USER_EXTERNALID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Id&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_ID}&quot;},{&quot;Token&quot;:&quot;@lab.User.Organization.Name&quot;,&quot;Replacement&quot;:&quot;{USER_ORGANIZATION_NAME}&quot;},{&quot;Token&quot;:&quot;@lab.Tag&quot;,&quot;Replacement&quot;:&quot;{TAG}&quot;}]">
+    <input type="hidden" id="replacements">
+    <input type="hidden" id="variables">
+
+    <textarea id="copyInput" value="" style="position: absolute; left:-10000px; top:-10000px; "></textarea>
+
+    <div id="Model" data-id="178695" data-contentroot="https://labondemand.blob.core.windows.net/content/lab178695/" data-scrolltop="" data-themescript="">
+
+
+
+</div></body></html>
